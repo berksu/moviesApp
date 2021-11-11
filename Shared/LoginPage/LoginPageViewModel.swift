@@ -9,6 +9,8 @@ import Foundation
 
 final class LoginPageViewModel: ObservableObject{
     
-    @Published var userName = ""
+    @Published var mail = ""
     @Published var password = ""
+
+    init(){}
 }
