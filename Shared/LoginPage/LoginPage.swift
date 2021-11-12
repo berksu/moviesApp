@@ -22,7 +22,7 @@ struct LoginPage: View {
     
     
     var loginButton: some View{
-        NavigationLink(destination: moviesView()) {
+        NavigationLink(destination: moviesListView()) {
             Text("Login")
                 .modifier(ButtonViewCustomRoundedStyle())
         }
@@ -30,7 +30,7 @@ struct LoginPage: View {
     
     
     var signUpButton: some View{
-        NavigationLink(destination: moviesView()) {
+        NavigationLink(destination: moviesListView()) {
             Text("Sign In")
                 .modifier(ButtonViewCustomRoundedStyle())
         }
