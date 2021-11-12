@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C921E6D7273DA00D007D927E /* moviesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C921E6D6273DA00D007D927E /* moviesListView.swift */; };
-		C921E6D8273DA00D007D927E /* moviesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C921E6D6273DA00D007D927E /* moviesListView.swift */; };
+		C921E6D7273DA00D007D927E /* MoviesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C921E6D6273DA00D007D927E /* MoviesListView.swift */; };
+		C921E6D8273DA00D007D927E /* MoviesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C921E6D6273DA00D007D927E /* MoviesListView.swift */; };
 		C921E6DB273DA619007D927E /* LoginPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C921E6DA273DA619007D927E /* LoginPageViewModel.swift */; };
 		C921E6DC273DA619007D927E /* LoginPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C921E6DA273DA619007D927E /* LoginPageViewModel.swift */; };
 		C921E6E0273DAFC5007D927E /* TextFieldCustomRoundedStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C921E6DF273DAFC5007D927E /* TextFieldCustomRoundedStyle.swift */; };
@@ -25,8 +25,9 @@
 		C9577925273C5F21008308A8 /* LoginPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C95778FB273C5F21008308A8 /* LoginPage.swift */; };
 		C9577926273C5F21008308A8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C95778FC273C5F21008308A8 /* Assets.xcassets */; };
 		C9577927273C5F21008308A8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C95778FC273C5F21008308A8 /* Assets.xcassets */; };
-		C970D87E273ED04B00C024A5 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = C970D87D273ED04B00C024A5 /* Movie.swift */; };
-		C970D87F273ED04B00C024A5 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = C970D87D273ED04B00C024A5 /* Movie.swift */; };
+		C970D87E273ED04B00C024A5 /* MovieListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C970D87D273ED04B00C024A5 /* MovieListViewModel.swift */; };
+		C970D87F273ED04B00C024A5 /* MovieListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C970D87D273ED04B00C024A5 /* MovieListViewModel.swift */; };
+		C970D883273F07A300C024A5 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = C970D882273F07A300C024A5 /* Kingfisher */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,7 +48,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		C921E6D6273DA00D007D927E /* moviesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = moviesListView.swift; sourceTree = "<group>"; };
+		C921E6D6273DA00D007D927E /* MoviesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesListView.swift; sourceTree = "<group>"; };
 		C921E6DA273DA619007D927E /* LoginPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPageViewModel.swift; sourceTree = "<group>"; };
 		C921E6DF273DAFC5007D927E /* TextFieldCustomRoundedStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldCustomRoundedStyle.swift; sourceTree = "<group>"; };
 		C921E6E2273DB47B007D927E /* ButtonViewCustomRoundedStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonViewCustomRoundedStyle.swift; sourceTree = "<group>"; };
@@ -63,7 +64,7 @@
 		C957791A273C5F21008308A8 /* Tests macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests macOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C957791E273C5F21008308A8 /* Tests_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOS.swift; sourceTree = "<group>"; };
 		C9577920273C5F21008308A8 /* Tests_macOSLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOSLaunchTests.swift; sourceTree = "<group>"; };
-		C970D87D273ED04B00C024A5 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		C970D87D273ED04B00C024A5 /* MovieListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C970D883273F07A300C024A5 /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -179,8 +181,8 @@
 		C970D880273EE4B300C024A5 /* MovieListPage */ = {
 			isa = PBXGroup;
 			children = (
-				C921E6D6273DA00D007D927E /* moviesListView.swift */,
-				C970D87D273ED04B00C024A5 /* Movie.swift */,
+				C921E6D6273DA00D007D927E /* MoviesListView.swift */,
+				C970D87D273ED04B00C024A5 /* MovieListViewModel.swift */,
 			);
 			path = MovieListPage;
 			sourceTree = "<group>";
@@ -201,6 +203,9 @@
 			dependencies = (
 			);
 			name = "movie (iOS)";
+			packageProductDependencies = (
+				C970D882273F07A300C024A5 /* Kingfisher */,
+			);
 			productName = "movie (iOS)";
 			productReference = C9577901273C5F21008308A8 /* movie.app */;
 			productType = "com.apple.product-type.application";
@@ -293,6 +298,9 @@
 				Base,
 			);
 			mainGroup = C95778F4273C5F21008308A8;
+			packageReferences = (
+				C970D881273F07A300C024A5 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
 			productRefGroup = C9577902273C5F21008308A8 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -347,8 +355,8 @@
 				C921E6E3273DB47B007D927E /* ButtonViewCustomRoundedStyle.swift in Sources */,
 				C921E6DB273DA619007D927E /* LoginPageViewModel.swift in Sources */,
 				C9577922273C5F21008308A8 /* movieApp.swift in Sources */,
-				C921E6D7273DA00D007D927E /* moviesListView.swift in Sources */,
-				C970D87E273ED04B00C024A5 /* Movie.swift in Sources */,
+				C921E6D7273DA00D007D927E /* MoviesListView.swift in Sources */,
+				C970D87E273ED04B00C024A5 /* MovieListViewModel.swift in Sources */,
 				C921E6E0273DAFC5007D927E /* TextFieldCustomRoundedStyle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -361,8 +369,8 @@
 				C921E6E4273DB47B007D927E /* ButtonViewCustomRoundedStyle.swift in Sources */,
 				C921E6DC273DA619007D927E /* LoginPageViewModel.swift in Sources */,
 				C9577923273C5F21008308A8 /* movieApp.swift in Sources */,
-				C921E6D8273DA00D007D927E /* moviesListView.swift in Sources */,
-				C970D87F273ED04B00C024A5 /* Movie.swift in Sources */,
+				C921E6D8273DA00D007D927E /* MoviesListView.swift in Sources */,
+				C970D87F273ED04B00C024A5 /* MovieListViewModel.swift in Sources */,
 				C921E6E1273DAFC5007D927E /* TextFieldCustomRoundedStyle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -779,6 +787,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C970D881273F07A300C024A5 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C970D882273F07A300C024A5 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C970D881273F07A300C024A5 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C95778F5273C5F21008308A8 /* Project object */;
 }
