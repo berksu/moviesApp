@@ -13,18 +13,15 @@ struct MoviesListView: View {
 
     @ObservedObject var moviesViewModel = MovieListViewModel()
     
-    var movies_all : [Movie] {
-            get {
-             return moviesViewModel.topTwo
-            }
-        }
     
     var body: some View{
         NavigationView {
-            List (movies_all, id: \.id){ movie in
+            List (moviesViewModel.topTwo, id: \.id){ movie in
                 movieCell(movie: movie)
+            }.onAppear{
+                moviesViewModel.getTopMovies()
             }
-            .navigationTitle("Top 50 Movies")
+            .navigationTitle("Top \(moviesViewModel.totalMovieNumber) Movies")
         }.navigationBarHidden(true)
         
     }
@@ -39,7 +36,7 @@ struct movieCell: View{
     
     var body: some View{
         HStack{
-            KFImage(URL(string: movie.movieImage)!)
+            KFImage(URL(string: movie.image ?? "")!)
                 .resizable()
                 .scaledToFit()
                 .frame(height: 70)
@@ -48,12 +45,12 @@ struct movieCell: View{
             
         
             VStack(alignment: .leading, spacing: 2){
-                Text(movie.movieName)
+                Text(movie.title ?? "")
                     .fontWeight(.semibold)
                     .lineLimit(2)
                     .minimumScaleFactor(0.5)
                 
-                Text(movie.movieDate)
+                Text(movie.year ?? "")
                     .font(.subheadline)
                     .foregroundColor(.secondary)
             }

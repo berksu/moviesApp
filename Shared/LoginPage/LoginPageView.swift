@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct LoginPage: View {
+struct LoginPageView: View {
     @ObservedObject var viewModel = LoginPageViewModel()
     
     var userNameField: some View{
@@ -71,6 +71,6 @@ struct LoginPage: View {
 
 struct LoginPage_Previews: PreviewProvider {
     static var previews: some View {
-        LoginPage(viewModel: .init())
+        LoginPageView(viewModel: .init())
     }
 }

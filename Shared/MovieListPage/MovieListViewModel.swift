@@ -7,76 +7,22 @@
 
 import SwiftUI
 
-struct Movie: Identifiable{
-    let id = UUID()
-    let movieName: String
-    let movieDate: String
-    let movieImage: String
-}
-
 
 final class MovieListViewModel: ObservableObject{
     @Published var topTwo:[Movie] = []
-    
-    init(){
-        getTopMovies()
-    }
+    @Published var isLoading: Bool = false
+    @Published var totalMovieNumber = 0
     
     func getTopMovies(){
-        guard let url = URL(string: "https://www.imdb.com/search/title/?groups=top_100&sort=user_rating,desc&view=simple") else {
-            print("Invalid URL")
-            return
-        }
-        do {
-            let myHTMLString = try String(contentsOf: url, encoding: .ascii)
-            //print("HTML : \(myHTMLString)")
-            
-            parseHTML(data: myHTMLString, keyword: "> <img alt=")
-            
-        } catch let error {
-            print("Error: \(error)")
-        }
-
-    }
-
-
-
-    func parseHTML(data:String, keyword: String) {
-        
-        let indices = data.indicesOf(string: keyword)
-        var movieNames:[String] = []
-        var movieImageURL:[String] = []
-        var imageYear:[String] = []
-
-        var startPoint = 0
-        
-        for ind in indices{
-            startPoint = ind + 12
-            var temp = data[startPoint...]
-            let ending:Int = temp.indexInt(of: "\"")!
-            //print(data[(ind+12)..<(ind+12+ending)])
-            let movName = data[startPoint..<(startPoint+ending)]
-            movieNames.append(movName)
-            
-            
-            let indexImageData = temp.firstIndicesOf(string: "loadlate")
-            temp = temp[(indexImageData+10+10)...]
-            let imageEnding:Int = temp.firstIndicesOf(string: "_V1_")
-            let movieImage = temp[0..<imageEnding] + "_V1_FMjpg_UY474_.jpg"
-            movieImageURL.append(movieImage)
-            
-            
-            let imageYearInd = temp.firstIndicesOf(string: "year text-muted unbold")
-            let imageYearInd_end = temp[(imageYearInd+22)...].indexInt(of: "<")!
-            let movYear = temp[imageYearInd+25..<(imageYearInd+22+imageYearInd_end-1)]
-            imageYear.append(movYear)
-
-            
-            topTwo.append(Movie(movieName: movName, movieDate: movYear, movieImage: movieImage))
+        isLoading = true
+        MoviesApi().fetchMovie { [weak self] movies in
+            print(movies.count)
+            self?.totalMovieNumber = movies.count
+            self?.topTwo = movies
+            self?.isLoading = false
+            print(self?.isLoading)
         }
     }
-    
-    
 
 }
 
