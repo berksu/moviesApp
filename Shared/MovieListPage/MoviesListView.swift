@@ -12,15 +12,32 @@ struct MoviesListView: View {
     
     
     @ObservedObject var moviesViewModel = MovieListViewModel()
+    @State private var selection = 1
     
     var body: some View{
         NavigationView {
-            List (searchResult, id: \.id){ movie in
-            //List (moviesViewModel.topTwo, id: \.id){ movie in
-                movieCell(movie: movie)
+            TabView(selection: $selection){
+                List (searchResult, id: \.id){ movie in
+                    //List (moviesViewModel.topTwo, id: \.id){ movie in
+                    movieCell(movie: movie)
+                }
+                .listStyle(PlainListStyle())
+                .navigationTitle("Top \(moviesViewModel.totalMovieNumber) Movies")
+                .tabItem {
+                    Image(systemName: "house.fill")
+                    Text("Home")
+                }.tag(0)
+                
+                Text("Bookmark Tab")
+                    .font(.system(size: 30, weight: .bold, design: .rounded))
+                    .tabItem {
+                        Image(systemName: "bookmark.circle.fill")
+                        Text("Bookmark")
+                    }
+                    .tag(1)
+                
             }
-            .listStyle(PlainListStyle())
-            .navigationTitle("Top \(moviesViewModel.totalMovieNumber) Movies")
+            
         }.navigationBarHidden(true)
             .searchable(text: $moviesViewModel.searchMovie, prompt: "Search Movie")
             .onAppear{
@@ -56,7 +73,7 @@ struct movieCell: View{
                     .cornerRadius(4)
                     .padding(.vertical, 4)
                 
-            
+                
                 VStack(alignment: .leading, spacing: 2){
                     Text(movie.title ?? "")
                         .fontWeight(.semibold)
