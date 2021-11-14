@@ -16,8 +16,6 @@ struct Movie: Codable{
     let ratingCount: String?
     
     enum CodingKeys: String, CodingKey{
-        case id, title, year, image, imDbRating, ratingCount = "imDbRatingCount"
+        case id, title, year , image, imDbRating, ratingCount = "imDbRatingCount"
     }
 }
-
-

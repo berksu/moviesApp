@@ -10,21 +10,33 @@ import Kingfisher
 
 struct MoviesListView: View {
     
-
-    @ObservedObject var moviesViewModel = MovieListViewModel()
     
+    @ObservedObject var moviesViewModel = MovieListViewModel()
     
     var body: some View{
         NavigationView {
-            List (moviesViewModel.topTwo, id: \.id){ movie in
+            List (searchResult, id: \.id){ movie in
+            //List (moviesViewModel.topTwo, id: \.id){ movie in
                 movieCell(movie: movie)
-            }.onAppear{
-                moviesViewModel.getTopMovies()
             }
+            .listStyle(PlainListStyle())
             .navigationTitle("Top \(moviesViewModel.totalMovieNumber) Movies")
         }.navigationBarHidden(true)
+            .searchable(text: $moviesViewModel.searchMovie, prompt: "Search Movie")
+            .onAppear{
+                moviesViewModel.getTopMovies()
+            }
         
     }
+    
+    
+    
+    var searchResult: [Movie] {
+        //moviesViewModel.searchMovies(title: moviesViewModel.searchMovie)
+        guard moviesViewModel.searchMovie.isEmpty else { return moviesViewModel.searchResults}
+        return moviesViewModel.topTwo
+    }
+    
 }
 
 
@@ -35,27 +47,30 @@ struct movieCell: View{
     var movie: Movie
     
     var body: some View{
-        HStack{
-            KFImage(URL(string: movie.image ?? "")!)
-                .resizable()
-                .scaledToFit()
-                .frame(height: 70)
-                .cornerRadius(4)
-                .padding(.vertical, 4)
-            
-        
-            VStack(alignment: .leading, spacing: 2){
-                Text(movie.title ?? "")
-                    .fontWeight(.semibold)
-                    .lineLimit(2)
-                    .minimumScaleFactor(0.5)
+        NavigationLink(destination: MovieDetailsView(movie: movie)) {
+            HStack{
+                KFImage(URL(string: movie.image ?? "")!)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: 70)
+                    .cornerRadius(4)
+                    .padding(.vertical, 4)
                 
-                Text(movie.year ?? "")
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
-            }
             
+                VStack(alignment: .leading, spacing: 2){
+                    Text(movie.title ?? "")
+                        .fontWeight(.semibold)
+                        .lineLimit(2)
+                        .minimumScaleFactor(0.5)
+                    
+                    Text(movie.year ?? "")
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                }
+                
+            }
         }
+        
     }
 }
 

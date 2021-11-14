@@ -10,17 +10,23 @@ import SwiftUI
 
 final class MovieListViewModel: ObservableObject{
     @Published var topTwo:[Movie] = []
-    @Published var isLoading: Bool = false
+    @Published var searchResults:[Movie] = []
     @Published var totalMovieNumber = 0
-    
+    @Published var searchMovie = ""
+
     func getTopMovies(){
-        isLoading = true
         MoviesApi().fetchMovie { [weak self] movies in
             print(movies.count)
             self?.totalMovieNumber = movies.count
             self?.topTwo = movies
-            self?.isLoading = false
-            print(self?.isLoading)
+        }
+    }
+    
+    
+    func searchMovies(title: String){
+        MovieSearchApi().searchMovie(title: title) { [weak self] searchResult in
+            self?.searchResults = searchResult
+            print(searchResult.count)
         }
     }
 

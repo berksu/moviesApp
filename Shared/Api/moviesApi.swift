@@ -14,8 +14,6 @@ final class MoviesApi{
     
     func fetchMovie(completion: @escaping completion){
         AF.request("https://imdb-api.com/en/API/Top250TVs/k_21lu02du").response { response in
-            debugPrint(response.error)
-        
             guard let data = response.data
             else{
                 return
@@ -26,6 +24,7 @@ final class MoviesApi{
                 completion(movies.items)
             }catch{
                 print(error.localizedDescription)
+                completion([])
             }
         }
     }
