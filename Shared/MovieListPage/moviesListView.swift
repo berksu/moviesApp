@@ -18,22 +18,23 @@ struct MoviesListView: View {
             ZStack{
                 if(isSideMenuShow){
                     SideMenuView(isSideMenuShow: $isSideMenuShow)
+                        
                 }
                 HomeView(moviesViewModel: moviesViewModel, isSideMenuShow: $isSideMenuShow)
                     .cornerRadius(isSideMenuShow ? 20 : 10)
-                    .offset(x: isSideMenuShow ? 250:0, y: isSideMenuShow ? 40:0)
+                    .offset(x: isSideMenuShow ? 250:0, y: isSideMenuShow ? 50:0)
                     .scaleEffect(isSideMenuShow ? 0.8 : 1)
                     .opacity(isSideMenuShow ? 0.4:1)
+                    .ignoresSafeArea()
             }
             
-            
-        }.navigationBarHidden(true)
+        }
+        .navigationBarHidden(true)
             .searchable(text: $moviesViewModel.searchMovie, prompt: "Search Movie")
             .onAppear{
-                print("Test")
                 moviesViewModel.getTopMovies()
             }
-            .ignoresSafeArea()
+        .ignoresSafeArea()
             
     }
     

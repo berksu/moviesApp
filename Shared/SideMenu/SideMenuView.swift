@@ -7,12 +7,13 @@
 
 import SwiftUI
 import Kingfisher
+import simd
 
 struct SideMenuView: View {
     @Binding var isSideMenuShow: Bool
     
     var body: some View {
-        ZStack(alignment: .topLeading){
+        ZStack{
             LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .top, endPoint: .bottom)
                 .ignoresSafeArea()
             
@@ -38,13 +39,15 @@ struct SideMenuView: View {
                             .frame(width: 40, height: 40)
                             .foregroundColor(.white)
                             .font(.system(size: 16, weight: .bold))
-                    }
+                    }.scaledToFit()
                     
                 }
                 
                 userInfo()
                 Spacer()
-            }.padding()
+            }
+            .ignoresSafeArea()
+            .padding(EdgeInsets(top: 5, leading: 20, bottom: 0, trailing: 20))
             Spacer()
             
         }.navigationBarHidden(true)
@@ -68,13 +71,13 @@ struct userInfo: View{
                 Text("Follower")
                     .font(.system(size:16, weight:.semibold))
             }.padding(.top)
+            .padding(.bottom)
             
-            profileButton()
-                .padding(.top,30)
             
-            logoutButton()
-                .padding(.top)
-            
+            ForEach(SideMenuViewModel.allCases, id: \.self){option in
+                sideMenuButtons(viewModel: option)
+                    .padding(.top)
+            }
             
             
         }.foregroundColor(.white)
@@ -82,12 +85,14 @@ struct userInfo: View{
 }
 
 
-struct profileButton: View{
+struct sideMenuButtons: View{
+    let viewModel: SideMenuViewModel
+        
     var body: some View{
         HStack{
-            Image(systemName: "person")
+            Image(systemName: viewModel.imageName)
                 .font(.system(size:16, weight:.semibold))
-            Text("Profile")
+            Text(viewModel.title)
                 .font(.system(size:16, weight: .bold))
         }
     }
