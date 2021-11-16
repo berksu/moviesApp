@@ -10,48 +10,31 @@ import Kingfisher
 
 struct MoviesListView: View {
     
-    
     @ObservedObject var moviesViewModel = MovieListViewModel()
-    @State private var selection = 0
+    @State var isSideMenuShow: Bool = false
     
     var body: some View{
         NavigationView {
-            TabView(selection: $selection){
-                List (searchResult, id: \.id){ movie in
-                    //List (moviesViewModel.topTwo, id: \.id){ movie in
-                    movieCell(movie: movie)
+            ZStack{
+                if(isSideMenuShow){
+                    SideMenuView(isSideMenuShow: $isSideMenuShow)
                 }
-                .listStyle(PlainListStyle())
-                .navigationTitle("Top \(moviesViewModel.totalMovieNumber) Movies")
-                .tabItem {
-                    Image(systemName: "house.fill")
-                    Text("Home")
-                }.tag(0)
-                
-                Text("Bookmark Tab")
-                    .font(.system(size: 30, weight: .bold, design: .rounded))
-                    .tabItem {
-                        Image(systemName: "bookmark.circle.fill")
-                        Text("Bookmark")
-                    }
-                    .tag(1)
-                
+                HomeView(moviesViewModel: moviesViewModel, isSideMenuShow: $isSideMenuShow)
+                    .cornerRadius(isSideMenuShow ? 20 : 10)
+                    .offset(x: isSideMenuShow ? 250:0, y: isSideMenuShow ? 40:0)
+                    .scaleEffect(isSideMenuShow ? 0.8 : 1)
+                    .opacity(isSideMenuShow ? 0.4:1)
             }
+            
             
         }.navigationBarHidden(true)
             .searchable(text: $moviesViewModel.searchMovie, prompt: "Search Movie")
             .onAppear{
+                print("Test")
                 moviesViewModel.getTopMovies()
             }
-        
-    }
-    
-    
-    
-    var searchResult: [Movie] {
-        //moviesViewModel.searchMovies(title: moviesViewModel.searchMovie)
-        guard moviesViewModel.searchMovie.isEmpty else { return moviesViewModel.searchResults}
-        return moviesViewModel.topTwo
+            .ignoresSafeArea()
+            
     }
     
 }
@@ -99,3 +82,60 @@ struct moviesListView_Previews: PreviewProvider {
     }
 }
 
+
+struct HomeView: View {
+    @ObservedObject var moviesViewModel: MovieListViewModel
+    @State private var selection = 0
+    @Binding var isSideMenuShow: Bool
+
+    var body: some View {
+        TabView(selection: $selection){
+            List (searchResult, id: \.id){ movie in
+                //List (moviesViewModel.topTwo, id: \.id){ movie in
+                movieCell(movie: movie)
+            }
+            .listStyle(PlainListStyle())
+            
+            .navigationTitle("Top \(moviesViewModel.totalMovieNumber) Movies")
+            //.navigationBarTitleDisplayMode(.inline)
+            
+            .tabItem {
+                Image(systemName: "house.fill")
+                Text("Home")
+            }.tag(0)
+            
+            Text("Bookmark Tab")
+                .font(.system(size: 30, weight: .bold, design: .rounded))
+                .tabItem {
+                    Image(systemName: "bookmark.circle.fill")
+                    Text("Bookmark")
+                }
+                .tag(1)
+            
+        }
+        .toolbar{
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button {
+                    withAnimation(.spring()){
+                        isSideMenuShow.toggle()
+                    }
+                } label: {
+                    KFImage(URL(string: "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"))
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .clipShape(Circle())
+                        .shadow(radius: 20)
+                        .frame(height: 50)
+                        .background(.clear)
+                }
+            }
+        }
+
+    }
+    
+    var searchResult: [Movie] {
+        //moviesViewModel.searchMovies(title: moviesViewModel.searchMovie)
+        guard moviesViewModel.searchMovie.isEmpty else { return moviesViewModel.searchResults}
+        return moviesViewModel.topTwo
+    }
+}
