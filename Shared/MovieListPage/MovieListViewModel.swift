@@ -7,21 +7,39 @@
 
 import SwiftUI
 import Kingfisher
-
+import Combine
 
 final class MovieListViewModel: ObservableObject{
     @Published var topTwo:[Movie] = []
     @Published var searchResults:[Movie] = []
     @Published var totalMovieNumber = 0
-    @Published var searchMovie = "" {
+    @Published var searchMovie = ""
+    {
         didSet {
             searchMovies(title: searchMovie)
         }
     }
-    @Published var searchResult: [Movie] =  []
+    //@Published var searchResult: [Movie] =  []
 
+    var cancellables = Set<AnyCancellable>()
    
-
+    init(){
+        //setUpBindings()
+    }
+    
+    func setUpBindings(){
+        $searchMovie
+            .map{
+                //MovieSearchApi().searcedMovies(title: $0)
+                MovieSearchApi().searchMovie_combine(title: $0)
+            }
+            .sink { keyWord in
+                print(keyWord)
+            }
+            .store(in: &cancellables)
+    }
+    
+    
     func getTopMovies(){
         MoviesApi().fetchMovie { [weak self] movies in
             print(movies.count)

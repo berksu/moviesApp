@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Movie: Codable{
+/*struct Movie: Codable{
     let id : String
     let title: String?
     let year: String?
@@ -17,5 +17,19 @@ struct Movie: Codable{
     
     enum CodingKeys: String, CodingKey{
         case id, title, year , image, imDbRating, ratingCount = "imDbRatingCount"
+    }
+}*/
+
+struct Movie: Codable{
+    let id : Int
+    let title: String?
+    let release_date: String?
+    let image: String?
+    let vote_average: Float?
+    let vote_count: Float?
+    let overview: String?
+    //"https://www.themoviedb.org/t/p/w1280"
+    enum CodingKeys: String, CodingKey{
+        case id, title, release_date , image = "poster_path", vote_average, vote_count, overview
     }
 }

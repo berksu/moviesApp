@@ -50,21 +50,30 @@ struct movieCell: View{
     var body: some View{
         NavigationLink(destination: MovieDetailsView(viewModel: MovieDetailsViewModel(movie: movie))) {
             HStack{
-                KFImage(URL(string: movie.image ?? "")!)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(height: 70)
-                    .cornerRadius(4)
-                    .padding(.vertical, 4)
+                if let im = movie.image{
+                    KFImage(URL(string: "https://www.themoviedb.org/t/p/w1280\(im)"))
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: 70)
+                        .cornerRadius(4)
+                        .padding(.vertical, 4)
+                }else{
+                    KFImage(URL(string: ""))
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: 70)
+                        .cornerRadius(4)
+                        .padding(.vertical, 4)
+                }
                 
                 
                 VStack(alignment: .leading, spacing: 2){
-                    Text(movie.title ?? "")
+                    Text(movie.title ?? "test")
                         .fontWeight(.semibold)
                         .lineLimit(2)
                         .minimumScaleFactor(0.5)
                     
-                    Text(movie.year ?? "")
+                    Text(movie.release_date![0..<4] ?? "test2")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                 }
@@ -92,7 +101,7 @@ struct HomeView: View {
 
     var body: some View {
         TabView(selection: $selection){
-            List (moviesViewModel.searchResult, id: \.id){ movie in
+            List (moviesViewModel.searchResults.isEmpty ?  moviesViewModel.topTwo: moviesViewModel.searchResults, id: \.id){ movie in
                 //List (moviesViewModel.topTwo, id: \.id){ movie in
                 movieCell(movie: movie)
             }
@@ -106,11 +115,11 @@ struct HomeView: View {
                 Text("Home")
             }.tag(0)
             
-            Text("Bookmark Tab")
+            Text("Favourites")
                 .font(.system(size: 30, weight: .bold, design: .rounded))
                 .tabItem {
-                    Image(systemName: "bookmark.circle.fill")
-                    Text("Bookmark")
+                    Image(systemName: "heart.fill")
+                    Text("Favourites")
                 }
                 .tag(1)
             

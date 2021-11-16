@@ -13,7 +13,7 @@ final class MoviesApi{
     typealias completion = ([Movie]) -> Void
     
     func fetchMovie(completion: @escaping completion){
-        AF.request("https://imdb-api.com/en/API/Top250TVs/k_21lu02du").response { response in
+        AF.request("https://api.themoviedb.org/3/movie/top_rated?api_key=5c011e8f93fae74da4b04f2a25562db2&language=en-US&page=1").response { response in
             guard let data = response.data
             else{
                 return
@@ -21,10 +21,12 @@ final class MoviesApi{
             
             do{
                 let movies = try JSONDecoder().decode(MoviesList.self, from: data)
-                completion(movies.items)
+                completion(movies.results)
             }catch{
                 print(error.localizedDescription)
                 completion([])
+                print(error)
+
             }
         }
     }
