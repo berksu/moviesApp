@@ -75,8 +75,11 @@ struct userInfo: View{
             
             
             ForEach(SideMenuViewModel.allCases, id: \.self){option in
-                sideMenuButtons(viewModel: option)
-                    .padding(.top)
+                NavigationLink(destination: test()) {
+                    sideMenuButtons(viewModel: option)
+                        .padding(.top)
+                }
+                
             }
             
             

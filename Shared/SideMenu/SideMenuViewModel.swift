@@ -25,4 +25,5 @@ enum SideMenuViewModel: Int, CaseIterable{
         }
     }
     
+    
 }

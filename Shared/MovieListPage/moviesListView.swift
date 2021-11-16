@@ -48,7 +48,7 @@ struct movieCell: View{
     var movie: Movie
     
     var body: some View{
-        NavigationLink(destination: MovieDetailsView(movie: movie)) {
+        NavigationLink(destination: MovieDetailsView(viewModel: MovieDetailsViewModel(movie: movie))) {
             HStack{
                 KFImage(URL(string: movie.image ?? "")!)
                     .resizable()
@@ -88,10 +88,11 @@ struct HomeView: View {
     @ObservedObject var moviesViewModel: MovieListViewModel
     @State private var selection = 0
     @Binding var isSideMenuShow: Bool
+    
 
     var body: some View {
         TabView(selection: $selection){
-            List (searchResult, id: \.id){ movie in
+            List (moviesViewModel.searchResult, id: \.id){ movie in
                 //List (moviesViewModel.topTwo, id: \.id){ movie in
                 movieCell(movie: movie)
             }
@@ -134,9 +135,5 @@ struct HomeView: View {
 
     }
     
-    var searchResult: [Movie] {
-        //moviesViewModel.searchMovies(title: moviesViewModel.searchMovie)
-        guard moviesViewModel.searchMovie.isEmpty else { return moviesViewModel.searchResults}
-        return moviesViewModel.topTwo
-    }
+    
 }

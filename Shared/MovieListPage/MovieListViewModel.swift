@@ -6,13 +6,21 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 
 final class MovieListViewModel: ObservableObject{
     @Published var topTwo:[Movie] = []
     @Published var searchResults:[Movie] = []
     @Published var totalMovieNumber = 0
-    @Published var searchMovie = ""
+    @Published var searchMovie = "" {
+        didSet {
+            searchMovies(title: searchMovie)
+        }
+    }
+    @Published var searchResult: [Movie] =  []
+
+   
 
     func getTopMovies(){
         MoviesApi().fetchMovie { [weak self] movies in
