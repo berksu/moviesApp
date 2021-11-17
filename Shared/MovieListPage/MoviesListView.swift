@@ -73,8 +73,8 @@ struct movieCell: View{
                         .lineLimit(2)
                         .minimumScaleFactor(0.5)
                     
-                    if let release_date = movie.release_date![0..<4]{
-                        Text(release_date)
+                    if let release_date = movie.release_date{
+                        Text(release_date[0..<4])
                             .font(.subheadline)
                             .foregroundColor(.secondary)
                     }else{

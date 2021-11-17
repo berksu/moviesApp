@@ -16,7 +16,7 @@ final class MovieSearchApi{
     
     func searchMovie(title: String, completion: @escaping completion) {
         AF.request("https://api.themoviedb.org/3/search/movie?api_key=5c011e8f93fae74da4b04f2a25562db2&language=en-US&query=\(title)&page=1&include_adult=true").response { response in
-            debugPrint(response)
+            //debugPrint(response)
             
             guard let data = response.data
             else{
@@ -27,7 +27,7 @@ final class MovieSearchApi{
                 let searchResult = try JSONDecoder().decode(MovieSearchList.self, from: data)
                 completion(searchResult.results)
             }catch{
-                print(error.localizedDescription)
+                //print(error.localizedDescription)
                 completion([])
             }
             

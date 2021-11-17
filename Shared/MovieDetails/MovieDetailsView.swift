@@ -100,8 +100,8 @@ struct MovieDetailsView: View {
                     .padding()
                     .multilineTextAlignment(.center)
                 
-                if let release_date = viewModel.movie.release_date![0..<4] {
-                    Text(release_date)
+                if let release_date = viewModel.movie.release_date {
+                    Text(release_date[0..<4])
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                 }else{

@@ -26,31 +26,22 @@ final class MovieListViewModel: ObservableObject{
    
     init(){
         //setUpBindings()
-        searchMovieOnTime
-            .receive(on: RunLoop.main)
-            .map{valid in
-                if(valid){
-                    self.searchMovies(title: self.searchMovie)
-                }
-            }
-            .sink{keyword in
-               //print(keyword)
-            }
-            //.assign(to: \.isValid, on: self)
-            .store(in: &cancellables)
+        searchMovieOnTime()
             
     }
     
     
     
-    private var searchMovieOnTime: AnyPublisher<Bool,Never>{
+    func searchMovieOnTime(){
         $searchMovie
             .debounce(for: 0.8, scheduler: RunLoop.main)
             .removeDuplicates()
             .map{input in
-                return input.count > 2
+                self.searchMovies(title: self.searchMovie)
             }
-            .eraseToAnyPublisher()
+            .sink{keyword in
+            }
+            .store(in: &cancellables)
     }
     
     
