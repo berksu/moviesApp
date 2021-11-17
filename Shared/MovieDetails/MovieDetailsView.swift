@@ -115,7 +115,7 @@ struct MovieDetailsView: View {
                         //.minimumScaleFactor(0.6)
                         .lineLimit(nil)
                         .fixedSize(horizontal: false, vertical: true)
-                        .frame(width: geometry.size.width*0.75)
+                        .frame(width: geometry.size.width*0.9)
                 }
                 
             }.frame(width: geometry.size.width, height: geometry.size.height)

@@ -14,24 +14,55 @@ final class MovieListViewModel: ObservableObject{
     @Published var searchResults:[Movie] = []
     @Published var totalMovieNumber = 0
     @Published var searchMovie = ""
-    {
-        didSet {
-            searchMovies(title: searchMovie)
-        }
-    }
+
+    //{
+    //    didSet {
+    //        searchMovies(title: searchMovie)
+    //    }
+    //}
     //@Published var searchResult: [Movie] =  []
 
     var cancellables = Set<AnyCancellable>()
    
     init(){
         //setUpBindings()
+        searchMovieOnTime
+            .receive(on: RunLoop.main)
+            .map{valid in
+                if(valid){
+                    self.searchMovies(title: self.searchMovie)
+                }
+            }
+            .sink{keyword in
+               //print(keyword)
+            }
+            //.assign(to: \.isValid, on: self)
+            .store(in: &cancellables)
+            
     }
+    
+    
+    
+    private var searchMovieOnTime: AnyPublisher<Bool,Never>{
+        $searchMovie
+            .debounce(for: 0.8, scheduler: RunLoop.main)
+            .removeDuplicates()
+            .map{input in
+                return input.count > 2
+            }
+            .eraseToAnyPublisher()
+    }
+    
+    
+    
     
     func setUpBindings(){
         $searchMovie
+            .debounce(for: 0.8, scheduler: RunLoop.main)
+            .removeDuplicates()
             .map{
                 //MovieSearchApi().searcedMovies(title: $0)
-                MovieSearchApi().searchMovie_combine(title: $0)
+                 MovieSearchApi().searchMovie_combine(title: $0)
             }
             .sink { keyWord in
                 print(keyWord)

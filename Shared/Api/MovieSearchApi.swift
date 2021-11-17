@@ -37,7 +37,7 @@ final class MovieSearchApi{
     
     
     func searchMovie_combine(title: String) -> DataResponsePublisher<Movie> {
-        return AF.request("https://imdb-api.com/en/API/Search/k_4qnwncq4/"+title).response { response in
+        return AF.request("https://api.themoviedb.org/3/search/movie?api_key=5c011e8f93fae74da4b04f2a25562db2&language=en-US&query=\(title)&page=1&include_adult=true").response { response in
             debugPrint(response)
             
             guard let data = response.data
@@ -52,7 +52,7 @@ final class MovieSearchApi{
 
             }
             
-        }.publishDecodable()
+        }.publishDecodable(type: Movie.self)
         
     }
     
