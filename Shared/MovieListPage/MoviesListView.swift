@@ -68,14 +68,19 @@ struct movieCell: View{
                 
                 
                 VStack(alignment: .leading, spacing: 2){
-                    Text(movie.title ?? "test")
+                    Text(movie.title ?? "")
                         .fontWeight(.semibold)
                         .lineLimit(2)
                         .minimumScaleFactor(0.5)
                     
-                    Text(movie.release_date![0..<4] ?? "test2")
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
+                    if let release_date = movie.release_date![0..<4]{
+                        Text(release_date)
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                    }else{
+                        Text("")
+                    }
+                    
                 }
                 
             }

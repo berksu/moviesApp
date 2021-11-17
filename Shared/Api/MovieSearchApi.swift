@@ -46,7 +46,7 @@ final class MovieSearchApi{
             }
             
             do{
-                let searchResult = try JSONDecoder().decode(MovieSearchList.self, from: data)
+                let _ = try JSONDecoder().decode(MovieSearchList.self, from: data)
             }catch{
                 print(error.localizedDescription)
 

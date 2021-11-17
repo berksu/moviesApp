@@ -9,6 +9,7 @@ import Foundation
 
 final class MovieDetailsViewModel: ObservableObject {
     let movie: Movie
+    @Published var isFavourite: Bool = false
     
     init(movie: Movie) {
         self.movie = movie

@@ -89,7 +89,7 @@ extension String {
     
     func firstIndicesOf(string: String) -> Int {
         var indices: Int = 0
-        var searchStartIndex = self.startIndex
+        let searchStartIndex = self.startIndex
 
         while searchStartIndex < self.endIndex,
             let range = self.range(of: string, range: searchStartIndex..<self.endIndex),

@@ -31,6 +31,7 @@ struct MovieDetailsView: View {
     var headerView: some View {
         GeometryReader{ geometry in
             VStack{
+                
                 if let im = viewModel.movie.image{
                     KFImage(URL(string: "https://www.themoviedb.org/t/p/w1280\(im)"))
                         .resizable()
@@ -40,28 +41,47 @@ struct MovieDetailsView: View {
                         .padding(.vertical, 4)
                 }else{
                     KFImage(URL(string: ""))
-                        .resizable()
-                        .scaledToFit()
                         .frame(height: geometry.size.height)
-                        .cornerRadius(4)
-                        .padding(.vertical, 4)
                 }
                 
                 
                 HStack{
                     Image(systemName: "hand.thumbsup")
                         .foregroundColor(.secondary)
-                    Text("\(viewModel.movie.vote_average!, specifier: "%.2f")" ?? "rating")
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
+                    if let vote = viewModel.movie.vote_average{
+                        Text("\(vote, specifier: "%.2f")" )
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                    }else{
+                        Text("rating")
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                    }
+                        
                     
                     
                     Image(systemName: "eye")
                         .foregroundColor(.secondary)
                         .padding(.leading,40)
-                    Text("\(Int(viewModel.movie.vote_count!))" ?? "count")
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
+                    if let vote_count = viewModel.movie.vote_count{
+                        Text("\(Int(vote_count))" )
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                    }else{
+                        Text("count")
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                    }
+                    
+                    
+                    Button {
+                        viewModel.isFavourite.toggle()
+                    } label: {
+                        Image(systemName: viewModel.isFavourite ? "heart.fill" : "heart")
+                            .foregroundColor(viewModel.isFavourite ? .red : .secondary)
+                            .padding(.leading,40)
+                    }
+
                 }
             }.frame(width: geometry.size.width, height: geometry.size.height)
         }
@@ -80,15 +100,23 @@ struct MovieDetailsView: View {
                     .padding()
                     .multilineTextAlignment(.center)
                 
-                Text(viewModel.movie.release_date![0..<4] ?? "")
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
+                if let release_date = viewModel.movie.release_date![0..<4] {
+                    Text(release_date)
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                }else{
+                    Text("")
+                }
                 
-                Text(viewModel.movie.overview ?? "")
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
-                    .minimumScaleFactor(0.6)
-                    .frame(width: geometry.size.width*0.75, height: geometry.size.height/2)
+                ScrollView(showsIndicators: false){
+                    Text(viewModel.movie.overview ?? "")
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                        //.minimumScaleFactor(0.6)
+                        .lineLimit(nil)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .frame(width: geometry.size.width*0.75)
+                }
                 
             }.frame(width: geometry.size.width, height: geometry.size.height)
         }

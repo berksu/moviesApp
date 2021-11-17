@@ -7,10 +7,22 @@
 
 import SwiftUI
 
-struct test: View {
+struct cardMenuView: View {
+    //@ObservedObject var cardMenuViewModel: CardMenuViewModel
+    var categories: [CardMenuCategories] = [CardMenuCategories(categoryName: "drama"),
+                                            CardMenuCategories(categoryName: "action"),
+                                            CardMenuCategories(categoryName: "love"),
+                                            CardMenuCategories(categoryName: "drama2"),
+                                            CardMenuCategories(categoryName: "action2"),
+                                            CardMenuCategories(categoryName: "love2"),
+                                            CardMenuCategories(categoryName: "drama3"),
+                                            CardMenuCategories(categoryName: "action3"),
+                                            CardMenuCategories(categoryName: "love3")]
     var body: some View {
         NavigationView{
             VStack{
+                scrolledTextView(categories: categories)
+                    .padding(.top)
                 cardsView
                     .padding()
                 buttonsSection
@@ -69,8 +81,33 @@ struct buttonView:View{
     }
 }
 
+
+
+
+struct scrolledTextView: View{
+    
+    @State var categories: [CardMenuCategories]
+    
+    var body: some View{
+        ScrollView(.horizontal,showsIndicators: false){
+            LazyHStack(spacing: 10){
+                ForEach(categories, id: \.self){ category in
+                    Text(category.categoryName)
+                        .padding(EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8))
+                        .foregroundColor(.black)
+                        .minimumScaleFactor(0.8)
+                        .background(
+                            RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                .stroke(Color.black, lineWidth: 2)
+                        )
+                }
+            }.padding(.leading)
+        }.frame(height: 40)
+    }
+}
+
 struct test_Previews: PreviewProvider {
     static var previews: some View {
-        test()
+        cardMenuView()
     }
 }
