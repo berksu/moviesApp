@@ -7,7 +7,6 @@
 
 import SwiftUI
 import Kingfisher
-import simd
 
 struct SideMenuView: View {
     @Binding var isSideMenuShow: Bool
@@ -75,7 +74,7 @@ struct userInfo: View{
             
             
             ForEach(SideMenuViewModel.allCases, id: \.self){option in
-                NavigationLink(destination: cardMenuView()) {
+                NavigationLink(destination: CardMenuView(cardMenuViewModel: CardMenuViewModel())) {
                     sideMenuButtons(viewModel: option)
                         .padding(.top)
                 }

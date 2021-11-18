@@ -36,7 +36,7 @@ final class MovieSearchApi{
     }
     
     
-    func searchMovie_combine(title: String) -> DataResponsePublisher<Movie> {
+    func searchMovie_combine(title: String) -> AnyPublisher<Movie,AFError> {
         return AF.request("https://api.themoviedb.org/3/search/movie?api_key=5c011e8f93fae74da4b04f2a25562db2&language=en-US&query=\(title)&page=1&include_adult=true").response { response in
             debugPrint(response)
             
@@ -53,7 +53,7 @@ final class MovieSearchApi{
             }
             
         }.publishDecodable(type: Movie.self)
-        
+            .value()
     }
     
     

@@ -36,10 +36,8 @@ final class MovieListViewModel: ObservableObject{
         $searchMovie
             .debounce(for: 0.8, scheduler: RunLoop.main)
             .removeDuplicates()
-            .map{input in
-                self.searchMovies(title: self.searchMovie)
-            }
             .sink{keyword in
+                self.searchMovies(title: self.searchMovie)
             }
             .store(in: &cancellables)
     }
@@ -53,7 +51,7 @@ final class MovieListViewModel: ObservableObject{
             .removeDuplicates()
             .map{
                 //MovieSearchApi().searcedMovies(title: $0)
-                 MovieSearchApi().searchMovie_combine(title: $0)
+                MovieSearchApi().searchMovie_combine(title: $0)
             }
             .sink { keyWord in
                 print(keyWord)

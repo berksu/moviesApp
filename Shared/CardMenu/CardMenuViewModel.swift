@@ -17,4 +17,8 @@ final class CardMenuViewModel: ObservableObject{
                                                        CardMenuCategories(categoryName: "drama3"),
                                                        CardMenuCategories(categoryName: "action3"),
                                                        CardMenuCategories(categoryName: "love3")]
+    
+    //@Published var cardViews:[CardView] = [CardView(offset_x: 40, opacity_v: 0.2, scaleRate: 0.9),
+    //                                       CardView(offset_x: 20, opacity_v: 0.4, scaleRate: 0.95),
+    //                                       CardView(offset_x: 0, opacity_v: 1, scaleRate: 1)]
 }
