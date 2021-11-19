@@ -100,7 +100,12 @@ struct moviesListView_Previews: PreviewProvider {
 
 struct HomeView: View {
     @ObservedObject var moviesViewModel: MovieListViewModel
-    @State private var selection = 0
+    
+    //AppStorage and userdefaults tried
+    @AppStorage("tabSelection") private var selection = 0
+    //@State private var tapCount = UserDefaults.standard.integer(forKey: "Tap")
+    //UserDefaults.standard.set(self.tapCount, forKey: "Tap")
+
     @Binding var isSideMenuShow: Bool
     
 
