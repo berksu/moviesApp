@@ -41,19 +41,22 @@ struct CardMenuView: View {
     
     var cardsView: some View {
         GeometryReader { geometry in
+            //Gözden geçirilecek
             ZStack(){
                 ForEach(0..<cards.count, id: \.self) { index in
-                    CardView(card: self.cards[index]){
-                        withAnimation{
-                            if(index != 0){
-                                cards[index-1].isDraggable = true
+                    if(index > cards.count - 4){
+                        CardView(card: self.cards[index]){
+                            withAnimation{
+                                if(index != 0){
+                                    cards[index-1].isDraggable = true
+                                }
+                                removeCard(at: index)
                             }
-                            removeCard(at: index)
                         }
+                        .stacked(at: index > 2 ? 2:index, in: (cards.count > 3) ? 3:cards.count)
+                        .opaced(at: index > 2 ? 2:index, in: (cards.count > 3) ? 3:cards.count)
+                        .scaled(at: index > 2 ? 2:index, in: (cards.count > 3) ? 3:cards.count)
                     }
-                    .stacked(at: index > 2 ? 2:index, in: (cards.count > 3) ? 3:cards.count)
-                    .opaced(at: index > 2 ? 2:index, in: (cards.count > 3) ? 3:cards.count)
-                    .scaled(at: index > 2 ? 2:index, in: (cards.count > 3) ? 3:cards.count)
                 }
             }.frame(width: geometry.size.width, height: geometry.size.height)
         }
