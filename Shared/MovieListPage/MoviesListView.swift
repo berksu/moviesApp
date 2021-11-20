@@ -120,7 +120,8 @@ struct HomeView: View {
             }
             .listStyle(PlainListStyle())
             
-            .navigationTitle("Top \(moviesViewModel.totalMovieNumber) Movies")
+            
+            .navigationTitle(selection == 0 ? "Top \(moviesViewModel.totalMovieNumber) Movies": "Favourite Movies")
             //.navigationBarTitleDisplayMode(.inline)
             
             .tabItem {
