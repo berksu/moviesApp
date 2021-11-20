@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Kingfisher
+import Firebase
 
 struct MoviesListView: View {
     
@@ -33,10 +34,12 @@ struct MoviesListView: View {
             .searchable(text: $moviesViewModel.searchMovie, prompt: "Search Movie")
             .onAppear{
                 moviesViewModel.getTopMovies()
+                moviesViewModel.getFavouriteMovies()
             }
         .ignoresSafeArea()
             
     }
+
     
 }
 
@@ -125,8 +128,7 @@ struct HomeView: View {
                 Text("Home")
             }.tag(0)
             
-            Text("Favourites")
-                .font(.system(size: 30, weight: .bold, design: .rounded))
+            FavouritesView(moviesViewModel: moviesViewModel)
                 .tabItem {
                     Image(systemName: "heart.fill")
                     Text("Favourites")
@@ -153,6 +155,24 @@ struct HomeView: View {
         }
 
     }
+}
+
+
+
+
+struct FavouritesView: View{
+    @ObservedObject var moviesViewModel: MovieListViewModel
     
-    
+    var body: some View{
+        List (moviesViewModel.favouriteMovies , id: \.id){ movie in
+            //List (moviesViewModel.topTwo, id: \.id){ movie in
+            movieCell(movie: movie)
+        }
+        .listStyle(PlainListStyle())
+        .onAppear{
+            moviesViewModel.getFavouriteMovies()
+            
+        }
+    }
+        
 }

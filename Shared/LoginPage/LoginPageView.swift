@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct LoginPageView: View {
     @ObservedObject var viewModel = LoginPageViewModel()
@@ -56,7 +57,17 @@ struct LoginPageView: View {
             
             }
         
+        }.onAppear(perform: authenticationProcess)
     }
+    
+    
+    
+    private func authenticationProcess(){
+        Auth.auth().signInAnonymously { authResult, error in
+            guard let user = authResult?.user else{return }
+            let _ = user.isAnonymous
+            let _ = user.uid
+        }
     }
 }
 
