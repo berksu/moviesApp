@@ -33,7 +33,7 @@ struct MoviesListView: View {
         .navigationBarHidden(true)
             .searchable(text: $moviesViewModel.searchMovie, prompt: "Search Movie")
             .onAppear{
-                moviesViewModel.getTopMovies()
+                moviesViewModel.getTopMovies(pageNum: moviesViewModel.pageNum)
                 moviesViewModel.getFavouriteMovies()
             }
         .ignoresSafeArea()
@@ -52,7 +52,7 @@ struct movieCell: View{
     
     var body: some View{
         NavigationLink(destination: MovieDetailsView(viewModel: MovieDetailsViewModel(movie: movie))) {
-            HStack{
+            HStack(spacing: 20){
                 if let im = movie.image{
                     KFImage(URL(string: "https://www.themoviedb.org/t/p/w1280\(im)"))
                         .resizable()
@@ -69,12 +69,12 @@ struct movieCell: View{
                         .padding(.vertical, 4)
                 }
                 
-                
                 VStack(alignment: .leading, spacing: 2){
                     Text(movie.title ?? "")
                         .fontWeight(.semibold)
                         .lineLimit(2)
                         .minimumScaleFactor(0.5)
+                        .multilineTextAlignment(.leading)
                     
                     if let release_date = movie.release_date{
                         Text(release_date[0..<4])
@@ -85,8 +85,9 @@ struct movieCell: View{
                     }
                     
                 }
+                Spacer()
                 
-            }
+            }.padding(.leading)
         }
         
     }
@@ -114,14 +115,62 @@ struct HomeView: View {
 
     var body: some View {
         TabView(selection: $selection){
-            List (moviesViewModel.searchResults.isEmpty ?  moviesViewModel.topTwo: moviesViewModel.searchResults, id: \.id){ movie in
-                //List (moviesViewModel.topTwo, id: \.id){ movie in
-                movieCell(movie: movie)
-            }
-            .listStyle(PlainListStyle())
+//            List (moviesViewModel.searchResults.isEmpty ?  moviesViewModel.topTwo: moviesViewModel.searchResults, id: \.id){ movie in
+//                //List (moviesViewModel.topTwo, id: \.id){ movie in
+//                VStack{
+//                    movieCell(movie: movie)
+//
+//                    if(moviesViewModel.searchResults.isEmpty){
+//                        if (self.moviesViewModel.topTwo.last?.id == movie.id) {
+//                            Divider()
+//                            Text("Fetching more...")
+//                        }
+//                    }
+//                }.onAppear(perform: {
+//                    self.moviesViewModel.getTopMovies(pageNum: self.moviesViewModel.updateMovies())
+//                })
+//
+//            }
+//            .listStyle(PlainListStyle())
+            
+//            List{
+//                ForEach(moviesViewModel.searchResults.isEmpty ?  moviesViewModel.topTwo: moviesViewModel.searchResults, id: \.id) { movie in
+//                    VStack{
+//
+//                        movieCell(movie: movie)
+//
+//                        if(moviesViewModel.searchResults.isEmpty && self.moviesViewModel.topTwo.last?.id == movie.id){
+//                            Divider()
+//                            Text("Fetching more...")
+//                                .onAppear(perform: {
+//                                    self.moviesViewModel.getTopMovies(pageNum: self.moviesViewModel.updateMovies())
+//                                })
+//                        }
+//                    }
+//                }
+//            }.listStyle(PlainListStyle())
+                
+            ScrollView(showsIndicators: false){
+                LazyVStack{
+                    ForEach(moviesViewModel.searchResults.isEmpty ?  moviesViewModel.topTwo: moviesViewModel.searchResults, id: \.id) { movie in
+                        VStack{
+                            Divider()
+                            movieCell(movie: movie)
+                            
+                            if(moviesViewModel.searchResults.isEmpty && self.moviesViewModel.topTwo.last?.id == movie.id){
+                                Divider()
+                                Text("Fetching more...")
+                                    .onAppear(perform: {
+                                        self.moviesViewModel.getTopMovies(pageNum: self.moviesViewModel.updateMovies())
+                                    })
+                            }
+                        }
+                    }
+                }
+            }.listStyle(PlainListStyle())
             
             
-            .navigationTitle(selection == 0 ? "Top \(moviesViewModel.totalMovieNumber) Movies": "Favourite Movies")
+                .navigationTitle(selection == 0 ? "Top \(moviesViewModel.topTwo.count) Movies": "Favourite Movies")
             //.navigationBarTitleDisplayMode(.inline)
             
             .tabItem {
@@ -156,6 +205,7 @@ struct HomeView: View {
         }
 
     }
+        
 }
 
 

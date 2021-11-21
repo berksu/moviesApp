@@ -12,8 +12,8 @@ final class MoviesApi{
     
     typealias completion = ([Movie]) -> Void
     
-    func fetchMovie(completion: @escaping completion){
-        AF.request("https://api.themoviedb.org/3/movie/top_rated?api_key=5c011e8f93fae74da4b04f2a25562db2&language=en-US&page=1").response { response in
+    func fetchMovie(pageNum:Int, completion: @escaping completion){
+        AF.request("https://api.themoviedb.org/3/movie/top_rated?api_key=5c011e8f93fae74da4b04f2a25562db2&language=en-US&page=\(pageNum)").response { response in
             guard let data = response.data
             else{
                 return

@@ -17,7 +17,7 @@ final class MovieListViewModel: ObservableObject{
     @Published var totalMovieNumber = 0
     @Published var searchMovie = ""
     @Published var favouriteMovies:[Movie] = []
-
+    @Published var pageNum = 1
 
     //{
     //    didSet {
@@ -65,11 +65,11 @@ final class MovieListViewModel: ObservableObject{
     }
     
     
-    func getTopMovies(){
-        MoviesApi().fetchMovie { [weak self] movies in
+    func getTopMovies(pageNum: Int){
+        MoviesApi().fetchMovie(pageNum: pageNum) { [weak self] movies in
             print(movies.count)
             self?.totalMovieNumber = movies.count
-            self?.topTwo = movies
+            self?.topTwo += movies
         }
     }
     
@@ -137,6 +137,13 @@ final class MovieListViewModel: ObservableObject{
         
     }
 
+    
+    
+    func updateMovies()-> Int{
+        pageNum += 1
+        totalMovieNumber = topTwo.count
+        return pageNum
+    }
 }
 
 
