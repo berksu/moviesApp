@@ -41,6 +41,7 @@ final class MovieListViewModel: ObservableObject{
             .debounce(for: 0.8, scheduler: RunLoop.main)
             .removeDuplicates()
             .sink{keyword in
+                //print("aaaaa")
                 self.searchMovies(title: self.searchMovie)
             }
             .store(in: &cancellables)
@@ -76,7 +77,8 @@ final class MovieListViewModel: ObservableObject{
     func searchMovies(title: String){
         MovieSearchApi().searchMovie(title: title) { [weak self] searchResult in
             self?.searchResults = searchResult
-            print(searchResult.count)
+            //signin page de değişen olduğunda buraya giriyor
+            //print(searchResult.count)
         }
     }
     
