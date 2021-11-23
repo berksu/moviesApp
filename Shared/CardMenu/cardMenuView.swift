@@ -41,8 +41,8 @@ struct CardMenuView: View {
     
     var cardsView: some View {
         GeometryReader { geometry in
-            //Gözden geçirilecek
             ZStack(){
+                let minusVal = cards.count - 3
                 ForEach(0..<cards.count, id: \.self) { index in
                     if(index > cards.count - 4){
                         CardView(card: self.cards[index]){
@@ -53,9 +53,9 @@ struct CardMenuView: View {
                                 removeCard(at: index)
                             }
                         }
-                        .stacked(at: index > 2 ? 2:index, in: (cards.count > 3) ? 3:cards.count)
-                        .opaced(at: index > 2 ? 2:index, in: (cards.count > 3) ? 3:cards.count)
-                        .scaled(at: index > 2 ? 2:index, in: (cards.count > 3) ? 3:cards.count)
+                        .stacked(at: index > 1 ? (index-minusVal):index, in: (cards.count > 3) ? 3:cards.count)
+                        .opaced(at: index > 1 ? (index-minusVal):index, in: (cards.count > 3) ? 3:cards.count)
+                        .scaled(at: index > 1 ? (index-minusVal):index, in: (cards.count > 3) ? 3:cards.count)
                     }
                 }
             }.frame(width: geometry.size.width, height: geometry.size.height)
