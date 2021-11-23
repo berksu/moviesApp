@@ -50,7 +50,7 @@ struct LoginPageView: View {
                 .sheet(isPresented: $viewModel.isSignInTapped, onDismiss: {
                     viewModel.isSignInTapped = false
                 }, content: {
-                    SignIn()
+                    SignIn(isPresented: $viewModel.isSignInTapped)
                 })
         }
     

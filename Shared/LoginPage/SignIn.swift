@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct SignIn: View {
-    
+    @Binding var isPresented: Bool
     @ObservedObject var viewModel = LoginPageViewModel()
 
     var emailField: some View{
-        TextField("Username", text: $viewModel.signInEmail)
+        TextField("E-mail", text: $viewModel.signInEmail)
             .modifier(TextFieldCustomRoundedStyle())
     }
     
@@ -28,36 +28,59 @@ struct SignIn: View {
     
     
     var signInButton: some View{
-        NavigationLink(destination: MoviesListView()) {
+        Button {
+            isPresented = false
+        } label: {
             Text("Sign In")
                 .modifier(ButtonViewCustomRoundedStyle())
+            
+        }
+
+    }
+    
+    var closePageButton: some View{
+        Button {
+            isPresented = false
+        } label: {
+           Image(systemName: "xmark.circle")
+                .resizable()
+                .foregroundColor(.red)
+                .font(.system(size: 10, weight: .bold))
+                .frame(width: 20, height: 20)
         }
     }
     
     var body: some View {
-        ZStack{
-            LinearGradient(gradient: Gradient(colors: [.orange, .green]), startPoint: .top, endPoint: .bottom)
-                .ignoresSafeArea()
-            
-            VStack{
-                Image("login_icon")
-                    .resizable()
-                    .frame(width: UIScreen.main.bounds.width/1.8, height: UIScreen.main.bounds.height/3.5)
-                    .padding(.top,-100)
-                emailField
-                    .padding(.top, 60)
-                passwordField
-                passwordRepatField
-                signInButton.padding(.top)
+        NavigationView{
+            ZStack{
+                LinearGradient(gradient: Gradient(colors: [.orange, .green]), startPoint: .top, endPoint: .bottom)
+                    .ignoresSafeArea()
+                
+                VStack{
+                    HStack{
+                        Spacer()
+                        closePageButton
+                            .padding(.trailing)
+                    }
+                    Image("login_icon")
+                        .resizable()
+                        .frame(width: UIScreen.main.bounds.width/1.8, height: UIScreen.main.bounds.height/3.5)
+                    
+                    emailField
+                        .padding(.top, 60)
+                    passwordField
+                    passwordRepatField
+                    signInButton.padding(.top)
+                    
+                }
             }
+            .navigationBarHidden(true)
         }
-        
-        
     }
 }
 
 struct SignIn_Previews: PreviewProvider {
     static var previews: some View {
-        SignIn()
+        SignIn(isPresented:.constant(true))
     }
 }
