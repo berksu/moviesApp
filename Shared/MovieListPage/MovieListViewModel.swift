@@ -31,7 +31,6 @@ final class MovieListViewModel: ObservableObject{
     init(){
         //setUpBindings()
         searchMovieOnTime()
-            
     }
     
     
@@ -70,6 +69,8 @@ final class MovieListViewModel: ObservableObject{
             print(movies.count)
             self?.totalMovieNumber = movies.count
             self?.topTwo += movies
+            
+            self?.findFavouriteMoviesInAll()
         }
     }
     
@@ -86,39 +87,10 @@ final class MovieListViewModel: ObservableObject{
     
     
     func getFavouriteMovies(){
-        favouriteMovies = []
-        if let userID = Auth.auth().currentUser?.uid{
-            let db = Firestore.firestore()
-            
-            db.collection(userID).getDocuments() { (querySnapshot, err) in
-                if let err = err {
-                    print("Error getting documents: \(err)")
-                } else {
-                    for document in querySnapshot!.documents {
-                        print("\(document.documentID) => \(document.data())")
-                        let data = document.data()
-                        let tempMovie = Movie(id: data["id"]! as! Int,
-                                              title: data["title"]! as? String,
-                                              release_date: data["release_date"]! as? String,
-                                              image: data["image"]! as? String,
-                                              vote_average: data["vote_average"]! as? Float,
-                                              vote_count: data["vote_count"]! as? Float,
-                                              overview: data["overview"]! as? String,
-                                              isFavourite: data["isFavourite"]! as! Bool)
-                        self.favouriteMovies.append(tempMovie)
-                    }
-                    if !self.topTwo.isEmpty {
-                        self.findFavouriteMoviesInAll()
-                    }
-                }
-            }
-            
-            
-        } else{
-            print("Cannot reach firebase")
-            return
+        MovieListViewStorage().getFavouriteMovies {[weak self] movies in
+            self?.favouriteMovies = movies
+            self?.getTopMovies(pageNum: self?.pageNum ?? 1)
         }
-        
     }
     
     

@@ -33,7 +33,6 @@ struct MoviesListView: View {
         .navigationBarHidden(true)
             .searchable(text: $moviesViewModel.searchMovie, prompt: "Search Movie")
             .onAppear{
-                moviesViewModel.getTopMovies(pageNum: moviesViewModel.pageNum)
                 moviesViewModel.getFavouriteMovies()
             }
         .ignoresSafeArea()

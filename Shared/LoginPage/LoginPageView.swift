@@ -14,40 +14,45 @@ struct LoginPageView: View {
 
 
     var body: some View {
-        NavigationView {
-            ZStack{
+            NavigationView {
+    //            ZStack{
+    //                loginPageViewBack(viewModel: viewModel)
+    //                if(viewModel.isSignInTapped){
+    //                    SignIn()
+    //                        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+    //                        .cornerRadius(60.0)
+    //                        .transition(.move(edge: .bottom))
+    //                        .offset(x: 0 , y: offset.height)
+    //                        .gesture(
+    //                            DragGesture()
+    //                                .onChanged{ gesture in
+    //                                    if(gesture.translation.height > 0){
+    //                                        self.offset = gesture.translation
+    //                                    }
+    //                                }
+    //                                .onEnded{ _ in
+    //                                    if(self.offset.height > 100){
+    //                                        withAnimation{
+    //                                            self.viewModel.isSignInTapped.toggle()
+    //                                            self.offset = CGSize.zero
+    //                                        }
+    //                                    }else{
+    //
+    //                                    }
+    //                                }
+    //                        )
+    //
+    //                }
+    //
+    //            }
                 loginPageViewBack(viewModel: viewModel)
-                if(viewModel.isSignInTapped){
+            }.onAppear(perform: authenticationProcess)
+                .sheet(isPresented: $viewModel.isSignInTapped, onDismiss: {
+                    viewModel.isSignInTapped = false
+                }, content: {
                     SignIn()
-                        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-                        .cornerRadius(60.0)
-                        .transition(.move(edge: .bottom))
-                        .offset(x: 0 , y: offset.height)
-                        .gesture(
-                            DragGesture()
-                                .onChanged{ gesture in
-                                    if(gesture.translation.height > 0){
-                                        self.offset = gesture.translation
-                                    }
-                                }
-                                .onEnded{ _ in
-                                    if(self.offset.height > 100){
-                                        withAnimation{
-                                            self.viewModel.isSignInTapped.toggle()
-                                            self.offset = CGSize.zero
-                                        }
-                                    }else{
-                                        
-                                    }
-                                }
-                        )
-                        
-                }
-                
-            }
-        }.onAppear(perform: authenticationProcess)
-        
-    }
+                })
+        }
     
     
     
