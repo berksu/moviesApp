@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import Firebase
 
 final class LoginPageViewModel: ObservableObject{
     
@@ -42,4 +43,36 @@ final class LoginPageViewModel: ObservableObject{
             }
             .store(in: &cancellables)
     }
+    
+    
+    func login(completion: @escaping (Bool) -> Void){
+        print("Girdi")
+        Auth.auth().signIn(withEmail: mail, password: password) { [weak self] authResult, error in
+            guard let user = authResult?.user, error == nil else {
+                // ...print("Signed in")
+                completion(false)
+                return
+                
+            }
+            print("Logged In")
+            completion(true)
+            
+        }
+    }
+    
+    
+    func signIn(completion: @escaping (Bool) -> Void){
+        Auth.auth().createUser(withEmail: signInEmail, password: signInPassword) { authResult, error in
+          // ...
+            guard let user = authResult?.user, error == nil else {
+                //strongSelf.showMessagePrompt(error!.localizedDescription)
+                print("Login error: \(error)")
+                completion(false)
+                return
+            }
+            print("\(user.email!) created")
+            completion(true)
+        }
+    }
+    
 }

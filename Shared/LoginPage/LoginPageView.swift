@@ -79,6 +79,8 @@ struct loginPageViewBack: View{
     var userNameField: some View{
         TextField("Username", text: $viewModel.mail)
             .modifier(TextFieldCustomRoundedStyle())
+            .textInputAutocapitalization(.never)
+            .disableAutocorrection(true)
     }
     
     var passwordField: some View{
@@ -87,10 +89,16 @@ struct loginPageViewBack: View{
     }
     
     
+    @State var isLoggedIn:Bool = false
     var loginButton: some View{
-        NavigationLink(destination: MoviesListView()) {
+        NavigationLink(destination: MoviesListView(),isActive: $isLoggedIn) {
             Text("Login")
                 .modifier(ButtonViewCustomRoundedStyle())
+                .onTapGesture {
+                    viewModel.login { isIn in
+                        isLoggedIn = isIn ? true:false
+                    }
+                }
         }
     }
     

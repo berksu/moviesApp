@@ -33,6 +33,13 @@ struct SignIn: View {
         } label: {
             Text("Sign In")
                 .modifier(ButtonViewCustomRoundedStyle())
+//                .onTapGesture {
+//                    viewModel.signIn { isSignedIn in
+//                        NavigationLink(destination: MoviesListView(), isActive: isSignedIn) {
+//                            EmptyView()
+//                        }
+//                    }
+//                }
             
         }
 
