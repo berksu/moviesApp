@@ -31,7 +31,8 @@ struct MoviesListView: View {
             
         }
         .navigationBarHidden(true)
-            .searchable(text: $moviesViewModel.searchMovie, prompt: "Search Movie")
+            //.searchable(text: $moviesViewModel.searchMovie, prompt: "Search Movie")
+            .searchable(text: $moviesViewModel.searchMovie, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search Movie")
             .onAppear{
                 moviesViewModel.getFavouriteMovies()
             }
@@ -171,6 +172,7 @@ struct HomeView: View {
                 Image(systemName: "house.fill")
                 Text("Home")
             }.tag(0)
+
             
             FavouritesView(moviesViewModel: moviesViewModel)
                 .tabItem {
@@ -180,8 +182,8 @@ struct HomeView: View {
                 .tag(1)
             
             
-                .navigationTitle(selection == 0 ? "Top \(moviesViewModel.topTwo.count) Movies": "Favourite Movies")
         }
+        .navigationTitle(selection == 0 ? "Top \(moviesViewModel.topTwo.count) Movies": "Favourite Movies")
         .toolbar{
             ToolbarItem(placement: .navigationBarLeading) {
                 Button {
