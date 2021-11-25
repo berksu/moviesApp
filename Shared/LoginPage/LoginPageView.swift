@@ -46,7 +46,9 @@ struct LoginPageView: View {
     //
     //            }
                 loginPageViewBack(viewModel: viewModel)
-            }.onAppear(perform: authenticationProcess)
+            }
+            .navigationBarHidden(true)
+            .onAppear(perform: authenticationProcess)
                 .sheet(isPresented: $viewModel.isSignInTapped, onDismiss: {
                     viewModel.isSignInTapped = false
                 }, content: {

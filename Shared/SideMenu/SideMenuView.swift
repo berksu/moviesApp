@@ -74,9 +74,16 @@ struct userInfo: View{
             
             
             ForEach(SideMenuViewModel.allCases, id: \.self){option in
-                NavigationLink(destination: CardMenuView(cardMenuViewModel: CardMenuViewModel())) {
-                    sideMenuButtons(viewModel: option)
-                        .padding(.top)
+                if(option.title != SideMenuViewModel.profile.title){
+                    NavigationLink(destination: LoginPageView()) {
+                        sideMenuButtons(viewModel: option)
+                            .padding(.top)
+                    }
+                }else{
+                    NavigationLink(destination: CardMenuView(cardMenuViewModel: CardMenuViewModel())) {
+                        sideMenuButtons(viewModel: option)
+                            .padding(.top)
+                    }
                 }
                 
             }
