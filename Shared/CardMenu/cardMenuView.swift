@@ -43,20 +43,19 @@ struct CardMenuView: View {
         GeometryReader { geometry in
             ZStack(){
                 let minusVal = cards.count - 3
-                ForEach(0..<cards.count, id: \.self) { index in
-                    if(index > cards.count - 4){
-                        CardView(card: self.cards[index]){
-                            withAnimation{
-                                if(index != 0){
-                                    cards[index-1].isDraggable = true
-                                }
-                                removeCard(at: index)
+                let loopMinVal = minusVal > 0 ? minusVal:0
+                ForEach(loopMinVal..<cards.count, id: \.self) { index in
+                    CardView(card: self.cards[index]){
+                        withAnimation{
+                            if(index != 0){
+                                cards[index-1].isDraggable = true
                             }
+                            removeCard(at: index)
                         }
-                        .stacked(at: index > 1 ? (index-minusVal):index, in: (cards.count > 3) ? 3:cards.count)
-                        .opaced(at: index > 1 ? (index-minusVal):index, in: (cards.count > 3) ? 3:cards.count)
-                        .scaled(at: index > 1 ? (index-minusVal):index, in: (cards.count > 3) ? 3:cards.count)
                     }
+                    .stacked(at: index > 1 ? (index-minusVal):index, in: (cards.count > 3) ? 3:cards.count)
+                    .opaced(at: index > 1 ? (index-minusVal):index, in: (cards.count > 3) ? 3:cards.count)
+                    .scaled(at: index > 1 ? (index-minusVal):index, in: (cards.count > 3) ? 3:cards.count)
                 }
             }.frame(width: geometry.size.width, height: geometry.size.height)
         }
