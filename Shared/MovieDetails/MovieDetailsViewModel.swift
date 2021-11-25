@@ -52,8 +52,4 @@ final class MovieDetailsViewModel: ObservableObject {
         }
         
     }
-    
-    
-        
-    
 }

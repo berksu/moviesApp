@@ -26,7 +26,7 @@ struct MoviesListView: View {
                     .offset(x: isSideMenuShow ? 250:0, y: isSideMenuShow ? 50:0)
                     .scaleEffect(isSideMenuShow ? 0.8 : 1)
                     .opacity(isSideMenuShow ? 0.4:1)
-                    .ignoresSafeArea()
+                    .ignoresSafeArea(.container, edges: .bottom)
             }
             
         }
@@ -105,13 +105,11 @@ struct HomeView: View {
     @ObservedObject var moviesViewModel: MovieListViewModel
     
     //AppStorage and userdefaults tried
-    @AppStorage("tabSelection") private var selection = 0
+    @AppStorage("tabSelection") private var selection: Int = 0
     //@State private var tapCount = UserDefaults.standard.integer(forKey: "Tap")
     //UserDefaults.standard.set(self.tapCount, forKey: "Tap")
 
     @Binding var isSideMenuShow: Bool
-    
-
     var body: some View {
         TabView(selection: $selection){
 //            List (moviesViewModel.searchResults.isEmpty ?  moviesViewModel.topTwo: moviesViewModel.searchResults, id: \.id){ movie in
@@ -167,9 +165,6 @@ struct HomeView: View {
                     }
                 }
             }.listStyle(PlainListStyle())
-            
-            
-                .navigationTitle(selection == 0 ? "Top \(moviesViewModel.topTwo.count) Movies": "Favourite Movies")
             //.navigationBarTitleDisplayMode(.inline)
             
             .tabItem {
@@ -184,6 +179,8 @@ struct HomeView: View {
                 }
                 .tag(1)
             
+            
+                .navigationTitle(selection == 0 ? "Top \(moviesViewModel.topTwo.count) Movies": "Favourite Movies")
         }
         .toolbar{
             ToolbarItem(placement: .navigationBarLeading) {
@@ -214,11 +211,16 @@ struct FavouritesView: View{
     @ObservedObject var moviesViewModel: MovieListViewModel
     
     var body: some View{
-        List (moviesViewModel.favouriteMovies , id: \.id){ movie in
-            //List (moviesViewModel.topTwo, id: \.id){ movie in
-            movieCell(movie: movie)
-        }
-        .listStyle(PlainListStyle())
+        ScrollView(showsIndicators: false){
+            LazyVStack{
+                ForEach(moviesViewModel.favouriteMovies , id: \.id) { movie in
+                    VStack{
+                        Divider()
+                        movieCell(movie: movie)
+                    }
+                }
+            }
+        }.listStyle(PlainListStyle())
         .onAppear{
             moviesViewModel.getFavouriteMovies()
             
