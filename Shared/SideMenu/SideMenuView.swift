@@ -10,6 +10,7 @@ import Kingfisher
 
 struct SideMenuView: View {
     @Binding var isSideMenuShow: Bool
+    let sideMenuModel = SideMenuModel()
     
     var body: some View {
         ZStack{
@@ -19,7 +20,7 @@ struct SideMenuView: View {
             
             VStack(alignment: .leading){
                 HStack{
-                    KFImage(URL(string: "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"))
+                    KFImage(URL(string: sideMenuModel.url))
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .clipShape(Circle())
@@ -42,7 +43,7 @@ struct SideMenuView: View {
                     
                 }
                 
-                userInfo()
+                userInfo(sideMenuModel: sideMenuModel)
                 Spacer()
             }
             .ignoresSafeArea()
@@ -58,17 +59,18 @@ struct SideMenuView: View {
 struct userInfo: View{
     @ObservedObject var sideMenuViewModel = SideMenuViewModell()
     @State var isSignedOut: Bool=false
+    let sideMenuModel: SideMenuModel
 
     var body: some View{
         VStack(alignment: .leading){
-            Text("Eddie Brook")
+            Text(sideMenuModel.name)
                 .font(.system(size:24, weight: .semibold))
-            Text("@eddie")
+            Text(sideMenuModel.hashtag)
                 .font(.system(size:14))
             
             
             HStack{
-                Text("3425")
+                Text(sideMenuModel.follower)
                     .font(.system(size:16, weight: .bold))
                 Text("Follower")
                     .font(.system(size:16, weight:.semibold))
