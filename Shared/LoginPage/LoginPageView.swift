@@ -11,6 +11,7 @@ import Firebase
 struct LoginPageView: View {
     @ObservedObject var viewModel = LoginPageViewModel()
     @State private var offset = CGSize.zero
+    @State private var isSignedIn: Bool = false
 
 
     var body: some View {
@@ -45,15 +46,22 @@ struct LoginPageView: View {
     //                }
     //
     //            }
-                loginPageViewBack(viewModel: viewModel)
+                ZStack{
+                    NavigationLink(destination: MoviesListView(),isActive: $isSignedIn) {
+                        EmptyView()
+                    }
+                    loginPageViewBack(viewModel: viewModel)
+                }
             }
             .navigationBarHidden(true)
-            .onAppear(perform: authenticationProcess)
-                .sheet(isPresented: $viewModel.isSignInTapped, onDismiss: {
-                    viewModel.isSignInTapped = false
-                }, content: {
-                    SignIn(isPresented: $viewModel.isSignInTapped)
-                })
+            //.onAppear(perform: authenticationProcess)
+            .sheet(isPresented: $viewModel.isSignInTapped, onDismiss: {
+                viewModel.isSignInTapped = false
+                isSignedIn = true
+            }, content: {
+                //SignIn(isPresented: $viewModel.isSignInTapped)
+                SignIn(viewModel: viewModel)
+            })
         }
     
     
@@ -89,6 +97,7 @@ struct loginPageViewBack: View{
     }
     
     
+    //Indicator will add
     @State var isLoggedIn:Bool = false
     var loginButton: some View{
         NavigationLink(destination: MoviesListView(),isActive: $isLoggedIn) {

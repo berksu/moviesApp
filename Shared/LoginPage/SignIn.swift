@@ -8,12 +8,13 @@
 import SwiftUI
 
 struct SignIn: View {
-    @Binding var isPresented: Bool
-    @ObservedObject var viewModel = LoginPageViewModel()
-
+    @ObservedObject var viewModel: LoginPageViewModel
+    
     var emailField: some View{
         TextField("E-mail", text: $viewModel.signInEmail)
             .modifier(TextFieldCustomRoundedStyle())
+            .textInputAutocapitalization(.never)
+            .disableAutocorrection(true)
     }
     
     var passwordField: some View{
@@ -28,26 +29,20 @@ struct SignIn: View {
     
     
     var signInButton: some View{
-        Button {
-            isPresented = false
-        } label: {
-            Text("Sign In")
-                .modifier(ButtonViewCustomRoundedStyle())
-//                .onTapGesture {
-//                    viewModel.signIn { isSignedIn in
-//                        NavigationLink(destination: MoviesListView(), isActive: isSignedIn) {
-//                            EmptyView()
-//                        }
-//                    }
-//                }
-            
-        }
-
+        Text("Sign In")
+            .modifier(ButtonViewCustomRoundedStyle())
+            .onTapGesture {
+                viewModel.signIn { isIn in
+                    viewModel.isSignedIn = isIn
+                    viewModel.isSignInTapped = false
+                }
+            }
+        
     }
     
     var closePageButton: some View{
         Button {
-            isPresented = false
+            viewModel.isSignInTapped = false
         } label: {
            Image(systemName: "xmark.circle")
                 .resizable()
@@ -88,6 +83,6 @@ struct SignIn: View {
 
 struct SignIn_Previews: PreviewProvider {
     static var previews: some View {
-        SignIn(isPresented:.constant(true))
+        SignIn(viewModel: LoginPageViewModel())
     }
 }

@@ -56,6 +56,9 @@ struct SideMenuView: View {
 
 
 struct userInfo: View{
+    @ObservedObject var sideMenuViewModel = SideMenuViewModell()
+    @State var isSignedOut: Bool=false
+
     var body: some View{
         VStack(alignment: .leading){
             Text("Eddie Brook")
@@ -75,10 +78,17 @@ struct userInfo: View{
             
             ForEach(SideMenuViewModel.allCases, id: \.self){option in
                 if(option.title != SideMenuViewModel.profile.title){
-                    NavigationLink(destination: LoginPageView()) {
+                    NavigationLink(destination: LoginPageView(), isActive: $isSignedOut) {
                         sideMenuButtons(viewModel: option)
                             .padding(.top)
+                            .onTapGesture {
+                                isSignedOut = sideMenuViewModel.logout()
+                            }
                     }
+                    //NavigationLink(destination: LoginPageView()) {
+                    //    sideMenuButtons(viewModel: option)
+                    //        .padding(.top)
+                    //}
                 }else{
                     NavigationLink(destination: CardMenuView(cardMenuViewModel: CardMenuViewModel())) {
                         sideMenuButtons(viewModel: option)

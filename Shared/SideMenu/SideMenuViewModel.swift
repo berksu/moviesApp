@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Firebase
 
 enum SideMenuViewModel: Int, CaseIterable{
     case profile
@@ -26,4 +27,17 @@ enum SideMenuViewModel: Int, CaseIterable{
     }
     
     
+}
+
+
+final class SideMenuViewModell: ObservableObject{
+    func logout()->Bool{
+        do {
+            try Auth.auth().signOut()
+        } catch let err {
+            print(err)
+            return false
+        }
+        return true
+    }
 }
