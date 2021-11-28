@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Firebase
 
 enum SideMenuViewModel: Int, CaseIterable{
     case profile
