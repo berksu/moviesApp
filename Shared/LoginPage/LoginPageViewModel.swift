@@ -7,7 +7,6 @@
 
 import Foundation
 import Combine
-import Firebase
 import SwiftUI
 
 final class LoginPageViewModel: ObservableObject{
@@ -66,5 +65,9 @@ final class LoginPageViewModel: ObservableObject{
             isSignInTapped = true
             completion(false)
         }
+    }
+    
+    func isSignedIn() -> Bool{
+        return AuthenticationApi().controlUserIsSignedIn()
     }
 }

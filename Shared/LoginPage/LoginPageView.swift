@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Firebase
 
 struct LoginPageView: View {
     @ObservedObject var viewModel = LoginPageViewModel()
@@ -26,10 +25,7 @@ struct LoginPageView: View {
             .navigationBarHidden(true)
             .sheet(isPresented: $viewModel.isSignInTapped, onDismiss: {
                 viewModel.signInButtonUpdate(state: false)
-                let user = Auth.auth().currentUser
-                if let _ = user {
-                    isSignedIn = true
-                }
+                isSignedIn = viewModel.isSignedIn()
             }, content: {
                 SignIn(viewModel: viewModel)
             })

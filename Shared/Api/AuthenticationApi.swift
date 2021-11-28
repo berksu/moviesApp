@@ -47,4 +47,12 @@ final class AuthenticationApi{
         return true
     }
     
+    func controlUserIsSignedIn() -> Bool{
+        let user = Auth.auth().currentUser
+        if let _ = user {
+            return true
+        }
+        return false
+    }
+    
 }
