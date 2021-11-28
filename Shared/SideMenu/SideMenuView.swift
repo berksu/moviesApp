@@ -92,10 +92,14 @@ struct userInfo: View{
                     //        .padding(.top)
                     //}
                 }else{
-                    NavigationLink(destination: CardMenuView(cardMenuViewModel: CardMenuViewModel())) {
+                    NavigationLink(destination: ProfileInfoView()) {
                         sideMenuButtons(viewModel: option)
                             .padding(.top)
                     }
+//                    NavigationLink(destination: CardMenuView(cardMenuViewModel: CardMenuViewModel())) {
+//                        sideMenuButtons(viewModel: option)
+//                            .padding(.top)
+//                    }
                 }
                 
             }

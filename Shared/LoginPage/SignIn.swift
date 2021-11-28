@@ -30,7 +30,7 @@ struct SignIn: View {
     
     var signInButton: some View{
         Text("Sign In")
-            .modifier(ButtonViewCustomRoundedStyle())
+            .modifier(ButtonViewCustomRoundedStyle(buttonColor: Color(.red)))
             .onTapGesture {
                 viewModel.signIn { isIn in
                     viewModel.isSignedIn = isIn
@@ -63,7 +63,7 @@ struct SignIn: View {
                         Spacer()
                         closePageButton
                             .padding(.trailing)
-                    }
+                    }.padding(.bottom)
                     Image("login_icon")
                         .resizable()
                         .frame(width: UIScreen.main.bounds.width/1.8, height: UIScreen.main.bounds.height/3.5)

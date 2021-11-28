@@ -9,10 +9,11 @@ import Foundation
 import SwiftUI
 
 struct ButtonViewCustomRoundedStyle: ViewModifier{
+    let buttonColor: Color
     func body(content: Content) -> some View{
         return content
             .font(.system(size:16, weight: .medium))
-            .foregroundColor(Color(.red))
+            .foregroundColor(buttonColor)
             .padding()
             .frame(maxWidth: .infinity)
             .cornerRadius(16)
@@ -20,7 +21,7 @@ struct ButtonViewCustomRoundedStyle: ViewModifier{
                 RoundedRectangle(
                     cornerRadius: 16
                 ).stroke(
-                    Color.red,
+                    buttonColor,
                     lineWidth: 3.5
                 )
             )

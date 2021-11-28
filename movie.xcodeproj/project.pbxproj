@@ -15,6 +15,7 @@
 		C921E6E1273DAFC5007D927E /* TextFieldCustomRoundedStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C921E6DF273DAFC5007D927E /* TextFieldCustomRoundedStyle.swift */; };
 		C921E6E3273DB47B007D927E /* ButtonViewCustomRoundedStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C921E6E2273DB47B007D927E /* ButtonViewCustomRoundedStyle.swift */; };
 		C921E6E4273DB47B007D927E /* ButtonViewCustomRoundedStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C921E6E2273DB47B007D927E /* ButtonViewCustomRoundedStyle.swift */; };
+		C9278D832752663600C63B1A /* ProfileInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9278D822752663600C63B1A /* ProfileInfoView.swift */; };
 		C9356D3227496A200005ADBE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C9356D3127496A200005ADBE /* GoogleService-Info.plist */; };
 		C9356D3327496A200005ADBE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C9356D3127496A200005ADBE /* GoogleService-Info.plist */; };
 		C9356D3627496C680005ADBE /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = C9356D3527496C680005ADBE /* FirebaseAuth */; };
@@ -41,6 +42,8 @@
 		C9577925273C5F21008308A8 /* LoginPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C95778FB273C5F21008308A8 /* LoginPageView.swift */; };
 		C9577926273C5F21008308A8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C95778FC273C5F21008308A8 /* Assets.xcassets */; };
 		C9577927273C5F21008308A8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C95778FC273C5F21008308A8 /* Assets.xcassets */; };
+		C962373427529174001D5DAF /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C962373327529174001D5DAF /* UserInfo.swift */; };
+		C962373627529C25001D5DAF /* UserInfoApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C962373527529C25001D5DAF /* UserInfoApi.swift */; };
 		C9666A952746C39100125E31 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9666A942746C39100125E31 /* CardView.swift */; };
 		C9666A972746DCB400125E31 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9666A962746DCB400125E31 /* Card.swift */; };
 		C96CF28F274C347500A81DD0 /* MovieListViewStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96CF28E274C347500A81DD0 /* MovieListViewStorage.swift */; };
@@ -80,6 +83,7 @@
 		C921E6DA273DA619007D927E /* LoginPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPageViewModel.swift; sourceTree = "<group>"; };
 		C921E6DF273DAFC5007D927E /* TextFieldCustomRoundedStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldCustomRoundedStyle.swift; sourceTree = "<group>"; };
 		C921E6E2273DB47B007D927E /* ButtonViewCustomRoundedStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonViewCustomRoundedStyle.swift; sourceTree = "<group>"; };
+		C9278D822752663600C63B1A /* ProfileInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfoView.swift; sourceTree = "<group>"; };
 		C9356D3127496A200005ADBE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C93B8E1427518B1B007F7860 /* SideMenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuModel.swift; sourceTree = "<group>"; };
 		C93E848E2743CC13004B5F1C /* SideMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuView.swift; sourceTree = "<group>"; };
@@ -100,6 +104,8 @@
 		C957791A273C5F21008308A8 /* Tests macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests macOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C957791E273C5F21008308A8 /* Tests_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOS.swift; sourceTree = "<group>"; };
 		C9577920273C5F21008308A8 /* Tests_macOSLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOSLaunchTests.swift; sourceTree = "<group>"; };
+		C962373327529174001D5DAF /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		C962373527529C25001D5DAF /* UserInfoApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoApi.swift; sourceTree = "<group>"; };
 		C9666A942746C39100125E31 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		C9666A962746DCB400125E31 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		C96CF28E274C347500A81DD0 /* MovieListViewStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListViewStorage.swift; sourceTree = "<group>"; };
@@ -173,6 +179,15 @@
 			path = Modifiers;
 			sourceTree = "<group>";
 		};
+		C9278D812752662000C63B1A /* ProfileInfo */ = {
+			isa = PBXGroup;
+			children = (
+				C9278D822752663600C63B1A /* ProfileInfoView.swift */,
+				C962373327529174001D5DAF /* UserInfo.swift */,
+			);
+			path = ProfileInfo;
+			sourceTree = "<group>";
+		};
 		C93E848D2743CC03004B5F1C /* SideMenu */ = {
 			isa = PBXGroup;
 			children = (
@@ -209,6 +224,7 @@
 		C95778F9273C5F21008308A8 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				C9278D812752662000C63B1A /* ProfileInfo */,
 				C9356D3127496A200005ADBE /* GoogleService-Info.plist */,
 				C957674127450CCC00E06948 /* CardMenu */,
 				C93E848D2743CC03004B5F1C /* SideMenu */,
@@ -293,6 +309,7 @@
 				C9D01F5827402B5700E16479 /* MoviesApi.swift */,
 				C9CC116E2740447200EDFFD9 /* MovieSearchApi.swift */,
 				C96CF28E274C347500A81DD0 /* MovieListViewStorage.swift */,
+				C962373527529C25001D5DAF /* UserInfoApi.swift */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -487,9 +504,11 @@
 				C93B8E1527518B1B007F7860 /* SideMenuModel.swift in Sources */,
 				C921E6E3273DB47B007D927E /* ButtonViewCustomRoundedStyle.swift in Sources */,
 				C9D01F5C27402CE600E16479 /* Movie.swift in Sources */,
+				C9278D832752663600C63B1A /* ProfileInfoView.swift in Sources */,
 				C9A8FCA0274A6B160069082E /* SignIn.swift in Sources */,
 				C9CC116A274043CC00EDFFD9 /* MovieSearchList.swift in Sources */,
 				C96CF28F274C347500A81DD0 /* MovieListViewStorage.swift in Sources */,
+				C962373427529174001D5DAF /* UserInfo.swift in Sources */,
 				C957674327450D1100E06948 /* CardMenuViewModel.swift in Sources */,
 				C93E8491274402FA004B5F1C /* SideMenuViewModel.swift in Sources */,
 				C93E849327441489004B5F1C /* CardMenuView.swift in Sources */,
@@ -506,6 +525,7 @@
 				C970D87E273ED04B00C024A5 /* MovieListViewModel.swift in Sources */,
 				C921E6E0273DAFC5007D927E /* TextFieldCustomRoundedStyle.swift in Sources */,
 				C9D01F5E2740356700E16479 /* MoviesList.swift in Sources */,
+				C962373627529C25001D5DAF /* UserInfoApi.swift in Sources */,
 				C9D01F5927402B5700E16479 /* MoviesApi.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

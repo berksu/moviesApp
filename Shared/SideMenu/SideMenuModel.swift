@@ -8,8 +8,8 @@
 import Foundation
 
 struct SideMenuModel{
-    let url = "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-    let name = "Eddie Brook"
-    let hashtag = "@eddie"
-    let follower = "3425"
+    var url = "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+    var name = "Eddie Brook"
+    var hashtag = "@eddie"
+    var follower = "3425"
 }

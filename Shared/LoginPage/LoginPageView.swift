@@ -57,7 +57,13 @@ struct LoginPageView: View {
             //.onAppear(perform: authenticationProcess)
             .sheet(isPresented: $viewModel.isSignInTapped, onDismiss: {
                 viewModel.isSignInTapped = false
-                isSignedIn = true
+                let user = Auth.auth().currentUser
+                // [END get_user_profile]
+                // [START user_profile]
+                if let user = user {
+                    isSignedIn = true
+                    
+                }
             }, content: {
                 //SignIn(isPresented: $viewModel.isSignInTapped)
                 SignIn(viewModel: viewModel)
@@ -102,7 +108,7 @@ struct loginPageViewBack: View{
     var loginButton: some View{
         NavigationLink(destination: MoviesListView(),isActive: $isLoggedIn) {
             Text("Login")
-                .modifier(ButtonViewCustomRoundedStyle())
+                .modifier(ButtonViewCustomRoundedStyle(buttonColor: Color(.red)))
                 .onTapGesture {
                     viewModel.login { isIn in
                         isLoggedIn = isIn ? true:false
@@ -115,7 +121,7 @@ struct loginPageViewBack: View{
     var signUpButton: some View{
         //NavigationLink(destination: MoviesListView()) {
             Text("Sign In")
-                .modifier(ButtonViewCustomRoundedStyle())
+                .modifier(ButtonViewCustomRoundedStyle(buttonColor: Color(.red)))
                 .onTapGesture {
                     withAnimation(.spring()){
                         viewModel.isSignInTapped.toggle()

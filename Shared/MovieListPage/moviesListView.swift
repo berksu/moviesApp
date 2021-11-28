@@ -27,6 +27,7 @@ struct MoviesListView: View {
                     .scaleEffect(isSideMenuShow ? 0.8 : 1)
                     .opacity(isSideMenuShow ? 0.4:1)
                     .ignoresSafeArea(.container, edges: .bottom)
+                    .disabled(isSideMenuShow)
             }
             
         }
@@ -37,7 +38,6 @@ struct MoviesListView: View {
                 moviesViewModel.getFavouriteMovies()
             }
         .ignoresSafeArea()
-            
     }
 
     
