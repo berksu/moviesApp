@@ -7,9 +7,10 @@
 
 import Foundation
 
-struct UserInfo: Codable{
+struct UserInfo{
     var userName: String?
     var url: String?
     var hashtag: String?
     var follower: String?
 }
+

@@ -9,23 +9,18 @@ import SwiftUI
 import Kingfisher
 
 struct ProfileInfoView: View {
-    
     @State var profileInfo = SideMenuModel()
     
     var body: some View {
-        GeometryReader{geometry in
-            VStack{
-                imageView
-                    .padding(.top,30)
-                userInfoView
-                Spacer()
-            }
+        VStack{
+            imageView
+                .padding(.top,30)
+            userInfoView
+            Spacer()
         }
         .padding(.top,70)
         .ignoresSafeArea()
     }
-    
-    
     
     var imageView:some View{
         Button {
@@ -46,51 +41,30 @@ struct ProfileInfoView: View {
         GeometryReader{geometry in
             VStack{
                 HStack{
-                    Text("Name")
-                        .font(.system(size:16, weight: .medium))
-                        .foregroundColor(Color(.black))
-                        .cornerRadius(16)
-                        .frame(width: geometry.size.width*0.2)
-                        .padding()
+                    Text("Username")
+                        .modifier(ProfilePageCustomText(geometry: geometry))
                     
                     TextField("Username", text: $profileInfo.name)
-                        .frame(width: geometry.size.width*0.5)
-                        .modifier(TextFieldCustomRoundedStyle(fieldColor: Color(.black)))
-                        .textInputAutocapitalization(.never)
-                        .disableAutocorrection(true)
+                        .modifier(ProfilePageCustomTextField(geometry: geometry))
                 }
                 
                 HStack{
                     Spacer()
                     Text("Hashtag")
-                        .font(.system(size:16, weight: .medium))
-                        .foregroundColor(Color(.black))
-                        .cornerRadius(16)
-                        .frame(width: geometry.size.width*0.2)
-                        .padding()
+                        .modifier(ProfilePageCustomText(geometry: geometry))
                     
                     TextField("Hashtag", text: $profileInfo.hashtag)
-                        .frame(width: geometry.size.width*0.5)
-                        .modifier(TextFieldCustomRoundedStyle(fieldColor: Color(.black)))
-                        .textInputAutocapitalization(.never)
-                        .disableAutocorrection(true)
+                        .modifier(ProfilePageCustomTextField(geometry: geometry))
                     Spacer()
                 }
                 
                 HStack{
                     Spacer()
                     Text("Follower")
-                        .font(.system(size:16, weight: .medium))
-                        .foregroundColor(Color(.black))
-                        .cornerRadius(16)
-                        .frame(width: geometry.size.width*0.2)
-                        .padding()
+                        .modifier(ProfilePageCustomText(geometry: geometry))
                     
                     TextField("Follower", text: $profileInfo.follower)
-                        .frame(width: geometry.size.width*0.5)
-                        .modifier(TextFieldCustomRoundedStyle(fieldColor: Color(.black)))
-                        .textInputAutocapitalization(.never)
-                        .disableAutocorrection(true)
+                        .modifier(ProfilePageCustomTextField(geometry: geometry))
                     Spacer()
                     
                 }
@@ -101,9 +75,6 @@ struct ProfileInfoView: View {
         }
     }
     
-    
-    
-    
     var saveButton: some View{
         Text("Save")
             .modifier(ButtonViewCustomRoundedStyle(buttonColor: Color(.blue)))
@@ -111,10 +82,7 @@ struct ProfileInfoView: View {
                 print("asd")
             }
     }
-    
-    
 }
-
 
 
 struct ProfileInfoView_Previews: PreviewProvider {

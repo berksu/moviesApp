@@ -25,8 +25,6 @@ enum SideMenuViewModel: Int, CaseIterable{
         case .logout: return "chevron.backward.square"
         }
     }
-    
-    
 }
 
 

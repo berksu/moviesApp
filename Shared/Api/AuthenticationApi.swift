@@ -21,7 +21,6 @@ final class AuthenticationApi{
         }
     }
     
-    
     func signIn(signInEmail: String, signInPassword: String, signInPasswordRepeat: String, completion: @escaping (Bool) -> Void){
         Auth.auth().createUser(withEmail: signInEmail, password: signInPassword) { authResult, error in
             // ...
@@ -35,7 +34,6 @@ final class AuthenticationApi{
             completion(true)
         }
     }
-    
     
     func logOut() -> Bool{
         do {

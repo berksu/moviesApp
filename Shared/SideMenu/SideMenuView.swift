@@ -17,7 +17,6 @@ struct SideMenuView: View {
             LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .top, endPoint: .bottom)
                 .ignoresSafeArea()
             
-            
             VStack(alignment: .leading){
                 HStack{
                     KFImage(URL(string: sideMenuModel.url))
@@ -49,16 +48,14 @@ struct SideMenuView: View {
             .ignoresSafeArea()
             .padding(EdgeInsets(top: 5, leading: 20, bottom: 0, trailing: 20))
             Spacer()
-            
         }.navigationBarHidden(true)
-        
     }
 }
 
 
 struct userInfo: View{
     @ObservedObject var sideMenuViewModel = SideMenuViewModell()
-    @State var isSignedOut: Bool=false
+    @State var isSignedOut: Bool = false
     let sideMenuModel: SideMenuModel
 
     var body: some View{
@@ -68,7 +65,6 @@ struct userInfo: View{
             Text(sideMenuModel.hashtag)
                 .font(.system(size:14))
             
-            
             HStack{
                 Text(sideMenuModel.follower)
                     .font(.system(size:16, weight: .bold))
@@ -76,7 +72,6 @@ struct userInfo: View{
                     .font(.system(size:16, weight:.semibold))
             }.padding(.top)
             .padding(.bottom)
-            
             
             ForEach(SideMenuViewModel.allCases, id: \.self){option in
                 if(option.title != SideMenuViewModel.profile.title){
@@ -87,24 +82,13 @@ struct userInfo: View{
                                 isSignedOut = sideMenuViewModel.logout()
                             }
                     }
-                    //NavigationLink(destination: LoginPageView()) {
-                    //    sideMenuButtons(viewModel: option)
-                    //        .padding(.top)
-                    //}
                 }else{
                     NavigationLink(destination: ProfileInfoView()) {
                         sideMenuButtons(viewModel: option)
                             .padding(.top)
                     }
-//                    NavigationLink(destination: CardMenuView(cardMenuViewModel: CardMenuViewModel())) {
-//                        sideMenuButtons(viewModel: option)
-//                            .padding(.top)
-//                    }
                 }
-                
             }
-            
-            
         }.foregroundColor(.white)
     }
 }

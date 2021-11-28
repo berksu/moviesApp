@@ -5,7 +5,6 @@
 //  Created by Berksu Kısmet on 11.11.2021.
 //
 
-import Foundation
 import SwiftUI
 
 struct TextFieldCustomRoundedStyle: ViewModifier{

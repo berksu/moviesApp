@@ -29,7 +29,6 @@ final class UserInfoApi{
         }
     }
     
-    
     func getUserInfo(completion: @escaping (UserInfo) -> Void){
         var user: UserInfo = UserInfo(userName: "", url: "")
         if let userID = Auth.auth().currentUser?.uid{
@@ -60,7 +59,6 @@ final class UserInfoApi{
             return
         }
     }
-    
     
     func updateUserInfo(completion: @escaping(Bool) -> Void){
         

@@ -11,7 +11,6 @@ import Kingfisher
 
 
 struct MovieDetailsView: View {
-    
     @ObservedObject var viewModel: MovieDetailsViewModel
     
     var body: some View{
@@ -24,7 +23,6 @@ struct MovieDetailsView: View {
             }
             .navigationBarHidden(true)
         }
-            
     }
     
     
@@ -44,7 +42,6 @@ struct MovieDetailsView: View {
                         .frame(height: geometry.size.height)
                 }
                 
-                
                 HStack{
                     Image(systemName: "hand.thumbsup")
                         .foregroundColor(.secondary)
@@ -58,8 +55,6 @@ struct MovieDetailsView: View {
                             .foregroundColor(.secondary)
                     }
                         
-                    
-                    
                     Image(systemName: "eye")
                         .foregroundColor(.secondary)
                         .padding(.leading,40)
@@ -73,11 +68,10 @@ struct MovieDetailsView: View {
                             .foregroundColor(.secondary)
                     }
                     
-                    
                     Button {
-                        viewModel.movie.isFavourite.toggle()
+                        viewModel.movieFavouriteStatusUpdate()
                         if(viewModel.movie.isFavourite == false){
-                            viewModel.removeToDatabase()
+                            viewModel.removeFromDatabase()
                         }else{
                             viewModel.addToDatabase()
 

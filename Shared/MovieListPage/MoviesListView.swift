@@ -10,7 +10,6 @@ import Kingfisher
 import Firebase
 
 struct MoviesListView: View {
-    
     @ObservedObject var moviesViewModel = MovieListViewModel()
     @State var isSideMenuShow: Bool = false
     
@@ -32,67 +31,13 @@ struct MoviesListView: View {
             
         }
         .navigationBarHidden(true)
-            //.searchable(text: $moviesViewModel.searchMovie, prompt: "Search Movie")
             .searchable(text: $moviesViewModel.searchMovie, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search Movie")
             .onAppear{
                 moviesViewModel.getFavouriteMovies()
             }
         .ignoresSafeArea()
     }
-
-    
 }
-
-
-
-
-
-struct movieCell: View{
-    var movie: Movie
-    
-    var body: some View{
-        NavigationLink(destination: MovieDetailsView(viewModel: MovieDetailsViewModel(movie: movie))) {
-            HStack(spacing: 20){
-                if let im = movie.image{
-                    KFImage(URL(string: "https://www.themoviedb.org/t/p/w1280\(im)"))
-                        .resizable()
-                        .scaledToFit()
-                        .frame(height: 70)
-                        .cornerRadius(4)
-                        .padding(.vertical, 4)
-                }else{
-                    KFImage(URL(string: ""))
-                        .resizable()
-                        .scaledToFit()
-                        .frame(height: 70)
-                        .cornerRadius(4)
-                        .padding(.vertical, 4)
-                }
-                
-                VStack(alignment: .leading, spacing: 2){
-                    Text(movie.title ?? "")
-                        .fontWeight(.semibold)
-                        .lineLimit(2)
-                        .minimumScaleFactor(0.5)
-                        .multilineTextAlignment(.leading)
-                    
-                    if let release_date = movie.release_date{
-                        Text(release_date[0..<4])
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
-                    }else{
-                        Text("")
-                    }
-                    
-                }
-                Spacer()
-                
-            }.padding(.leading)
-        }
-        
-    }
-}
-
 
 
 struct moviesListView_Previews: PreviewProvider {
@@ -104,75 +49,20 @@ struct moviesListView_Previews: PreviewProvider {
 
 struct HomeView: View {
     @ObservedObject var moviesViewModel: MovieListViewModel
-    
+    @Binding var isSideMenuShow: Bool
+
     //AppStorage and userdefaults tried
     @AppStorage("tabSelection") private var selection: Int = 0
     //@State private var tapCount = UserDefaults.standard.integer(forKey: "Tap")
     //UserDefaults.standard.set(self.tapCount, forKey: "Tap")
 
-    @Binding var isSideMenuShow: Bool
     var body: some View {
         TabView(selection: $selection){
-//            List (moviesViewModel.searchResults.isEmpty ?  moviesViewModel.topTwo: moviesViewModel.searchResults, id: \.id){ movie in
-//                //List (moviesViewModel.topTwo, id: \.id){ movie in
-//                VStack{
-//                    movieCell(movie: movie)
-//
-//                    if(moviesViewModel.searchResults.isEmpty){
-//                        if (self.moviesViewModel.topTwo.last?.id == movie.id) {
-//                            Divider()
-//                            Text("Fetching more...")
-//                        }
-//                    }
-//                }.onAppear(perform: {
-//                    self.moviesViewModel.getTopMovies(pageNum: self.moviesViewModel.updateMovies())
-//                })
-//
-//            }
-//            .listStyle(PlainListStyle())
-            
-//            List{
-//                ForEach(moviesViewModel.searchResults.isEmpty ?  moviesViewModel.topTwo: moviesViewModel.searchResults, id: \.id) { movie in
-//                    VStack{
-//
-//                        movieCell(movie: movie)
-//
-//                        if(moviesViewModel.searchResults.isEmpty && self.moviesViewModel.topTwo.last?.id == movie.id){
-//                            Divider()
-//                            Text("Fetching more...")
-//                                .onAppear(perform: {
-//                                    self.moviesViewModel.getTopMovies(pageNum: self.moviesViewModel.updateMovies())
-//                                })
-//                        }
-//                    }
-//                }
-//            }.listStyle(PlainListStyle())
-                
-            ScrollView(showsIndicators: false){
-                LazyVStack{
-                    ForEach(moviesViewModel.searchResults.isEmpty ?  moviesViewModel.topTwo: moviesViewModel.searchResults, id: \.id) { movie in
-                        VStack{
-                            Divider()
-                            movieCell(movie: movie)
-                            
-                            if(moviesViewModel.searchResults.isEmpty && self.moviesViewModel.topTwo.last?.id == movie.id){
-                                Divider()
-                                Text("Fetching more...")
-                                    .onAppear(perform: {
-                                        self.moviesViewModel.getTopMovies(pageNum: self.moviesViewModel.updateMovies())
-                                    })
-                            }
-                        }
-                    }
-                }
-            }.listStyle(PlainListStyle())
-            //.navigationBarTitleDisplayMode(.inline)
-            
-            .tabItem {
-                Image(systemName: "house.fill")
-                Text("Home")
-            }.tag(0)
-
+            AllMoview(moviesViewModel: moviesViewModel)
+                .tabItem {
+                    Image(systemName: "house.fill")
+                    Text("Home")
+                }.tag(0)
             
             FavouritesView(moviesViewModel: moviesViewModel)
                 .tabItem {
@@ -180,10 +70,8 @@ struct HomeView: View {
                     Text("Favourites")
                 }
                 .tag(1)
-            
-            
         }
-        .navigationTitle(selection == 0 ? "Top \(moviesViewModel.topTwo.count) Movies": "Favourite Movies")
+        .navigationTitle(selection == 0 ? "Top \(moviesViewModel.allMovies.count) Movies": "Favourite Movies")
         .toolbar{
             ToolbarItem(placement: .navigationBarLeading) {
                 Button {
@@ -201,32 +89,7 @@ struct HomeView: View {
                 }
             }
         }
-
     }
-        
 }
 
 
-
-
-struct FavouritesView: View{
-    @ObservedObject var moviesViewModel: MovieListViewModel
-    
-    var body: some View{
-        ScrollView(showsIndicators: false){
-            LazyVStack{
-                ForEach(moviesViewModel.favouriteMovies , id: \.id) { movie in
-                    VStack{
-                        Divider()
-                        movieCell(movie: movie)
-                    }
-                }
-            }
-        }.listStyle(PlainListStyle())
-        .onAppear{
-            moviesViewModel.getFavouriteMovies()
-            
-        }
-    }
-        
-}
