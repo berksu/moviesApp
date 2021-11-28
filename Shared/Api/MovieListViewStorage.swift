@@ -29,8 +29,7 @@ struct MovieListViewStorage{
                                               image: data["image"]! as? String,
                                               vote_average: data["vote_average"]! as? Float,
                                               vote_count: data["vote_count"]! as? Float,
-                                              overview: data["overview"]! as? String,
-                                              isFavourite: data["isFavourite"]! as? Bool ?? true)
+                                              overview: data["overview"]! as? String)
                         favouriteMovies.append(tempMovie)
                     }
                     
@@ -55,8 +54,7 @@ struct MovieListViewStorage{
             "title": movie.title ?? "No title date is given",
             "vote_average": movie.vote_average ?? 0.0,
             "vote_count": movie.vote_count ?? 0.0,
-            "image": movie.image ?? "",
-            "isFavourite": movie.isFavourite
+            "image": movie.image ?? ""
         ]){err in
             if let err = err{
                 print("Add data error \(err)")

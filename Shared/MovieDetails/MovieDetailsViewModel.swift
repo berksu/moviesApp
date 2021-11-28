@@ -9,13 +9,23 @@ import Foundation
 
 final class MovieDetailsViewModel: ObservableObject {
     @Published var movie: Movie
+    var favouriteMovies: [Movie] = []
+    @Published var isFavourite:Bool = false
 
     init(movie: Movie) {
         self.movie = movie
     }
     
     func movieFavouriteStatusUpdate(){
-        movie.isFavourite.toggle()
+        isFavourite.toggle()
+    }
+    
+    func isInFavourite(){
+        MovieListViewStorage().getFavouriteMovies {[weak self] movies in
+            self?.favouriteMovies = movies
+            let id_eq = self?.favouriteMovies.indices.filter { self?.favouriteMovies[$0].id == self?.movie.id }
+            self?.isFavourite = (id_eq?.count != 0 ? true:false)
+        }
     }
     
     func addToDatabase(){

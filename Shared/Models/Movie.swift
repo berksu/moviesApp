@@ -28,7 +28,6 @@ struct Movie: Codable, Hashable{
     let vote_average: Float?
     let vote_count: Float?
     let overview: String?
-    var isFavourite: Bool = false
     //"https://www.themoviedb.org/t/p/w1280"
     enum CodingKeys: String, CodingKey{
         case id, title, release_date , image = "poster_path", vote_average, vote_count, overview

@@ -7,7 +7,6 @@
 
 import SwiftUI
 import Kingfisher
-import Firebase
 
 struct MoviesListView: View {
     @ObservedObject var moviesViewModel = MovieListViewModel()
@@ -32,8 +31,8 @@ struct MoviesListView: View {
         }
         .navigationBarHidden(true)
             .searchable(text: $moviesViewModel.searchMovie, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search Movie")
-            .onAppear{
-                moviesViewModel.getFavouriteMovies()
+            .onAppear {
+                moviesViewModel.getTopMovies(pageNum: 1)
             }
         .ignoresSafeArea()
     }

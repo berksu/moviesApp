@@ -70,16 +70,18 @@ struct MovieDetailsView: View {
                     
                     Button {
                         viewModel.movieFavouriteStatusUpdate()
-                        if(viewModel.movie.isFavourite == false){
+                        if(viewModel.isFavourite == false){
                             viewModel.removeFromDatabase()
                         }else{
                             viewModel.addToDatabase()
 
                         }
                     } label: {
-                        Image(systemName: viewModel.movie.isFavourite ? "heart.fill" : "heart")
-                            .foregroundColor(viewModel.movie.isFavourite ? .red : .secondary)
+                        Image(systemName: viewModel.isFavourite ? "heart.fill" : "heart")
+                            .foregroundColor(viewModel.isFavourite ? .red : .secondary)
                             .padding(.leading,40)
+                    }.onAppear {
+                        viewModel.isInFavourite()
                     }
 
                 }

@@ -45,7 +45,7 @@ final class MovieListViewModel: ObservableObject{
             self?.totalMovieNumber = movies.count
             self?.allMovies += movies
             
-            self?.findFavouriteMoviesInAll()
+            //self?.findFavouriteMoviesInAll()
         }
     }
     
@@ -58,21 +58,21 @@ final class MovieListViewModel: ObservableObject{
     func getFavouriteMovies(){
         MovieListViewStorage().getFavouriteMovies {[weak self] movies in
             self?.favouriteMovies = movies
-            self?.getTopMovies(pageNum: self?.pageNum ?? 1)
+            //self?.getTopMovies(pageNum: self?.pageNum ?? 1)
         }
     }
     
-    func findFavouriteMoviesInAll(){
-        var fav_ids:[Int] = []
-        favouriteMovies.indices.filter { favouriteMovies[$0].isFavourite == true }
-            .forEach { fav_ids.append(favouriteMovies[$0].id) }
-
-        for index in 0..<allMovies.count{
-            if(fav_ids.contains(allMovies[index].id)){
-                allMovies[index].isFavourite = true
-            }
-        }
-    }
+//    func findFavouriteMoviesInAll(){
+//        var fav_ids:[Int] = []
+//        favouriteMovies.indices.filter { favouriteMovies[$0].isFavourite == true }
+//            .forEach { fav_ids.append(favouriteMovies[$0].id) }
+//
+//        for index in 0..<allMovies.count{
+//            if(fav_ids.contains(allMovies[index].id)){
+//                allMovies[index].isFavourite = true
+//            }
+//        }
+//    }
 
     func updateMovies()-> Int{
         pageNum += 1
