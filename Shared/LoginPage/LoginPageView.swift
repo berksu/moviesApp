@@ -12,7 +12,6 @@ struct LoginPageView: View {
     @State private var offset = CGSize.zero
     @State private var isSignedIn: Bool = false
 
-
     var body: some View {
             NavigationView {
                 ZStack{
@@ -39,14 +38,14 @@ struct loginPageViewBack: View{
     
     var userNameField: some View{
         TextField("Username", text: $viewModel.mail)
-            .modifier(TextFieldCustomRoundedStyle())
+            .modifier(TextFieldCustomRoundedStyle(fieldColor: Color(.black)))
             .textInputAutocapitalization(.never)
             .disableAutocorrection(true)
     }
     
     var passwordField: some View{
         SecureField("Password", text: $viewModel.password)
-            .modifier(TextFieldCustomRoundedStyle())
+            .modifier(TextFieldCustomRoundedStyle(fieldColor: Color(.black)))
     }
     
     

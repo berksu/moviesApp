@@ -12,19 +12,19 @@ struct SignIn: View {
     
     var emailField: some View{
         TextField("E-mail", text: $viewModel.signInEmail)
-            .modifier(TextFieldCustomRoundedStyle())
+            .modifier(TextFieldCustomRoundedStyle(fieldColor: Color(.black)))
             .textInputAutocapitalization(.never)
             .disableAutocorrection(true)
     }
     
     var passwordField: some View{
         SecureField("Password", text: $viewModel.signInPassword)
-            .modifier(TextFieldCustomRoundedStyle())
+            .modifier(TextFieldCustomRoundedStyle(fieldColor: Color(viewModel.isPasswordEqual ? .black: .red)))
     }
     
     var passwordRepatField: some View{
         SecureField("Re-Type Password", text: $viewModel.signInPasswordRepeat)
-            .modifier(TextFieldCustomRoundedStyle())
+            .modifier(TextFieldCustomRoundedStyle(fieldColor: Color(viewModel.isPasswordEqual ? .black: .red)))
     }
     
     
@@ -33,7 +33,7 @@ struct SignIn: View {
             .modifier(ButtonViewCustomRoundedStyle(buttonColor: Color(.red)))
             .onTapGesture {
                 viewModel.signIn { isIn in
-                    viewModel.signInButtonUpdate(state: false)
+                    viewModel.signInButtonUpdate(state: isIn ? false:true)
                 }
             }
         

@@ -19,6 +19,7 @@ final class LoginPageViewModel: ObservableObject{
     @Published var signInPassword = ""
     @Published var signInPasswordRepeat = ""
     @Published var isValidEmail = false
+    @Published var isPasswordEqual = true
 
 
     var cancellables = Set<AnyCancellable>()
@@ -27,13 +28,11 @@ final class LoginPageViewModel: ObservableObject{
         userNameControl()
     }
     
-    
     func userNameControl(){
         $signInEmail
             .debounce(for: 0.3, scheduler: RunLoop.main)
             .removeDuplicates()
             .sink{keyword in
-                //print("aaaaa")
                 //self.searchMovies(title: self.searchMovie)
                 if keyword.contains("@") {
                     print("exists")
@@ -64,6 +63,7 @@ final class LoginPageViewModel: ObservableObject{
         }else{
             isSignInTapped = true
             completion(false)
+            isPasswordEqual = false
         }
     }
     

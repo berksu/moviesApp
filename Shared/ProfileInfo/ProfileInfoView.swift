@@ -55,7 +55,7 @@ struct ProfileInfoView: View {
                     
                     TextField("Username", text: $profileInfo.name)
                         .frame(width: geometry.size.width*0.5)
-                        .modifier(TextFieldCustomRoundedStyle())
+                        .modifier(TextFieldCustomRoundedStyle(fieldColor: Color(.black)))
                         .textInputAutocapitalization(.never)
                         .disableAutocorrection(true)
                 }
@@ -71,7 +71,7 @@ struct ProfileInfoView: View {
                     
                     TextField("Hashtag", text: $profileInfo.hashtag)
                         .frame(width: geometry.size.width*0.5)
-                        .modifier(TextFieldCustomRoundedStyle())
+                        .modifier(TextFieldCustomRoundedStyle(fieldColor: Color(.black)))
                         .textInputAutocapitalization(.never)
                         .disableAutocorrection(true)
                     Spacer()
@@ -88,7 +88,7 @@ struct ProfileInfoView: View {
                     
                     TextField("Follower", text: $profileInfo.follower)
                         .frame(width: geometry.size.width*0.5)
-                        .modifier(TextFieldCustomRoundedStyle())
+                        .modifier(TextFieldCustomRoundedStyle(fieldColor: Color(.black)))
                         .textInputAutocapitalization(.never)
                         .disableAutocorrection(true)
                     Spacer()

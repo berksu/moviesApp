@@ -9,17 +9,18 @@ import Foundation
 import SwiftUI
 
 struct TextFieldCustomRoundedStyle: ViewModifier{
+    let fieldColor: Color
     func body(content: Content) -> some View{
         return content
             .font(.system(size:16, weight: .medium))
-            .foregroundColor(Color(.black))
+            .foregroundColor(fieldColor)
             .padding()
             .cornerRadius(16)
             .overlay(
                 RoundedRectangle(
                     cornerRadius: 16
                 ).stroke(
-                    Color.black
+                    fieldColor
                 )
             )
             .padding(.horizontal,15)
