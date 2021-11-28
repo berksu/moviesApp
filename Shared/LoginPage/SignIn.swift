@@ -33,8 +33,7 @@ struct SignIn: View {
             .modifier(ButtonViewCustomRoundedStyle(buttonColor: Color(.red)))
             .onTapGesture {
                 viewModel.signIn { isIn in
-                    viewModel.isSignedIn = isIn
-                    viewModel.isSignInTapped = false
+                    viewModel.signInButtonUpdate(state: false)
                 }
             }
         
@@ -42,7 +41,7 @@ struct SignIn: View {
     
     var closePageButton: some View{
         Button {
-            viewModel.isSignInTapped = false
+            viewModel.signInButtonUpdate(state: false)
         } label: {
            Image(systemName: "xmark.circle")
                 .resizable()

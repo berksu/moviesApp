@@ -16,36 +16,6 @@ struct LoginPageView: View {
 
     var body: some View {
             NavigationView {
-    //            ZStack{
-    //                loginPageViewBack(viewModel: viewModel)
-    //                if(viewModel.isSignInTapped){
-    //                    SignIn()
-    //                        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-    //                        .cornerRadius(60.0)
-    //                        .transition(.move(edge: .bottom))
-    //                        .offset(x: 0 , y: offset.height)
-    //                        .gesture(
-    //                            DragGesture()
-    //                                .onChanged{ gesture in
-    //                                    if(gesture.translation.height > 0){
-    //                                        self.offset = gesture.translation
-    //                                    }
-    //                                }
-    //                                .onEnded{ _ in
-    //                                    if(self.offset.height > 100){
-    //                                        withAnimation{
-    //                                            self.viewModel.isSignInTapped.toggle()
-    //                                            self.offset = CGSize.zero
-    //                                        }
-    //                                    }else{
-    //
-    //                                    }
-    //                                }
-    //                        )
-    //
-    //                }
-    //
-    //            }
                 ZStack{
                     NavigationLink(destination: MoviesListView(),isActive: $isSignedIn) {
                         EmptyView()
@@ -54,36 +24,17 @@ struct LoginPageView: View {
                 }
             }
             .navigationBarHidden(true)
-            //.onAppear(perform: authenticationProcess)
             .sheet(isPresented: $viewModel.isSignInTapped, onDismiss: {
-                viewModel.isSignInTapped = false
+                viewModel.signInButtonUpdate(state: false)
                 let user = Auth.auth().currentUser
-                // [END get_user_profile]
-                // [START user_profile]
-                if let user = user {
+                if let _ = user {
                     isSignedIn = true
-                    
                 }
             }, content: {
-                //SignIn(isPresented: $viewModel.isSignInTapped)
                 SignIn(viewModel: viewModel)
             })
         }
-    
-    
-    
-    private func authenticationProcess(){
-        Auth.auth().signInAnonymously { authResult, error in
-            guard let user = authResult?.user else{return }
-            let _ = user.isAnonymous
-            let _ = user.uid
-        }
-    }
 }
-
-
-
-
 
 
 
@@ -119,15 +70,13 @@ struct loginPageViewBack: View{
     
     
     var signUpButton: some View{
-        //NavigationLink(destination: MoviesListView()) {
             Text("Sign In")
                 .modifier(ButtonViewCustomRoundedStyle(buttonColor: Color(.red)))
                 .onTapGesture {
                     withAnimation(.spring()){
-                        viewModel.isSignInTapped.toggle()
+                        viewModel.signInButtonUpdate(state: true)
                     }
                 }
-        //}
     }
     
     var body: some View{

@@ -20,7 +20,6 @@ final class LoginPageViewModel: ObservableObject{
     @Published var signInPassword = ""
     @Published var signInPasswordRepeat = ""
     @Published var isValidEmail = false
-    @Published var isSignedIn:Bool = false
 
 
     var cancellables = Set<AnyCancellable>()
@@ -47,44 +46,25 @@ final class LoginPageViewModel: ObservableObject{
             .store(in: &cancellables)
     }
     
+    func signInButtonUpdate(state: Bool){
+        isSignInTapped = state
+    }
     
     func login(completion: @escaping (Bool) -> Void){
-        Auth.auth().signIn(withEmail: mail, password: password) { [weak self] authResult, error in
-            guard let user = authResult?.user, error == nil else {
-                // ...print("Signed in")
-                completion(false)
-                return
-                
-            }
-            //print("Logged In")
-            completion(true)
-            
+        AuthenticationApi().login(mail: mail, password: password) { isLoggedIn in
+            completion(isLoggedIn)
         }
     }
     
     
     func signIn(completion: @escaping (Bool) -> Void){
         if(signInPassword == signInPasswordRepeat){
-            Auth.auth().createUser(withEmail: signInEmail, password: signInPassword) { authResult, error in
-              // ...
-                guard let user = authResult?.user, error == nil else {
-                    //strongSelf.showMessagePrompt(error!.localizedDescription)
-                    print("Login error: \(error)")
-                    completion(false)
-                    return
-                }
-                //print("\(user.email!) created")
-                self.isSignInTapped = false
-
-                completion(true)
+            AuthenticationApi().signIn(signInEmail: signInEmail, signInPassword: signInPassword, signInPasswordRepeat: signInPasswordRepeat) { success in
+                completion(success)
             }
         }else{
             isSignInTapped = true
             completion(false)
-            Alert(title: Text("Error"), message: Text("Password and repeated one should be same"), dismissButton: .default(Text("Ok!")))
         }
     }
-    
-    
-    //log out will add
 }
