@@ -21,6 +21,7 @@ struct SignIn: View {
     var passwordField: some View{
         SecureField("Password", text: $viewModel.signInPassword)
             .modifier(TextFieldCustomRoundedStyle(fieldColor: Color(viewModel.isPasswordEqual ? .black: .red)))
+        //telefonda dene
     }
     
     var passwordRepatField: some View{
@@ -46,7 +47,8 @@ struct SignIn: View {
            Image(systemName: "xmark.circle")
                 .resizable()
                 .foregroundColor(.red)
-                .font(.system(size: 10, weight: .bold))
+                .font(.system(size: 10,
+                              weight: .bold))
                 .frame(width: 20, height: 20)
         }
     }
@@ -54,7 +56,9 @@ struct SignIn: View {
     var body: some View {
         NavigationView{
             ZStack{
-                LinearGradient(gradient: Gradient(colors: [.orange, .green]), startPoint: .top, endPoint: .bottom)
+                LinearGradient(gradient: Gradient(colors: [.orange, .green]),
+                               startPoint: .top,
+                               endPoint: .bottom)
                     .ignoresSafeArea()
                 
                 VStack{
