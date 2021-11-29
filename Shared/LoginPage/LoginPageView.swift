@@ -9,7 +9,6 @@ import SwiftUI
 
 struct LoginPageView: View {
     @ObservedObject var viewModel = LoginPageViewModel()
-    @State private var offset = CGSize.zero
     @State private var isSignedIn: Bool = false
 
     var body: some View {

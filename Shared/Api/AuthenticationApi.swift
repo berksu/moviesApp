@@ -5,7 +5,6 @@
 //  Created by Berksu Kısmet on 28.11.2021.
 //
 
-import Foundation
 import Firebase
 
 final class AuthenticationApi{

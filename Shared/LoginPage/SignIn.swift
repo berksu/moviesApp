@@ -15,6 +15,7 @@ struct SignIn: View {
             .modifier(TextFieldCustomRoundedStyle(fieldColor: Color(.black)))
             .textInputAutocapitalization(.never)
             .disableAutocorrection(true)
+            .keyboardType(.emailAddress)
     }
     
     var passwordField: some View{
@@ -36,7 +37,6 @@ struct SignIn: View {
                     viewModel.signInButtonUpdate(state: isIn ? false:true)
                 }
             }
-        
     }
     
     var closePageButton: some View{

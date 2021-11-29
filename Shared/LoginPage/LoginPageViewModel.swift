@@ -21,7 +21,6 @@ final class LoginPageViewModel: ObservableObject{
     @Published var isValidEmail = false
     @Published var isPasswordEqual = true
 
-
     var cancellables = Set<AnyCancellable>()
 
     init(){
@@ -53,7 +52,6 @@ final class LoginPageViewModel: ObservableObject{
             completion(isLoggedIn)
         }
     }
-    
     
     func signIn(completion: @escaping (Bool) -> Void){
         if(signInPassword == signInPasswordRepeat){

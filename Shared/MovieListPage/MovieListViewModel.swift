@@ -41,11 +41,8 @@ final class MovieListViewModel: ObservableObject{
     
     func getTopMovies(pageNum: Int){
         MoviesApi().fetchMovie(pageNum: pageNum) { [weak self] movies in
-            print(movies.count)
             self?.totalMovieNumber = movies.count
             self?.allMovies += movies
-            
-            //self?.findFavouriteMoviesInAll()
         }
     }
     

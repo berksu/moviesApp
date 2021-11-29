@@ -50,12 +50,4 @@ final class MovieSearchApi{
             .value()
     }
     
-    /*func searcedMovies(title: String) -> AnyPublisher<Movie, AFError> {
-        return searchMovie_combine(title: title)
-            .mapError{ _ in
-                return AFError.sessionDeinitialized
-            }
-            .value()
-    }*/
-    
 }

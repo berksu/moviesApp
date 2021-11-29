@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C91E213A2755471200F52D39 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C91E21392755471200F52D39 /* ImagePicker.swift */; };
 		C921E6D7273DA00D007D927E /* MoviesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C921E6D6273DA00D007D927E /* MoviesListView.swift */; };
 		C921E6D8273DA00D007D927E /* MoviesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C921E6D6273DA00D007D927E /* MoviesListView.swift */; };
 		C921E6DB273DA619007D927E /* LoginPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C921E6DA273DA619007D927E /* LoginPageViewModel.swift */; };
@@ -86,6 +87,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C91E2138275544EE00F52D39 /* movie--iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "movie--iOS--Info.plist"; sourceTree = "<group>"; };
+		C91E21392755471200F52D39 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		C921E6D6273DA00D007D927E /* MoviesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesListView.swift; sourceTree = "<group>"; };
 		C921E6DA273DA619007D927E /* LoginPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPageViewModel.swift; sourceTree = "<group>"; };
 		C921E6DF273DAFC5007D927E /* TextFieldCustomRoundedStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldCustomRoundedStyle.swift; sourceTree = "<group>"; };
@@ -200,6 +203,7 @@
 			children = (
 				C9278D822752663600C63B1A /* ProfileInfoView.swift */,
 				C962373327529174001D5DAF /* UserInfo.swift */,
+				C91E21392755471200F52D39 /* ImagePicker.swift */,
 			);
 			path = ProfileInfo;
 			sourceTree = "<group>";
@@ -229,6 +233,7 @@
 		C95778F4273C5F21008308A8 = {
 			isa = PBXGroup;
 			children = (
+				C91E2138275544EE00F52D39 /* movie--iOS--Info.plist */,
 				C95778F9273C5F21008308A8 /* Shared */,
 				C9577908273C5F21008308A8 /* macOS */,
 				C9577911273C5F21008308A8 /* Tests iOS */,
@@ -546,6 +551,7 @@
 				C957674327450D1100E06948 /* CardMenuViewModel.swift in Sources */,
 				C93E8491274402FA004B5F1C /* SideMenuViewModel.swift in Sources */,
 				C93E849327441489004B5F1C /* CardMenuView.swift in Sources */,
+				C91E213A2755471200F52D39 /* ImagePicker.swift in Sources */,
 				C921E6DB273DA619007D927E /* LoginPageViewModel.swift in Sources */,
 				C9B5334A27418A8C0085059E /* MovieDetailsView.swift in Sources */,
 				C9577922273C5F21008308A8 /* movieApp.swift in Sources */,
@@ -736,6 +742,7 @@
 				DEVELOPMENT_TEAM = VUH3GM8HPJ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "movie--iOS--Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -766,6 +773,7 @@
 				DEVELOPMENT_TEAM = VUH3GM8HPJ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "movie--iOS--Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

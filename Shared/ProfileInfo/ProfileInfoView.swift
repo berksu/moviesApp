@@ -10,29 +10,47 @@ import Kingfisher
 
 struct ProfileInfoView: View {
     @State var profileInfo = SideMenuModel()
+    @State private var showImagePicker: Bool = false
+    
+    @State var image: Image?
+    @State private var inputImage: UIImage?
     
     var body: some View {
         VStack{
             imageView
                 .padding(.top,30)
             userInfoView
+                .padding(.top)
             Spacer()
         }
         .padding(.top,70)
         .ignoresSafeArea()
+        .sheet(isPresented: $showImagePicker, onDismiss: loadImage) {
+            ImagePicker(image: self.$inputImage)
+        }
     }
     
     var imageView:some View{
         Button {
-            print("Image change")
+            self.showImagePicker = true
         } label: {
-            KFImage(URL(string: profileInfo.url))
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .clipShape(Circle())
-                .shadow(radius: 20)
-                .overlay(Circle().stroke(.white ,lineWidth: 2))
-                .frame(height: 200)
+            if image == nil{
+                KFImage(URL(string: profileInfo.url))
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .clipShape(Circle())
+                    .shadow(radius: 20)
+                    .overlay(Circle().stroke(.white ,lineWidth: 2))
+                    .frame(height: 150)
+            }else{
+                image?
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .clipShape(Circle())
+                    .shadow(radius: 20)
+                    .overlay(Circle().stroke(.white ,lineWidth: 2))
+                    .frame(height: 150)
+            }
         }
     }
     
@@ -81,6 +99,11 @@ struct ProfileInfoView: View {
             .onTapGesture {
                 print("asd")
             }
+    }
+    
+    func loadImage(){
+        guard let inputImage = inputImage else{return}
+        image = Image(uiImage: inputImage)
     }
 }
 

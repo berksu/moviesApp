@@ -70,7 +70,7 @@ struct HomeView: View {
                 }
                 .tag(1)
         }
-        .navigationTitle(selection == 0 ? "Top \(moviesViewModel.allMovies.count) Movies": "Favourite Movies")
+        .navigationTitle(selection == 0 ? "Top \(moviesViewModel.allMovies.count) Movies": "Favourite Movies") // bu satır constraint hatası verdiriyor
         .toolbar{
             ToolbarItem(placement: .navigationBarLeading) {
                 Button {

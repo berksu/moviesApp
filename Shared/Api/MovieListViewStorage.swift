@@ -21,7 +21,7 @@ struct MovieListViewStorage{
                     print("Error getting documents: \(err)")
                 } else {
                     for document in querySnapshot!.documents {
-                        print("\(document.documentID) => \(document.data())")
+                        //print("\(document.documentID) => \(document.data())")
                         let data = document.data()
                         let tempMovie = Movie(id: data["id"]! as! Int,
                                               title: data["title"]! as? String,
