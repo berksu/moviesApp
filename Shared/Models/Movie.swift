@@ -25,6 +25,7 @@ struct Movie: Codable, Hashable{
     let title: String?
     let release_date: String?
     let image: String?
+    // - 8 - camelCase
     let vote_average: Float?
     let vote_count: Float?
     let overview: String?

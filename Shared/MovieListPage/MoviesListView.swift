@@ -8,6 +8,7 @@
 import SwiftUI
 import Kingfisher
 
+// 1 - TabBar - naming
 struct MoviesListView: View {
     @ObservedObject var moviesViewModel = MovieListViewModel()
     @State var isSideMenuShow: Bool = false
@@ -19,6 +20,7 @@ struct MoviesListView: View {
                     SideMenuView(isSideMenuShow: $isSideMenuShow)
                         
                 }
+                // 2 - ViewModel ayrı, ismi değişmeli
                 HomeView(moviesViewModel: moviesViewModel, isSideMenuShow: $isSideMenuShow)
                     .cornerRadius(isSideMenuShow ? 20 : 10)
                     .offset(x: isSideMenuShow ? 250:0, y: isSideMenuShow ? 50:0)
@@ -27,7 +29,6 @@ struct MoviesListView: View {
                     .ignoresSafeArea(.container, edges: .bottom)
                     .disabled(isSideMenuShow)
             }
-            
         }
         .navigationBarHidden(true)
             .searchable(text: $moviesViewModel.searchMovie, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search Movie")
@@ -44,7 +45,6 @@ struct moviesListView_Previews: PreviewProvider {
         MoviesListView(moviesViewModel: .init())
     }
 }
-
 
 struct HomeView: View {
     @ObservedObject var moviesViewModel: MovieListViewModel
@@ -70,8 +70,12 @@ struct HomeView: View {
                 }
                 .tag(1)
         }
+        // 3 principal
         .navigationTitle(selection == 0 ? "Top \(moviesViewModel.allMovies.count) Movies": "Favourite Movies") // bu satır constraint hatası verdiriyor
         .toolbar{
+//            ToolbarItem(placement: .principal) {
+//                Text(selection == 0 ? "Top \(moviesViewModel.allMovies.count) Movies": "Favourite Movies")
+//            }
             ToolbarItem(placement: .navigationBarLeading) {
                 Button {
                     withAnimation(.spring()){

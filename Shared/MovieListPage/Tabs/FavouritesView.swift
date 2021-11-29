@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct FavouritesView: View{
+    // 11 - ViewModel'i ayır
     @ObservedObject var moviesViewModel: MovieListViewModel
     
     var body: some View{
@@ -20,7 +21,8 @@ struct FavouritesView: View{
                     }
                 }
             }
-        }.listStyle(PlainListStyle())
+        }
+        .listStyle(PlainListStyle())
         .onAppear{
             moviesViewModel.getFavouriteMovies()
         }

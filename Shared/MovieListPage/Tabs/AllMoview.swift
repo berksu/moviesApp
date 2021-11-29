@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct AllMoview: View {
+    // 9 - Buradan gitmeli
     @ObservedObject var moviesViewModel: MovieListViewModel
     
     var body: some View {
@@ -22,6 +23,7 @@ struct AllMoview: View {
                             Divider()
                             Text("Fetching more...")
                                 .onAppear(perform: {
+                                    // 10 - Burası metod olmalı sadece
                                     self.moviesViewModel.getTopMovies(pageNum: self.moviesViewModel.updateMovies())
                                 })
                         }

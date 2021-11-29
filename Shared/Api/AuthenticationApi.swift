@@ -1,14 +1,7 @@
-//
-//  AuthenticationApi.swift
-//  movie (iOS)
-//
-//  Created by Berksu Kısmet on 28.11.2021.
-//
-
 import Firebase
 
-final class AuthenticationApi{
-    func login(mail: String, password: String, completion: @escaping (Bool) -> Void){
+struct AuthenticationApi {
+    func login(mail: String, password: String, completion: @escaping (Bool) -> Void) {
         Auth.auth().signIn(withEmail: mail, password: password) {authResult, error in
             guard let _ = authResult?.user, error == nil else {
                 // ...print("Signed in")
@@ -20,7 +13,7 @@ final class AuthenticationApi{
         }
     }
     
-    func signIn(signInEmail: String, signInPassword: String, signInPasswordRepeat: String, completion: @escaping (Bool) -> Void){
+    func signIn(signInEmail: String, signInPassword: String, signInPasswordRepeat: String, completion: @escaping (Bool) -> Void) {
         Auth.auth().createUser(withEmail: signInEmail, password: signInPassword) { authResult, error in
             // ...
             guard let _ = authResult?.user, error == nil else {
@@ -34,7 +27,7 @@ final class AuthenticationApi{
         }
     }
     
-    func logOut() -> Bool{
+    func logOut() -> Bool {
         do {
             try Auth.auth().signOut()
         } catch let err {
@@ -44,7 +37,7 @@ final class AuthenticationApi{
         return true
     }
     
-    func controlUserIsSignedIn() -> Bool{
+    func controlUserIsSignedIn() -> Bool {
         let user = Auth.auth().currentUser
         if let _ = user {
             return true

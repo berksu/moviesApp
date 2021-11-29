@@ -5,10 +5,8 @@
 //  Created by Berksu Kısmet on 14.11.2021.
 //
 
-
 import SwiftUI
 import Kingfisher
-
 
 struct MovieDetailsView: View {
     @ObservedObject var viewModel: MovieDetailsViewModel

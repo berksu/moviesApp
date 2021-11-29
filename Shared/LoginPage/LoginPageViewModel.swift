@@ -5,7 +5,6 @@
 //  Created by Berksu Kısmet on 11.11.2021.
 //
 
-import Foundation
 import Combine
 import SwiftUI
 
@@ -20,8 +19,15 @@ final class LoginPageViewModel: ObservableObject{
     @Published var signInPasswordRepeat = ""
     @Published var isValidEmail = false
     @Published var isPasswordEqual = true
+    
+    @Published var isLoggedIn: Bool = false
+    @Published var isSignedIn: Bool = false
 
     var cancellables = Set<AnyCancellable>()
+    
+    func controlIsSignedIn() {
+        isSignedIn = AuthenticationApi().controlUserIsSignedIn()
+    }
 
     init(){
         userNameControl()
@@ -31,15 +37,16 @@ final class LoginPageViewModel: ObservableObject{
         $signInEmail
             .debounce(for: 0.3, scheduler: RunLoop.main)
             .removeDuplicates()
-            .sink{keyword in
+            .map{keyword in
                 //self.searchMovies(title: self.searchMovie)
                 if keyword.contains("@") {
                     print("exists")
-                    self.isValidEmail = true
+                    return true
                 }else{
-                    self.isValidEmail = false
+                    return false
                 }
             }
+            .assign(to: \.isValidEmail, on: self)
             .store(in: &cancellables)
     }
     
@@ -47,9 +54,10 @@ final class LoginPageViewModel: ObservableObject{
         isSignInTapped = state
     }
     
-    func login(completion: @escaping (Bool) -> Void){
-        AuthenticationApi().login(mail: mail, password: password) { isLoggedIn in
-            completion(isLoggedIn)
+    func login(){
+        AuthenticationApi().login(mail: mail, password: password) { isIn in
+            //completion(isLoggedIn)
+            self.isLoggedIn = isIn
         }
     }
     
@@ -63,9 +71,5 @@ final class LoginPageViewModel: ObservableObject{
             completion(false)
             isPasswordEqual = false
         }
-    }
-    
-    func isSignedIn() -> Bool{
-        return AuthenticationApi().controlUserIsSignedIn()
     }
 }

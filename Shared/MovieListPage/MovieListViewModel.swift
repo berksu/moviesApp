@@ -8,12 +8,13 @@
 import SwiftUI
 import Combine
 
+// 5- Fix style
 final class MovieListViewModel: ObservableObject{
-    @Published var allMovies:[Movie] = []
-    @Published var searchResults:[Movie] = []
+    @Published var allMovies: [Movie] = []
+    @Published var searchResults: [Movie] = []
     @Published var totalMovieNumber = 0
     @Published var searchMovie = ""
-    @Published var favouriteMovies:[Movie] = []
+    @Published var favouriteMovies : [Movie] = []
     @Published var pageNum = 1
 
     //{
@@ -42,7 +43,7 @@ final class MovieListViewModel: ObservableObject{
     func getTopMovies(pageNum: Int){
         MoviesApi().fetchMovie(pageNum: pageNum) { [weak self] movies in
             self?.totalMovieNumber = movies.count
-            self?.allMovies += movies
+            self?.allMovies.append(contentsOf: movies)
         }
     }
     
@@ -71,6 +72,7 @@ final class MovieListViewModel: ObservableObject{
 //        }
 //    }
 
+    // 4 - logic burada olmalı, view sadece metod çağırmalı
     func updateMovies()-> Int{
         pageNum += 1
         totalMovieNumber = allMovies.count

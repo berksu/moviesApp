@@ -8,13 +8,17 @@
 import SwiftUI
 import Kingfisher
 
+// 6 - Add .View
 struct MovieCell: View{
     var movie: Movie
+    // let url: String
+    // 7- İhtiyacın kadar kullan
     
-    var body: some View{
+    var body: some View {
         NavigationLink(destination: MovieDetailsView(viewModel: MovieDetailsViewModel(movie: movie))) {
             HStack(spacing: 20){
                 if let im = movie.image{
+                    // 8 - Placeholder yazıp elseden kurtuluabilirsin
                     KFImage(URL(string: "\(MovieListModel().urlBase)\(im)"))
                         .resizable()
                         .scaledToFit()
@@ -39,6 +43,7 @@ struct MovieCell: View{
                         .multilineTextAlignment(.leading)
                     
                     if let release_date = movie.release_date{
+                        // 9- ViewModel kokusu var
                         Text(release_date[0..<4])
                             .font(.subheadline)
                             .foregroundColor(.secondary)
@@ -47,9 +52,9 @@ struct MovieCell: View{
                     }
                 }
                 Spacer()
-            }.padding(.leading)
+            }
+            .padding(.leading)
         }
-        
     }
 }
 
