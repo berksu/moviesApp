@@ -23,7 +23,6 @@ struct MovieDetailsView: View {
         }
     }
     
-    
     var headerView: some View {
         GeometryReader{ geometry in
             VStack{
