@@ -8,7 +8,6 @@
 import SwiftUI
 import Kingfisher
 
-// 1 - TabBar - naming
 struct MainBackgroundView: View {
     @ObservedObject var moviesViewModel = MainBackgroundViewModel()
     @State var isSideMenuShow: Bool = false
@@ -20,7 +19,7 @@ struct MainBackgroundView: View {
                     SideMenuView(isSideMenuShow: $isSideMenuShow)
                         
                 }
-                TabBackgroundView(moviesViewModel: moviesViewModel, isSideMenuShow: $isSideMenuShow)
+                TabBackgroundView(isSideMenuShow: $isSideMenuShow)
                     .cornerRadius(isSideMenuShow ? 20 : 10)
                     .offset(x: isSideMenuShow ? 250:0, y: isSideMenuShow ? 50:0)
                     .scaleEffect(isSideMenuShow ? 0.8 : 1)
@@ -30,10 +29,7 @@ struct MainBackgroundView: View {
             }
         }
         .navigationBarHidden(true)
-            .searchable(text: $moviesViewModel.searchMovie, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search Movie")
-            .onAppear {
-                moviesViewModel.getTopMovies(pageNum: 1)
-            }
+            //.searchable(text: $moviesViewModel.searchMovie, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search Movie")
         .ignoresSafeArea()
     }
 }

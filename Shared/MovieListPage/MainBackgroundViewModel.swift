@@ -39,13 +39,6 @@ final class MainBackgroundViewModel: ObservableObject{
             .store(in: &cancellables)
     }
     
-    func getTopMovies(pageNum: Int){
-        MoviesApi().fetchMovie(pageNum: pageNum) { [weak self] movies in
-            self?.totalMovieNumber = movies.count
-            self?.allMovies.append(contentsOf: movies)
-        }
-    }
-    
     func searchMovies(title: String){
         MovieSearchApi().searchMovie(title: title) { [weak self] searchResult in
             self?.searchResults = searchResult
@@ -64,13 +57,6 @@ final class MainBackgroundViewModel: ObservableObject{
     //            }
     //        }
     //    }
-    
-    // 4 - logic burada olmalı, view sadece metod çağırmalı
-    func updateMovies()-> Int{
-        pageNum += 1
-        totalMovieNumber = allMovies.count
-        return pageNum
-    }
 }
 
 
