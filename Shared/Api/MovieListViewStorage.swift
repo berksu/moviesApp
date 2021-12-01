@@ -32,7 +32,6 @@ struct MovieListViewStorage{
                                               overview: data["overview"]! as? String)
                         favouriteMovies.append(tempMovie)
                     }
-                    
                     completion(favouriteMovies)
                 }
             }

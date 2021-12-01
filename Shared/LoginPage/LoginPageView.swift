@@ -13,7 +13,7 @@ struct LoginPageView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                NavigationLink(destination: MoviesListView(),isActive: $viewModel.isSignedIn) {
+                NavigationLink(destination: MainBackgroundView(),isActive: $viewModel.isSignedIn) {
                     EmptyView()
                 }
                 
@@ -62,7 +62,7 @@ struct LoginPageView: View {
     }
     
     var loginButton: some View {
-        NavigationLink(destination: MoviesListView(),isActive: $viewModel.isLoggedIn) {
+        NavigationLink(destination: MainBackgroundView(),isActive: $viewModel.isLoggedIn) {
             Text("Login")
                 .modifier(ButtonViewCustomRoundedStyle(buttonColor: Color(.red)))
                 .onTapGesture {

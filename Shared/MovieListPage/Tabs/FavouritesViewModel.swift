@@ -10,10 +10,13 @@ import Foundation
 final class FavouritesViewModel: ObservableObject{
     @Published var favouriteMovies : [Movie] = []
 
+    init(){
+        getFavouriteMovies()
+    }
+    
     func getFavouriteMovies(){
         MovieListViewStorage().getFavouriteMovies {[weak self] movies in
             self?.favouriteMovies = movies
-            //self?.getTopMovies(pageNum: self?.pageNum ?? 1)
         }
     }
 }

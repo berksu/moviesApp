@@ -24,9 +24,6 @@ struct FavouritesView: View{
             }
         }
         .listStyle(PlainListStyle())
-        .onAppear{
-            favouritesViewModel.getFavouriteMovies()
-        }
     }
 }
 
