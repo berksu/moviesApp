@@ -7,11 +7,13 @@
 
 import Foundation
 
-struct FavouritesViewModel{
-//    func getFavouriteMovies(){
-//        MovieListViewStorage().getFavouriteMovies {[weak self] movies in
-//            self?.favouriteMovies = movies
-//            //self?.getTopMovies(pageNum: self?.pageNum ?? 1)
-//        }
-//    }
+final class FavouritesViewModel: ObservableObject{
+    @Published var favouriteMovies : [Movie] = []
+
+    func getFavouriteMovies(){
+        MovieListViewStorage().getFavouriteMovies {[weak self] movies in
+            self?.favouriteMovies = movies
+            //self?.getTopMovies(pageNum: self?.pageNum ?? 1)
+        }
+    }
 }

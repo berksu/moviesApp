@@ -14,7 +14,6 @@ final class MovieListViewModel: ObservableObject{
     @Published var searchResults: [Movie] = []
     @Published var totalMovieNumber = 0
     @Published var searchMovie = ""
-    @Published var favouriteMovies : [Movie] = []
     @Published var pageNum = 1
 
     //{
@@ -53,12 +52,6 @@ final class MovieListViewModel: ObservableObject{
         }
     }
     
-    func getFavouriteMovies(){
-        MovieListViewStorage().getFavouriteMovies {[weak self] movies in
-            self?.favouriteMovies = movies
-            //self?.getTopMovies(pageNum: self?.pageNum ?? 1)
-        }
-    }
     
 //    func findFavouriteMoviesInAll(){
 //        var fav_ids:[Int] = []

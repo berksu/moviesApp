@@ -63,7 +63,7 @@ struct HomeView: View {
                     Text("Home")
                 }.tag(0)
             
-            FavouritesView(moviesViewModel: moviesViewModel)
+            FavouritesView()
                 .tabItem {
                     Image(systemName: "heart.fill")
                     Text("Favourites")
