@@ -17,7 +17,9 @@ struct FavouritesView: View{
                 ForEach(moviesViewModel.favouriteMovies , id: \.id) { movie in
                     VStack{
                         Divider()
-                        MovieCell(movie: movie)
+                        NavigationLink(destination: MovieDetailsView(viewModel: MovieDetailsViewModel(movie: movie))) {
+                            MovieCellView(image: movie.image, title: movie.title, releaseDate: movie.release_date)
+                        }
                     }
                 }
             }

@@ -42,7 +42,7 @@ struct MovieDetailsView: View {
                 HStack{
                     Image(systemName: "hand.thumbsup")
                         .foregroundColor(.secondary)
-                    if let vote = viewModel.movie.vote_average{
+                    if let vote = viewModel.movie.voteAverage{
                         Text("\(vote, specifier: "%.2f")" )
                             .font(.subheadline)
                             .foregroundColor(.secondary)
@@ -55,7 +55,7 @@ struct MovieDetailsView: View {
                     Image(systemName: "eye")
                         .foregroundColor(.secondary)
                         .padding(.leading,40)
-                    if let vote_count = viewModel.movie.vote_count{
+                    if let vote_count = viewModel.movie.voteCount{
                         Text("\(Int(vote_count))" )
                             .font(.subheadline)
                             .foregroundColor(.secondary)
@@ -130,7 +130,7 @@ struct MovieDetailsView: View {
 
 struct MovieDetailsView_Previews: PreviewProvider {
     static var previews: some View {
-        MovieDetailsView(viewModel: MovieDetailsViewModel(movie: Movie(id: 99999999, title: "Dexter", release_date: "2003", image: "https://tr.web.img4.acsta.net/pictures/21/10/04/15/10/2211034.jpg", vote_average: 9.1, vote_count: 3245, overview: "dexter is a tv series")))
+        MovieDetailsView(viewModel: MovieDetailsViewModel(movie: Movie(id: 99999999, title: "Dexter", release_date: "2003", image: "https://tr.web.img4.acsta.net/pictures/21/10/04/15/10/2211034.jpg", voteAverage: 9.1, voteCount: 3245, overview: "dexter is a tv series")))
             .previewDevice(PreviewDevice(rawValue: "iPhone 12 Pro Max"))
     }
 }

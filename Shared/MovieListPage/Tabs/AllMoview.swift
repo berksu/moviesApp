@@ -17,7 +17,9 @@ struct AllMoview: View {
                 ForEach(moviesViewModel.searchResults.isEmpty ?  moviesViewModel.allMovies: moviesViewModel.searchResults, id: \.id) { movie in
                     VStack{
                         Divider()
-                        MovieCell(movie: movie)
+                        NavigationLink(destination: MovieDetailsView(viewModel: MovieDetailsViewModel(movie: movie))) {
+                            MovieCellView(image: movie.image, title: movie.title, releaseDate: movie.release_date)
+                        }
                         //Pagination
                         if(moviesViewModel.searchResults.isEmpty && self.moviesViewModel.allMovies.last?.id == movie.id){
                             Divider()

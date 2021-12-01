@@ -25,12 +25,11 @@ struct Movie: Codable, Hashable{
     let title: String?
     let release_date: String?
     let image: String?
-    // - 8 - camelCase
-    let vote_average: Float?
-    let vote_count: Float?
+    let voteAverage: Float?
+    let voteCount: Float?
     let overview: String?
     //"https://www.themoviedb.org/t/p/w1280"
     enum CodingKeys: String, CodingKey{
-        case id, title, release_date , image = "poster_path", vote_average, vote_count, overview
+        case id, title, release_date , image = "poster_path", voteAverage = "vote_average", voteCount = "vote_count", overview
     }
 }
