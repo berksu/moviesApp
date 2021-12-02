@@ -11,6 +11,7 @@ import Combine
 final class TabBackgroundViewModel: ObservableObject{
     @Published var searchMovie = ""
     @Published var searchResults: [Movie] = []
+    var searchedPage = 1
     
     var cancellables = Set<AnyCancellable>()
     
@@ -23,14 +24,16 @@ final class TabBackgroundViewModel: ObservableObject{
             .debounce(for: 0.8, scheduler: RunLoop.main)
             .removeDuplicates()
             .sink{keyword in
-                self.searchMovies(title: self.searchMovie)
+                self.searchedPage = 1
+                self.searchMovies(title: self.searchMovie, page: self.searchedPage)
             }
             .store(in: &cancellables)
     }
     
-    func searchMovies(title: String){
-        MovieSearchApi().searchMovie(title: title) { [weak self] searchResult in
+    func searchMovies(title: String, page: Int){
+        MovieSearchApi().searchMovie(title: title, page: page) { [weak self] searchResult in
             self?.searchResults = searchResult
+            self?.searchedPage += 1
         }
     }
 }

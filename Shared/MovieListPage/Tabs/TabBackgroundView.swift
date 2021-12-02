@@ -37,7 +37,6 @@ struct TabBackgroundView: View {
         }
         .searchable(text: $viewModel.searchMovie, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search Movie")
         .navigationTitle(selection == 0 ? "Top Movies": "Favourite Movies") // bu satır constraint hatası verdiriyor
-
         // 3 principal
         .toolbar{
 //            ToolbarItem(placement: .principal) {

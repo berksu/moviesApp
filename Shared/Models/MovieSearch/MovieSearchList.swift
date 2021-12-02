@@ -9,4 +9,8 @@ import Foundation
 
 struct MovieSearchList: Codable{
     let results: [Movie]
+    let totalPage: Int?
+    enum CodingKeys: String, CodingKey{
+        case results, totalPage = "total_pages"
+    }
 }
