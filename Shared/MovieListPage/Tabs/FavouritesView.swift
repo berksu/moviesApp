@@ -9,11 +9,12 @@ import SwiftUI
 
 struct FavouritesView: View{
     @ObservedObject var favouritesViewModel = FavouritesViewModel()
+    @Binding var searchResults: [Movie]
 
     var body: some View{
         ScrollView(showsIndicators: false){
             LazyVStack{
-                ForEach(favouritesViewModel.favouriteMovies , id: \.id) { movie in
+                ForEach(searchResults.isEmpty ?  favouritesViewModel.favouriteMovies: searchResults, id: \.id) { movie in
                     VStack{
                         Divider()
                         NavigationLink(destination: MovieDetailsView(viewModel: MovieDetailsViewModel(movie: movie))) {
@@ -29,6 +30,6 @@ struct FavouritesView: View{
 
 struct FavouritesView_Previews: PreviewProvider {
     static var previews: some View {
-        FavouritesView()
+        FavouritesView(searchResults: .constant([Movie(id: 1, title: "test", release_date: "test", image: "test", voteAverage: 3.2, voteCount: 1234, overview: "ads")]))
     }
 }

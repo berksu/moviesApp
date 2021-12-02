@@ -6,44 +6,14 @@
 //
 
 import SwiftUI
-import Combine
 
-// 5- Fix style
-final class MainBackgroundViewModel: ObservableObject{
-    @Published var allMovies: [Movie] = []
-    @Published var searchResults: [Movie] = []
-    @Published var totalMovieNumber = 0
-    @Published var searchMovie = ""
-    @Published var pageNum = 1
-    
+final class MainBackgroundViewModel: ObservableObject{    
     //{
     //    didSet {
     //        searchMovies(title: searchMovie)
     //    }
     //}
     //@Published var searchResult: [Movie] =  []
-    
-    var cancellables = Set<AnyCancellable>()
-    
-    init(){
-        searchMovieOnTime()
-    }
-    
-    func searchMovieOnTime(){
-        $searchMovie
-            .debounce(for: 0.8, scheduler: RunLoop.main)
-            .removeDuplicates()
-            .sink{keyword in
-                self.searchMovies(title: self.searchMovie)
-            }
-            .store(in: &cancellables)
-    }
-    
-    func searchMovies(title: String){
-        MovieSearchApi().searchMovie(title: title) { [weak self] searchResult in
-            self?.searchResults = searchResult
-        }
-    }
     
     
     //    func findFavouriteMoviesInAll(){

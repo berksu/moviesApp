@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C906359927595D4B004E16EC /* TabBackgroundViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C906359827595D4B004E16EC /* TabBackgroundViewModel.swift */; };
 		C91E213A2755471200F52D39 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C91E21392755471200F52D39 /* ImagePicker.swift */; };
 		C921E6D7273DA00D007D927E /* MainBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C921E6D6273DA00D007D927E /* MainBackgroundView.swift */; };
 		C921E6D8273DA00D007D927E /* MainBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C921E6D6273DA00D007D927E /* MainBackgroundView.swift */; };
@@ -91,6 +92,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C906359827595D4B004E16EC /* TabBackgroundViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBackgroundViewModel.swift; sourceTree = "<group>"; };
 		C91E2138275544EE00F52D39 /* movie--iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "movie--iOS--Info.plist"; sourceTree = "<group>"; };
 		C91E21392755471200F52D39 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		C921E6D6273DA00D007D927E /* MainBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainBackgroundView.swift; sourceTree = "<group>"; };
@@ -310,6 +312,7 @@
 			isa = PBXGroup;
 			children = (
 				C960554F2757E1B000459252 /* TabBackgroundView.swift */,
+				C906359827595D4B004E16EC /* TabBackgroundViewModel.swift */,
 				C96237402753D519001D5DAF /* FavouritesView.swift */,
 				C960554B2757DDC300459252 /* FavouritesViewModel.swift */,
 				C96237422753D57A001D5DAF /* AllMoviesView.swift */,
@@ -548,6 +551,7 @@
 			files = (
 				C960554C2757DDC300459252 /* FavouritesViewModel.swift in Sources */,
 				C9577924273C5F21008308A8 /* LoginPageView.swift in Sources */,
+				C906359927595D4B004E16EC /* TabBackgroundViewModel.swift in Sources */,
 				C93B8E1527518B1B007F7860 /* SideMenuModel.swift in Sources */,
 				C96237452753D8D3001D5DAF /* ProfilePageCustomText.swift in Sources */,
 				C921E6E3273DB47B007D927E /* ButtonViewCustomRoundedStyle.swift in Sources */,

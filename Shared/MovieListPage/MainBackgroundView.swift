@@ -9,7 +9,6 @@ import SwiftUI
 import Kingfisher
 
 struct MainBackgroundView: View {
-    @ObservedObject var moviesViewModel = MainBackgroundViewModel()
     @State var isSideMenuShow: Bool = false
     
     var body: some View{
@@ -37,6 +36,6 @@ struct MainBackgroundView: View {
 
 struct moviesListView_Previews: PreviewProvider {
     static var previews: some View {
-        MainBackgroundView(moviesViewModel: .init())
+        MainBackgroundView()
     }
 }

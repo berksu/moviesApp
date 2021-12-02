@@ -10,31 +10,35 @@ import Kingfisher
 
 struct TabBackgroundView: View {
     @Binding var isSideMenuShow: Bool
-    @State var test = ""
+
     //AppStorage and userdefaults tried
     @AppStorage("tabSelection") private var selection: Int = 0
     //@State private var tapCount = UserDefaults.standard.integer(forKey: "Tap")
     //UserDefaults.standard.set(self.tapCount, forKey: "Tap")
 
+    @ObservedObject var viewModel = TabBackgroundViewModel()
+    
     var body: some View {
         TabView(selection: $selection){
-            AllMoviesView()
+            AllMoviesView(searchResults: $viewModel.searchResults)
                 .tabItem {
                     Image(systemName: "house.fill")
                     Text("Home")
                 }.tag(0)
             
             
-            FavouritesView()
+            FavouritesView(searchResults: $viewModel.searchResults)
                 .tabItem {
                     Image(systemName: "heart.fill")
                     Text("Favourites")
                 }
                 .tag(1)
+            
         }
+        .searchable(text: $viewModel.searchMovie, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search Movie")
+        .navigationTitle(selection == 0 ? "Top Movies": "Favourite Movies") // bu satır constraint hatası verdiriyor
 
         // 3 principal
-        .navigationTitle(selection == 0 ? "Top Movies": "Favourite Movies") // bu satır constraint hatası verdiriyor
         .toolbar{
 //            ToolbarItem(placement: .principal) {
 //                Text(selection == 0 ? "Top \(moviesViewModel.allMovies.count) Movies": "Favourite Movies")

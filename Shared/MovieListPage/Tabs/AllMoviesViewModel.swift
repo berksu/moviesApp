@@ -11,7 +11,6 @@ final class AllMoviesViewModel:ObservableObject{
     @Published var allMovies: [Movie] = []
     @Published var totalMovieNumber = 0
     @Published var pageNum = 1
-    @Published var searchMovie = ""
 
     init(){
         getTopMovies(pageNum: 1)
@@ -21,6 +20,7 @@ final class AllMoviesViewModel:ObservableObject{
         MoviesApi().fetchMovie(pageNum: pageNum) { [weak self] movies in
             self?.totalMovieNumber = movies.count
             self?.allMovies.append(contentsOf: movies)
+            self?.updateMovies()
         }
     }
     

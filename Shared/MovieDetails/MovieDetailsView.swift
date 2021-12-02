@@ -120,12 +120,7 @@ struct MovieDetailsView: View {
             }.frame(width: geometry.size.width, height: geometry.size.height)
         }
     }
-    
-    
 }
-
-
-
 
 
 struct MovieDetailsView_Previews: PreviewProvider {
