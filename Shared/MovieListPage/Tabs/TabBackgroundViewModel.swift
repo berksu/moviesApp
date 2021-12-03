@@ -14,7 +14,7 @@ final class TabBackgroundViewModel: ObservableObject{
     var searchedPage = 1
     
     var cancellables = Set<AnyCancellable>()
-    
+        
     init(){
         searchMovieOnTime()
     }
@@ -34,6 +34,19 @@ final class TabBackgroundViewModel: ObservableObject{
         MovieSearchApi().searchMovie(title: title, page: page) { [weak self] searchResult in
             self?.searchResults = searchResult
             self?.searchedPage += 1
+        }
+    }
+    
+    func determineTheTitle(tabNo: Int) -> String{
+        switch tabNo{
+        case 0:
+            return "Top Movies"
+        case 1:
+            return "Favourite Movies"
+        case 2:
+            return "Collections"
+        default:
+            return ""
         }
     }
 }

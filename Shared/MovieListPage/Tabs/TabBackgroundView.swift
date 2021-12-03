@@ -34,9 +34,16 @@ struct TabBackgroundView: View {
                 }
                 .tag(1)
             
+            CollectionsView()
+                .tabItem {
+                    Image(systemName: "folder.fill")
+                    Text("Collections")
+                }
+                .tag(2)
+            
         }
         .searchable(text: $viewModel.searchMovie, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search Movie")
-        .navigationTitle(selection == 0 ? "Top Movies": "Favourite Movies") // bu satır constraint hatası verdiriyor
+        .navigationTitle(viewModel.determineTheTitle(tabNo: selection)) // bu satır constraint hatası verdiriyor
         // 3 principal
         .toolbar{
 //            ToolbarItem(placement: .principal) {
