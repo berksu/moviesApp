@@ -8,6 +8,7 @@
 import Foundation
 
 struct CollectionModel: Hashable{
-    let id: Int?
-    let title: String?
+    let id: String
+    var title: String?
+    var movieIDs:[Int]?
 }

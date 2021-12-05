@@ -53,6 +53,7 @@ struct AddCollectionView: View {
             .modifier(ButtonViewCustomRoundedStyle(buttonColor: Color(.blue)))
             .onTapGesture {
                 isPresented = false
+                addCollectionViewModel.addToDatabase()
             }
     }
     

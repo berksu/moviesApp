@@ -10,7 +10,7 @@ import Kingfisher
 
 struct MovieDetailsView: View {
     @ObservedObject var viewModel: MovieDetailsViewModel
-    
+
     var body: some View{
         NavigationView {
             VStack(spacing:30){
@@ -21,6 +21,11 @@ struct MovieDetailsView: View {
             }
             .navigationBarHidden(true)
         }
+        .sheet(isPresented: $viewModel.isAddMovieToCollectionButtonTapped, onDismiss: {
+            viewModel.addMovieToCollectionButton(state: false)
+        }, content: {
+            MovieToCollectionView(movieID: viewModel.movie.id)
+        })
     }
     
     var headerView: some View {
@@ -80,6 +85,8 @@ struct MovieDetailsView: View {
                     }.onAppear {
                         viewModel.isInFavourite()
                     }
+                    
+                    addMovieToCollectionButton
 
                 }
             }.frame(width: geometry.size.width, height: geometry.size.height)
@@ -119,6 +126,18 @@ struct MovieDetailsView: View {
                 
             }.frame(width: geometry.size.width, height: geometry.size.height)
         }
+    }
+    
+    
+    var addMovieToCollectionButton: some View{
+        Button {
+            viewModel.addMovieToCollectionButton(state: true)
+        } label: {
+            Image(systemName: "folder.badge.plus")
+                .foregroundColor(.secondary)
+                .padding(.leading,40)
+        }
+
     }
 }
 

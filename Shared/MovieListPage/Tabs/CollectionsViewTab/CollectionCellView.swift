@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct CollectionCellView: View {
+    let collectionName: String
+    
     var body: some View {
         HStack(){
             Image(systemName: "folder")
@@ -15,7 +17,7 @@ struct CollectionCellView: View {
                 .scaledToFit()
                 .frame(width: 30)
             
-            Text("asd")
+            Text(collectionName)
                 .padding(.leading)
             
             Spacer()
@@ -26,6 +28,6 @@ struct CollectionCellView: View {
 
 struct CollectionCellView_Previews: PreviewProvider {
     static var previews: some View {
-        CollectionCellView()
+        CollectionCellView(collectionName: "test")
     }
 }

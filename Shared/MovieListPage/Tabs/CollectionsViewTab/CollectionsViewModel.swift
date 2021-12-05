@@ -8,9 +8,14 @@
 import Foundation
 
 final class CollectionsViewModel: ObservableObject{
-    @Published var collections: [CollectionModel] = [CollectionModel(id: 1, title: "Horror"), CollectionModel(id: 2, title: "Comedy")]
+    @Published var collections: [CollectionModel] = []
     @Published var isCollectionAddTapped = false
     var id = 3
+    
+    
+    init(){
+        fetchCollectionsFromDatabase()
+    }
     
     func addNewCollection(){
         id = collections.count + 1
@@ -19,5 +24,20 @@ final class CollectionsViewModel: ObservableObject{
     
     func isCollectionAddTappedUpdate(state: Bool) {
         isCollectionAddTapped = state
+    }
+    
+    func deleteCollectionCell(id: String){
+        //collections = collections.filter(){$0.id != id}
+        let removedCollection = collections.filter { $0.id == id }
+        if(removedCollection.count > 0){
+            CollectionViewStorage().removeCollectionFromDatabase(collection: removedCollection[0])
+            fetchCollectionsFromDatabase()
+        }
+    }
+    
+    func fetchCollectionsFromDatabase(){
+        CollectionViewStorage().getAllCollections {[weak self] allCollections in
+            self?.collections = allCollections
+        }
     }
 }

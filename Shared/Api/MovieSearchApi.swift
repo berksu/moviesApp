@@ -51,4 +51,22 @@ final class MovieSearchApi{
             .value()
     }
     
+    func getMovieById(id: Int, completion: @escaping (Movie) -> Void){
+        AF.request("https://api.themoviedb.org/3/movie/\(id)?api_key=5c011e8f93fae74da4b04f2a25562db2&language=en-US").response { response in
+            guard let data = response.data
+            else{
+                return
+            }
+            
+            do{
+                let searchResult = try JSONDecoder().decode(Movie.self, from: data)
+                completion(searchResult)
+                //print(searchResult)
+            }catch{
+                //print(error.localizedDescription)
+                completion(Movie(id: 999, title: "", release_date: "", image: "", voteAverage: 99.9, voteCount: 99.9, overview: ""))
+            }
+        }
+    }
+    
 }

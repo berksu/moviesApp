@@ -11,6 +11,7 @@ final class MovieDetailsViewModel: ObservableObject {
     @Published var movie: Movie
     var favouriteMovies: [Movie] = []
     @Published var isFavourite:Bool = false
+    @Published var isAddMovieToCollectionButtonTapped: Bool = false
 
     init(movie: Movie) {
         self.movie = movie
@@ -34,6 +35,10 @@ final class MovieDetailsViewModel: ObservableObject {
     
     func removeFromDatabase(){
         MovieListViewStorage().removeFromDatabase(movieID: movie.id)
+    }
+    
+    func addMovieToCollectionButton(state: Bool){
+        isAddMovieToCollectionButtonTapped = state
     }
 
 }

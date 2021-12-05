@@ -16,7 +16,6 @@ struct LoginPageView: View {
                 NavigationLink(destination: MainBackgroundView(),isActive: $viewModel.isSignedIn) {
                     EmptyView()
                 }
-                
                 inputFieldView
             }
         }

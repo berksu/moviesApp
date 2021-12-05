@@ -9,4 +9,10 @@ import Foundation
 
 final class AddCollectionViewModel: ObservableObject{
     @Published var collectionNameText = ""
+    
+    func addToDatabase(){
+        if(collectionNameText != ""){
+            CollectionViewStorage().addCollectionToDatabase(collection: CollectionModel(id: UUID().uuidString, title: collectionNameText, movieIDs: []))
+        }
+    }
 }

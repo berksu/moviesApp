@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwipeCellSUI
 
 struct CollectionsView: View {
     @ObservedObject var collectionViewModel = CollectionsViewModel()
@@ -16,7 +17,14 @@ struct CollectionsView: View {
                 LazyVStack{
                     ForEach(collectionViewModel.collections, id: \.id){ collection in
                         Divider()
-                        CollectionCellView()
+                        NavigationLink {
+                            CollectionDetailsListView(title: collection.title ?? "",
+                                                  movieIDs: collection.movieIDs ?? [])
+                        } label: {
+                            CollectionCellView(collectionName: collection.title ?? "Failed")
+                                .swipeCell(leadingSideGroup: rightGroup(id: collection.id), trailingSideGroup: rightGroup(id: collection.id), currentUserInteractionCellID: .constant(collection.id))
+                                .foregroundColor(.black)
+                        }
                     }
                 }
             }
@@ -25,6 +33,7 @@ struct CollectionsView: View {
         }
         .sheet(isPresented: $collectionViewModel.isCollectionAddTapped, onDismiss: {
             collectionViewModel.isCollectionAddTappedUpdate(state: false)
+            collectionViewModel.fetchCollectionsFromDatabase()
         }, content: {
             AddCollectionView(isPresented: $collectionViewModel.isCollectionAddTapped)
         })
@@ -43,6 +52,29 @@ struct CollectionsView: View {
         .foregroundColor(.white)
         .clipShape(Circle())
         .padding()
+    }
+    
+    
+    func rightGroup(id: String)->[SwipeCellActionItem] {
+
+        let items =  [
+            SwipeCellActionItem(buttonView: {
+                self.trashView(swipeOut: false)
+            }, swipeOutButtonView: {
+                self.trashView(swipeOut: true)
+            }, backgroundColor: .red, swipeOutAction: true, swipeOutHapticFeedbackType: .warning, swipeOutIsDestructive: true) {
+                collectionViewModel.deleteCollectionCell(id: id)
+            }
+          ]
+        
+        return items
+    }
+    
+    func trashView(swipeOut: Bool)->AnyView {
+            VStack(spacing: 3)  {
+                Image(systemName: "trash").font(.system(size: swipeOut ? 28 : 22)).foregroundColor(.white)
+                Text("Delete").fixedSize().font(.system(size: swipeOut ? 16 : 12)).foregroundColor(.white)
+            }.frame(maxHeight: 80).animation(.default,value: UUID()).castToAnyView()
     }
 }
 
