@@ -13,10 +13,9 @@ struct LoginPageView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                NavigationLink(destination: MoviesListView(),isActive: $viewModel.isSignedIn) {
+                NavigationLink(destination: MainBackgroundView(),isActive: $viewModel.isSignedIn) {
                     EmptyView()
                 }
-                
                 inputFieldView
             }
         }
@@ -32,20 +31,23 @@ struct LoginPageView: View {
     // MARK: - UI Components
     
     private var inputFieldView: some View {
-        VStack {
-            Image("login_icon")
-                .resizable()
-                .frame(width: UIScreen.main.bounds.width / 1.8, height: UIScreen.main.bounds.height / 3.5)
-                .padding(.top, -100)
-            userNameField
-                .padding(.top, 60)
-            passwordField
-            
-            HStack(alignment: .center, spacing: -20){
-                loginButton
-                signUpButton
+        GeometryReader{ geometry in
+            VStack {
+                Image("login_icon")
+                    .resizable()
+                    .frame(width: geometry.size.width / 1.8, height: geometry.size.height / 2.8)
+                userNameField
+                    .padding(.top, 60)
+                passwordField
+                
+                HStack(alignment: .center){
+                    loginButton
+                        .frame(width: geometry.size.width * 0.45)
+                    signUpButton
+                        .frame(width: geometry.size.width * 0.45)
+                }
+                .padding()
             }
-            .padding()
         }
     }
     
@@ -62,7 +64,7 @@ struct LoginPageView: View {
     }
     
     var loginButton: some View {
-        NavigationLink(destination: MoviesListView(),isActive: $viewModel.isLoggedIn) {
+        NavigationLink(destination: MainBackgroundView(),isActive: $viewModel.isLoggedIn) {
             Text("Login")
                 .modifier(ButtonViewCustomRoundedStyle(buttonColor: Color(.red)))
                 .onTapGesture {

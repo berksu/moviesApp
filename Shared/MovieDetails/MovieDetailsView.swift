@@ -10,7 +10,7 @@ import Kingfisher
 
 struct MovieDetailsView: View {
     @ObservedObject var viewModel: MovieDetailsViewModel
-    
+
     var body: some View{
         NavigationView {
             VStack(spacing:30){
@@ -21,6 +21,11 @@ struct MovieDetailsView: View {
             }
             .navigationBarHidden(true)
         }
+        .sheet(isPresented: $viewModel.isAddMovieToCollectionButtonTapped, onDismiss: {
+            viewModel.addMovieToCollectionButton(state: false)
+        }, content: {
+            MovieToCollectionView(movieID: viewModel.movie.id)
+        })
     }
     
     var headerView: some View {
@@ -42,7 +47,7 @@ struct MovieDetailsView: View {
                 HStack{
                     Image(systemName: "hand.thumbsup")
                         .foregroundColor(.secondary)
-                    if let vote = viewModel.movie.vote_average{
+                    if let vote = viewModel.movie.voteAverage{
                         Text("\(vote, specifier: "%.2f")" )
                             .font(.subheadline)
                             .foregroundColor(.secondary)
@@ -55,7 +60,7 @@ struct MovieDetailsView: View {
                     Image(systemName: "eye")
                         .foregroundColor(.secondary)
                         .padding(.leading,40)
-                    if let vote_count = viewModel.movie.vote_count{
+                    if let vote_count = viewModel.movie.voteCount{
                         Text("\(Int(vote_count))" )
                             .font(.subheadline)
                             .foregroundColor(.secondary)
@@ -80,6 +85,8 @@ struct MovieDetailsView: View {
                     }.onAppear {
                         viewModel.isInFavourite()
                     }
+                    
+                    addMovieToCollectionButton
 
                 }
             }.frame(width: geometry.size.width, height: geometry.size.height)
@@ -122,15 +129,22 @@ struct MovieDetailsView: View {
     }
     
     
+    var addMovieToCollectionButton: some View{
+        Button {
+            viewModel.addMovieToCollectionButton(state: true)
+        } label: {
+            Image(systemName: "folder.badge.plus")
+                .foregroundColor(.secondary)
+                .padding(.leading,40)
+        }
+
+    }
 }
-
-
-
 
 
 struct MovieDetailsView_Previews: PreviewProvider {
     static var previews: some View {
-        MovieDetailsView(viewModel: MovieDetailsViewModel(movie: Movie(id: 99999999, title: "Dexter", release_date: "2003", image: "https://tr.web.img4.acsta.net/pictures/21/10/04/15/10/2211034.jpg", vote_average: 9.1, vote_count: 3245, overview: "dexter is a tv series")))
+        MovieDetailsView(viewModel: MovieDetailsViewModel(movie: Movie(id: 99999999, title: "Dexter", release_date: "2003", image: "https://tr.web.img4.acsta.net/pictures/21/10/04/15/10/2211034.jpg", voteAverage: 9.1, voteCount: 3245, overview: "dexter is a tv series")))
             .previewDevice(PreviewDevice(rawValue: "iPhone 12 Pro Max"))
     }
 }
