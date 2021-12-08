@@ -26,7 +26,6 @@ struct TabBackgroundView: View {
                     Text("Home")
                 }.tag(0)
             
-            
             FavouritesView(searchResults: $viewModel.searchResults)
                 .tabItem {
                     Image(systemName: "heart.fill")
@@ -42,7 +41,7 @@ struct TabBackgroundView: View {
                 .tag(2)
             
         }
-        .searchable(text: $viewModel.searchMovie, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search Movie")
+        //.searchable(text: $viewModel.searchMovie, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search Movie")
         .navigationTitle(viewModel.determineTheTitle(tabNo: selection)) // bu satır constraint hatası verdiriyor
         // 3 principal
         .toolbar{

@@ -17,6 +17,7 @@
 		C921E6E1273DAFC5007D927E /* TextFieldCustomRoundedStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C921E6DF273DAFC5007D927E /* TextFieldCustomRoundedStyle.swift */; };
 		C921E6E3273DB47B007D927E /* ButtonViewCustomRoundedStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C921E6E2273DB47B007D927E /* ButtonViewCustomRoundedStyle.swift */; };
 		C921E6E4273DB47B007D927E /* ButtonViewCustomRoundedStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C921E6E2273DB47B007D927E /* ButtonViewCustomRoundedStyle.swift */; };
+		C925F184276006EF0009665F /* LoginPageTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C925F183276006EF0009665F /* LoginPageTextField.swift */; };
 		C9278D832752663600C63B1A /* ProfileInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9278D822752663600C63B1A /* ProfileInfoView.swift */; };
 		C9356D3227496A200005ADBE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C9356D3127496A200005ADBE /* GoogleService-Info.plist */; };
 		C9356D3327496A200005ADBE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C9356D3127496A200005ADBE /* GoogleService-Info.plist */; };
@@ -86,6 +87,7 @@
 		C9EFE887275BE5560004F460 /* CollectionViewStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EFE886275BE5560004F460 /* CollectionViewStorage.swift */; };
 		C9EFE88C275BEB170004F460 /* SwipeCellSUI in Frameworks */ = {isa = PBXBuildFile; productRef = C9EFE88B275BEB170004F460 /* SwipeCellSUI */; };
 		C9EFE88E275C06210004F460 /* CollectionDetailsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EFE88D275C06210004F460 /* CollectionDetailsListView.swift */; };
+		C9F9D570276017F000630207 /* LoginPageButtonField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F9D56F276017F000630207 /* LoginPageButtonField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -113,6 +115,7 @@
 		C921E6DA273DA619007D927E /* LoginPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPageViewModel.swift; sourceTree = "<group>"; };
 		C921E6DF273DAFC5007D927E /* TextFieldCustomRoundedStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldCustomRoundedStyle.swift; sourceTree = "<group>"; };
 		C921E6E2273DB47B007D927E /* ButtonViewCustomRoundedStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonViewCustomRoundedStyle.swift; sourceTree = "<group>"; };
+		C925F183276006EF0009665F /* LoginPageTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPageTextField.swift; sourceTree = "<group>"; };
 		C9278D822752663600C63B1A /* ProfileInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfoView.swift; sourceTree = "<group>"; };
 		C9356D3127496A200005ADBE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C93B8E1427518B1B007F7860 /* SideMenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuModel.swift; sourceTree = "<group>"; };
@@ -171,6 +174,7 @@
 		C9D01F5D2740356700E16479 /* MoviesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesList.swift; sourceTree = "<group>"; };
 		C9EFE886275BE5560004F460 /* CollectionViewStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewStorage.swift; sourceTree = "<group>"; };
 		C9EFE88D275C06210004F460 /* CollectionDetailsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionDetailsListView.swift; sourceTree = "<group>"; };
+		C9F9D56F276017F000630207 /* LoginPageButtonField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPageButtonField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -232,6 +236,8 @@
 				C921E6E2273DB47B007D927E /* ButtonViewCustomRoundedStyle.swift */,
 				C96237442753D8D3001D5DAF /* ProfilePageCustomText.swift */,
 				C96237462753D99C001D5DAF /* ProfilePageCustomTextField.swift */,
+				C925F183276006EF0009665F /* LoginPageTextField.swift */,
+				C9F9D56F276017F000630207 /* LoginPageButtonField.swift */,
 			);
 			path = Modifiers;
 			sourceTree = "<group>";
@@ -343,8 +349,8 @@
 				C96658E1275AB03700184E6D /* FavouritesViewTab */,
 				C96658E0275AB02700184E6D /* AllMoviesTab */,
 				C960554F2757E1B000459252 /* TabBackgroundView.swift */,
-				C96055492757D6BC00459252 /* MovieCellViewModel.swift */,
 				C906359827595D4B004E16EC /* TabBackgroundViewModel.swift */,
+				C96055492757D6BC00459252 /* MovieCellViewModel.swift */,
 			);
 			path = Tabs;
 			sourceTree = "<group>";
@@ -632,6 +638,7 @@
 				C921E6E3273DB47B007D927E /* ButtonViewCustomRoundedStyle.swift in Sources */,
 				C9D01F5C27402CE600E16479 /* Movie.swift in Sources */,
 				C96237382753B689001D5DAF /* AuthenticationApi.swift in Sources */,
+				C925F184276006EF0009665F /* LoginPageTextField.swift in Sources */,
 				C962373A2753CD8F001D5DAF /* MovieListModel.swift in Sources */,
 				C9278D832752663600C63B1A /* ProfileInfoView.swift in Sources */,
 				C96658E4275ABB4A00184E6D /* AddCollectionView.swift in Sources */,
@@ -666,6 +673,7 @@
 				C96AC53D275D3AEA009C9D77 /* CollectionDetailsListViewModel.swift in Sources */,
 				C9EFE88E275C06210004F460 /* CollectionDetailsListView.swift in Sources */,
 				C96055502757E1B000459252 /* TabBackgroundView.swift in Sources */,
+				C9F9D570276017F000630207 /* LoginPageButtonField.swift in Sources */,
 				C921E6D7273DA00D007D927E /* MainBackgroundView.swift in Sources */,
 				C9666A972746DCB400125E31 /* Card.swift in Sources */,
 				C970D87E273ED04B00C024A5 /* MainBackgroundViewModel.swift in Sources */,

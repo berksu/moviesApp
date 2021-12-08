@@ -11,12 +11,36 @@ struct LoginPageView: View {
     @ObservedObject var viewModel = LoginPageViewModel()
     
     var body: some View {
-        NavigationView {
-            ZStack {
-                NavigationLink(destination: MainBackgroundView(),isActive: $viewModel.isSignedIn) {
-                    EmptyView()
-                }
-                inputFieldView
+            NavigationView {
+                ZStack(alignment: .top){
+                    GeometryReader{ geometry in
+
+                    NavigationLink(destination: MainBackgroundView(),isActive: $viewModel.isSignedIn) {
+                        EmptyView()
+                    }
+                    
+                    backgroundImage(geometry: geometry)
+                        .ignoresSafeArea()
+                    
+                    VStack{
+                        logo(geometry: geometry)
+                            .padding(.top, geometry.size.height * 0.13)
+                        userNameField(geometry: geometry)
+                            .padding(.top,geometry.size.height * 0.06)
+                        passwordField(geometry: geometry)
+                            .padding(.top,10)
+                        loginButton(geometry: geometry)
+                            .padding(.top)
+                        
+                        socialLoginsButton(geometry: geometry)
+                            .padding(.top,geometry.size.height * 0.03)
+                        
+                        signUpButton
+                            .padding(EdgeInsets(top: 25 , leading: 0, bottom: geometry.safeAreaInsets.bottom, trailing: 0))
+                            //.padding(.bottom, geometry.safeAreaInsets.bottom)
+                    }
+                }.background(.black)
+                .ignoresSafeArea()
             }
         }
         .navigationBarHidden(true)
@@ -30,62 +54,161 @@ struct LoginPageView: View {
     
     // MARK: - UI Components
     
-    private var inputFieldView: some View {
-        GeometryReader{ geometry in
-            VStack {
-                Image("login_icon")
-                    .resizable()
-                    .frame(width: geometry.size.width / 1.8, height: geometry.size.height / 2.8)
-                userNameField
-                    .padding(.top, 60)
-                passwordField
-                
-                HStack(alignment: .center){
-                    loginButton
-                        .frame(width: geometry.size.width * 0.45)
-                    signUpButton
-                        .frame(width: geometry.size.width * 0.45)
-                }
-                .padding()
+    func backgroundImage(geometry: GeometryProxy) -> some View{
+        return Image("image1")
+                .frame(width: geometry.size.width, height: geometry.size.height*0.5)
+                .opacity(0.77)
+    }
+    
+    func logo(geometry: GeometryProxy) -> some View{
+        return HStack{
+                Spacer()
+                Image("logo")
+                    .frame(width: geometry.size.width * 0.28, height: geometry.size.height * 0.15, alignment: .center)
+                Spacer()
             }
-        }
     }
     
-    var userNameField: some View {
-        TextField("Username", text: $viewModel.mail)
-            .modifier(TextFieldCustomRoundedStyle(fieldColor: Color(.black)))
-            .textInputAutocapitalization(.never)
-            .disableAutocorrection(true)
+    
+    func userNameField(geometry: GeometryProxy) -> some View{
+            return VStack{
+                Text("Email")
+                    .foregroundColor(.white)
+                    .font(.system(size:12, weight: .bold))
+                    .frame(width: geometry.size.width * 0.9, height: 20, alignment: .leading)
+                
+                TextField("", text: $viewModel.mail)
+                    .modifier(PlaceholderStyle(showPlaceHolder: viewModel.mail.isEmpty,
+                                           placeholder: "e-mail"))
+                    .modifier(LoginPageTextField())
+                    .textInputAutocapitalization(.never)
+                    .disableAutocorrection(true)
+                    .frame(width: geometry.size.width * 0.9)
+
+            }
     }
     
-    var passwordField: some View {
-        SecureField("Password", text: $viewModel.password)
-            .modifier(TextFieldCustomRoundedStyle(fieldColor: Color(.black)))
+    func passwordField(geometry: GeometryProxy) -> some View{
+            return VStack{
+                Text("Password")
+                    .foregroundColor(.white)
+                    .font(.system(size:12, weight: .bold))
+                    .frame(width: geometry.size.width * 0.9, height: 20, alignment: .leading)
+                
+                SecureField("", text: $viewModel.password)
+                    .modifier(PlaceholderStyle(showPlaceHolder: viewModel.password.isEmpty,
+                                           placeholder: "password"))
+                    .modifier(LoginPageTextField())
+                    .textInputAutocapitalization(.never)
+                    .disableAutocorrection(true)
+                    .frame(width: geometry.size.width * 0.9)
+
+            }
     }
     
-    var loginButton: some View {
-        NavigationLink(destination: MainBackgroundView(),isActive: $viewModel.isLoggedIn) {
-            Text("Login")
-                .modifier(ButtonViewCustomRoundedStyle(buttonColor: Color(.red)))
+    
+    func loginButton(geometry: GeometryProxy) -> some View{
+        return NavigationLink(destination: MainBackgroundView(),isActive: $viewModel.isLoggedIn) {
+            Text("LOGIN")
+                .modifier(LoginPageButtonField())
                 .onTapGesture {
                     viewModel.login()
                 }
+                .frame(width: geometry.size.width * 0.9)
         }
     }
     
-    var signUpButton: some View {
-        Text("Sign In")
-            .modifier(ButtonViewCustomRoundedStyle(buttonColor: Color(.red)))
-            .onTapGesture {
-                withAnimation(.spring()) {
-                    viewModel.signInButtonUpdate(state: true)
+    
+    func socialLoginsButton(geometry: GeometryProxy) -> some View{
+        return Group{
+            VStack{
+                HStack{
+                    line
+                        .padding(.leading)
+                    Text("Social Logins")
+                        .font(.system(size:14, weight: .medium))
+                        .foregroundColor(.white)
+                        .padding()
+                    line
+                        .padding(.trailing)
+                }
+                
+                HStack(spacing: 25){
+                    Button {
+                        //
+                    } label: {
+                        Image("facebookButton")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 43, height: 43)
+                    }
+
+                    Button {
+                        //
+                    } label: {
+                        Image("googleButton")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 43, height: 43)
+                    }
                 }
             }
+        }
     }
+    
+    var line: some View {
+        VStack {
+            Divider()
+                .background(.white)
+                .opacity(0.64)
+        }
+    }
+    
+    
+    var signUpButton: some View {
+        VStack(spacing: 5){
+            Text("Don't have an account ?")
+                .font(.system(size:14, weight: .medium))
+                .foregroundColor(.white)
+                .opacity(0.64)
+            Text("REGISTER")
+                .font(.system(size:14, weight: .bold))
+                .foregroundColor(.white)
+                .onTapGesture {
+                    withAnimation(.spring()) {
+                        viewModel.signInButtonUpdate(state: true)
+                    }
+                }
+        }
+    }
+    
+    
 }
+
+
 
 struct LoginPage_Previews: PreviewProvider {
     static var previews: some View {
         LoginPageView(viewModel: .init())
+    }
+}
+
+
+
+
+public struct PlaceholderStyle: ViewModifier {
+    var showPlaceHolder: Bool
+    var placeholder: String
+
+    public func body(content: Content) -> some View {
+        ZStack(alignment: .leading) {
+            if showPlaceHolder {
+                Text(placeholder)
+                .padding(.horizontal, 15)
+            }
+            content
+            .foregroundColor(Color(red: 162/255, green: 162/255, blue: 162/255))
+            .padding(5.0)
+        }
     }
 }

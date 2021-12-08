@@ -11,7 +11,10 @@ final class AllMoviesViewModel:ObservableObject{
     @Published var allMovies: [Movie] = []
     @Published var totalMovieNumber = 0
     @Published var pageNum = 1
-
+    
+    @Published var searched_pageNum:Int = 1
+    @Published var searched_title:Int = 1
+    
     init(){
         getTopMovies(pageNum: 1)
     }
@@ -24,9 +27,17 @@ final class AllMoviesViewModel:ObservableObject{
         }
     }
     
+    @discardableResult
     func updateMovies()-> Int{
         pageNum += 1
         totalMovieNumber = allMovies.count
         return pageNum
+    }
+    
+    func searchMovies(title: String, completion: @escaping ([Movie]) -> Void){
+        MovieSearchApi().searchMovie(title: title, page: searched_pageNum) { [weak self] searchResult in
+            self?.searched_pageNum += 1
+            completion(searchResult)
+        }
     }
 }

@@ -16,7 +16,6 @@ struct MainBackgroundView: View {
             ZStack{
                 if(isSideMenuShow){
                     SideMenuView(isSideMenuShow: $isSideMenuShow)
-                        
                 }
                 TabBackgroundView(isSideMenuShow: $isSideMenuShow)
                     .cornerRadius(isSideMenuShow ? 20 : 10)

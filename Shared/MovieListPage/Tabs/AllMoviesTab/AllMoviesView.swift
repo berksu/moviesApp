@@ -11,27 +11,44 @@ struct AllMoviesView: View {
     @ObservedObject var allMoviewViewModel = AllMoviesViewModel()
     @Binding var searchResults: [Movie]
     
+    @State var temp = ""
+    
     var body: some View {
-        ScrollView(showsIndicators: false){
-            LazyVStack{
-                ForEach(searchResults.isEmpty ?  allMoviewViewModel.allMovies: searchResults, id: \.id) { movie in
-                    VStack{
-                        Divider()
-                        NavigationLink(destination: MovieDetailsView(viewModel: MovieDetailsViewModel(movie: movie))) {
-                            MovieCellView(image: movie.image, title: movie.title, releaseDate: movie.release_date)
-                        }
-                        //Pagination
-                        if(searchResults.isEmpty && self.allMoviewViewModel.allMovies.last?.id == movie.id){
+        VStack{
+            Rectangle()
+            .frame(width: UIScreen.main.bounds.width, height: 30)
+            .background(.red)
+            .padding()
+            
+            ScrollView(showsIndicators: false){
+                LazyVStack{
+                    ForEach(searchResults.isEmpty ?  allMoviewViewModel.allMovies: searchResults, id: \.id) { movie in
+                        VStack{
                             Divider()
-                            Text("Fetching more...")
-                                .onAppear(perform: {
-                                    self.allMoviewViewModel.getTopMovies(pageNum: self.allMoviewViewModel.pageNum)
-                                })
+                            NavigationLink(destination: MovieDetailsView(viewModel: MovieDetailsViewModel(movie: movie))) {
+                                MovieCellView(image: movie.image, title: movie.title, releaseDate: movie.release_date)
+                                    .redacted(reason: .placeholder)
+                            }
+                            //Pagination
+                            if(searchResults.isEmpty && self.allMoviewViewModel.allMovies.last?.id == movie.id){
+                                Divider()
+                                Text("Fetching more...")
+                                    .onAppear(perform: {
+                                        self.allMoviewViewModel.getTopMovies(pageNum: self.allMoviewViewModel.pageNum)
+                                    })
+                            }
+    //                        else if(!searchResults.isEmpty && searchResults.last?.id == movie.id){
+    //                            Divider()
+    //                            Text("Fetching more...")
+    //                                .onAppear(perform: {
+    //                                    //self.allMoviewViewModel.getTopMovies(pageNum: self.allMoviewViewModel.pageNum)
+    //                                })
+    //                        }
                         }
                     }
                 }
             }
-        }.listStyle(PlainListStyle())
+        }
     }
 }
 
