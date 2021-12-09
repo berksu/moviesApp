@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import UIKit
 
 final class TabBackgroundViewModel: ObservableObject{
     @Published var searchMovie = ""

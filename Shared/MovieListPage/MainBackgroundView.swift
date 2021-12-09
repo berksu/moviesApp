@@ -25,6 +25,8 @@ struct MainBackgroundView: View {
                     .ignoresSafeArea(.container, edges: .bottom)
                     .disabled(isSideMenuShow)
             }
+            .navigationBarColor(.black)
+            .background(.black)
         }
         .navigationBarHidden(true)
             //.searchable(text: $moviesViewModel.searchMovie, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search Movie")
@@ -37,4 +39,13 @@ struct moviesListView_Previews: PreviewProvider {
     static var previews: some View {
         MainBackgroundView()
     }
+}
+
+
+extension View {
+ 
+    func navigationBarColor(_ backgroundColor: UIColor?) -> some View {
+        self.modifier(NavigationBarModifier(backgroundColor: backgroundColor))
+    }
+
 }

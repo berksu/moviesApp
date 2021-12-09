@@ -14,6 +14,8 @@ final class LoginPageViewModel: ObservableObject{
     @Published var password = ""
 
     @Published var isSignInTapped = false
+    @Published var isForgotPasswordTapped = false
+
     @Published var signInEmail = ""
     @Published var signInPassword = ""
     @Published var signInPasswordRepeat = ""
@@ -71,5 +73,9 @@ final class LoginPageViewModel: ObservableObject{
             completion(false)
             isPasswordEqual = false
         }
+    }
+    
+    func forgotPasswordUpdate(state: Bool){
+        isForgotPasswordTapped = state
     }
 }

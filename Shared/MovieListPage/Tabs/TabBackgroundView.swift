@@ -41,13 +41,16 @@ struct TabBackgroundView: View {
                 .tag(2)
             
         }
+        .onAppear {
+            UITabBar.appearance().backgroundColor = .black
+        }
         //.searchable(text: $viewModel.searchMovie, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search Movie")
         .navigationTitle(viewModel.determineTheTitle(tabNo: selection)) // bu satır constraint hatası verdiriyor
         // 3 principal
         .toolbar{
-//            ToolbarItem(placement: .principal) {
-//                Text(selection == 0 ? "Top \(moviesViewModel.allMovies.count) Movies": "Favourite Movies")
-//            }
+            //            ToolbarItem(placement: .principal) {
+            //                Text(selection == 0 ? "Top \(moviesViewModel.allMovies.count) Movies": "Favourite Movies")
+            //            }
             ToolbarItem(placement: .navigationBarLeading) {
                 Button {
                     withAnimation(.spring()){

@@ -32,8 +32,10 @@ struct LoginPageView: View {
                         loginButton(geometry: geometry)
                             .padding(.top)
                         
+                        forgotPasswordButton()
+                        
                         socialLoginsButton(geometry: geometry)
-                            .padding(.top,geometry.size.height * 0.03)
+                            .padding(.top,geometry.size.height * 0.01)
                         
                         signUpButton
                             .padding(EdgeInsets(top: 25 , leading: 0, bottom: geometry.safeAreaInsets.bottom, trailing: 0))
@@ -44,11 +46,18 @@ struct LoginPageView: View {
             }
         }
         .navigationBarHidden(true)
+        //signIn sheet
         .sheet(isPresented: $viewModel.isSignInTapped, onDismiss: {
             viewModel.signInButtonUpdate(state: false)
             viewModel.controlIsSignedIn()
         }, content: {
             SignIn(viewModel: viewModel)
+        })
+        //forgot password sheet
+        .sheet(isPresented: $viewModel.isForgotPasswordTapped, onDismiss: {
+            viewModel.forgotPasswordUpdate(state: false)
+        }, content: {
+            ForgotPasswordView()
         })
     }
     
@@ -84,7 +93,6 @@ struct LoginPageView: View {
                     .textInputAutocapitalization(.never)
                     .disableAutocorrection(true)
                     .frame(width: geometry.size.width * 0.9)
-
             }
     }
     
@@ -102,7 +110,6 @@ struct LoginPageView: View {
                     .textInputAutocapitalization(.never)
                     .disableAutocorrection(true)
                     .frame(width: geometry.size.width * 0.9)
-
             }
     }
     
@@ -118,6 +125,19 @@ struct LoginPageView: View {
         }
     }
     
+    func forgotPasswordButton() -> some View{
+        return HStack{
+            Spacer()
+            
+            Button {
+                viewModel.forgotPasswordUpdate(state: true)
+            } label: {
+                Text("Forget Password ?")
+                    .foregroundColor(.white)
+                    .font(.system(size: 10, weight: .regular))
+            }.padding(.trailing)
+        }
+    }
     
     func socialLoginsButton(geometry: GeometryProxy) -> some View{
         return Group{
@@ -181,34 +201,10 @@ struct LoginPageView: View {
                 }
         }
     }
-    
-    
 }
-
-
 
 struct LoginPage_Previews: PreviewProvider {
     static var previews: some View {
         LoginPageView(viewModel: .init())
-    }
-}
-
-
-
-
-public struct PlaceholderStyle: ViewModifier {
-    var showPlaceHolder: Bool
-    var placeholder: String
-
-    public func body(content: Content) -> some View {
-        ZStack(alignment: .leading) {
-            if showPlaceHolder {
-                Text(placeholder)
-                .padding(.horizontal, 15)
-            }
-            content
-            .foregroundColor(Color(red: 162/255, green: 162/255, blue: 162/255))
-            .padding(5.0)
-        }
     }
 }

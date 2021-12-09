@@ -12,15 +12,18 @@ struct MovieDetailsView: View {
     @ObservedObject var viewModel: MovieDetailsViewModel
 
     var body: some View{
-        NavigationView {
-            VStack(spacing:30){
+        //NavigationView {
+            VStack(spacing:20){
+                Spacer()
                 headerView
                 titleView
                     .padding()
                 Spacer()
             }
-            .navigationBarHidden(true)
-        }
+            .navigationBarColor(.black)
+            .background(.black)
+            .navigationBarTitleDisplayMode(.inline)
+        //}
         .sheet(isPresented: $viewModel.isAddMovieToCollectionButtonTapped, onDismiss: {
             viewModel.addMovieToCollectionButton(state: false)
         }, content: {
@@ -39,6 +42,7 @@ struct MovieDetailsView: View {
                         .frame(height: geometry.size.height)
                         .cornerRadius(4)
                         .padding(.vertical, 4)
+                        .shadow(color: .white, radius: 2)
                 }else{
                     KFImage(URL(string: ""))
                         .frame(height: geometry.size.height)
@@ -46,28 +50,28 @@ struct MovieDetailsView: View {
                 
                 HStack{
                     Image(systemName: "hand.thumbsup")
-                        .foregroundColor(.secondary)
+                        .foregroundColor(.white)
                     if let vote = viewModel.movie.voteAverage{
                         Text("\(vote, specifier: "%.2f")" )
                             .font(.subheadline)
-                            .foregroundColor(.secondary)
+                            .foregroundColor(.white)
                     }else{
                         Text("rating")
                             .font(.subheadline)
-                            .foregroundColor(.secondary)
+                            .foregroundColor(.white)
                     }
                         
                     Image(systemName: "eye")
-                        .foregroundColor(.secondary)
+                        .foregroundColor(.white)
                         .padding(.leading,40)
                     if let vote_count = viewModel.movie.voteCount{
                         Text("\(Int(vote_count))" )
                             .font(.subheadline)
-                            .foregroundColor(.secondary)
+                            .foregroundColor(.white)
                     }else{
                         Text("count")
                             .font(.subheadline)
-                            .foregroundColor(.secondary)
+                            .foregroundColor(.white)
                     }
                     
                     Button {
@@ -80,7 +84,7 @@ struct MovieDetailsView: View {
                         }
                     } label: {
                         Image(systemName: viewModel.isFavourite ? "heart.fill" : "heart")
-                            .foregroundColor(viewModel.isFavourite ? .red : .secondary)
+                            .foregroundColor(viewModel.isFavourite ? .red : .white)
                             .padding(.leading,40)
                     }.onAppear {
                         viewModel.isInFavourite()
@@ -105,11 +109,12 @@ struct MovieDetailsView: View {
                     .minimumScaleFactor(0.5)
                     .padding()
                     .multilineTextAlignment(.center)
+                    .foregroundColor(.white)
                 
                 if let release_date = viewModel.movie.release_date {
                     Text(release_date[0..<4])
                         .font(.subheadline)
-                        .foregroundColor(.secondary)
+                        .foregroundColor(.white)
                 }else{
                     Text("")
                 }
@@ -117,7 +122,7 @@ struct MovieDetailsView: View {
                 ScrollView(showsIndicators: false){
                     Text(viewModel.movie.overview ?? "")
                         .font(.subheadline)
-                        .foregroundColor(.secondary)
+                        .foregroundColor(.white)
                         //.minimumScaleFactor(0.6)
                         .lineLimit(nil)
                         .fixedSize(horizontal: false, vertical: true)
@@ -134,7 +139,7 @@ struct MovieDetailsView: View {
             viewModel.addMovieToCollectionButton(state: true)
         } label: {
             Image(systemName: "folder.badge.plus")
-                .foregroundColor(.secondary)
+                .foregroundColor(.white)
                 .padding(.leading,40)
         }
 
