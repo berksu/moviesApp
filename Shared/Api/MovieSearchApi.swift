@@ -64,7 +64,44 @@ final class MovieSearchApi{
                 //print(searchResult)
             }catch{
                 //print(error.localizedDescription)
-                completion(Movie(id: 999, title: "", release_date: "", image: "", voteAverage: 99.9, voteCount: 99.9, overview: ""))
+                completion(Movie(id: 999, title: "", release_date: "", image: "", voteAverage: 99.9, voteCount: 99.9, overview: "", backdropPath: "", genreIDs: []))
+            }
+        }
+    }
+    
+    
+    func getLatestMovies(completion: @escaping ([Movie]) -> Void){
+        AF.request("https://api.themoviedb.org/3/movie/now_playing?api_key=5c011e8f93fae74da4b04f2a25562db2&language=en-US&page=1&region=us").response { response in
+            guard let data = response.data
+            else{
+                return
+            }
+            
+            do{
+                let searchResult = try JSONDecoder().decode(MovieSearchList.self, from: data)
+                completion(searchResult.results)
+                //print(searchResult.totalPage)
+            }catch{
+                //print(error.localizedDescription)
+                completion([])
+            }
+        }
+    }
+    
+    
+    func fetchGenres(completion: @escaping ([Genre]) -> Void){
+        AF.request("https://api.themoviedb.org/3/genre/movie/list?api_key=5c011e8f93fae74da4b04f2a25562db2&language=en-US").response { response in
+            guard let data = response.data
+            else{
+                return
+            }
+            
+            do{
+                let genres = try JSONDecoder().decode(GenreList.self, from: data)
+                completion(genres.genres)
+            }catch{
+                print(error.localizedDescription)
+                print(error)
             }
         }
     }

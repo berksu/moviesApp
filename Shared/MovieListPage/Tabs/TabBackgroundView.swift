@@ -41,10 +41,13 @@ struct TabBackgroundView: View {
                 .tag(2)
             
         }
+        .searchable(text: $viewModel.searchMovie, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search Movie").foregroundColor(.white)
         .onAppear {
             UITabBar.appearance().backgroundColor = .black
+            UITabBar.appearance().unselectedItemTintColor = UIColor(Color(red: 1.0, green: 1.0, blue: 1.0, opacity: 0.75))
         }
-        //.searchable(text: $viewModel.searchMovie, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search Movie")
+        .accentColor(Color(red: 255/255, green: 178/255, blue: 36/255))
+       // .searchable(text: $viewModel.searchMovie, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search Movie")
         .navigationTitle(viewModel.determineTheTitle(tabNo: selection)) // bu satır constraint hatası verdiriyor
         // 3 principal
         .toolbar{

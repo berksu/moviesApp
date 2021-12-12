@@ -40,5 +40,8 @@ final class MovieDetailsViewModel: ObservableObject {
     func addMovieToCollectionButton(state: Bool){
         isAddMovieToCollectionButtonTapped = state
     }
+    
+    func findGenreNames(){
+    }
 
 }

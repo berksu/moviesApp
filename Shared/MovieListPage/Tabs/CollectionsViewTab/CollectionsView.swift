@@ -31,6 +31,7 @@ struct CollectionsView: View {
             
             buttonView
         }
+        .background(.black)
         .sheet(isPresented: $collectionViewModel.isCollectionAddTapped, onDismiss: {
             collectionViewModel.isCollectionAddTappedUpdate(state: false)
             collectionViewModel.fetchCollectionsFromDatabase()

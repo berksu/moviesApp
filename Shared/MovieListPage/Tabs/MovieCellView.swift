@@ -42,7 +42,7 @@ struct MovieCellView: View{
                 if let movieReleaseDate = releaseDate{
                     Text(movieCellViewModel.getYearFromRelaseDate(releaseDate: movieReleaseDate))
                         .font(.subheadline)
-                        .foregroundColor(.secondary)
+                        .foregroundColor(Color(red: 1.0, green: 1.0, blue: 1.0, opacity: 0.8))
                 }else{
                     Text("")
                 }

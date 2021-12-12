@@ -13,23 +13,24 @@ struct AddCollectionView: View {
     
     var body: some View {
         VStack{
-            HStack{
-                Spacer()
-                closeButton
-                    .padding()
-            }
+//            HStack{
+//                Spacer()
+//                closeButton
+//                    .padding()
+//            }
             Spacer()
 
             ZStack{
                 Circle()
-                    .foregroundColor(.white)
-                    .overlay(Circle().stroke(.black ,lineWidth: 3))
+                    .foregroundColor(.black)
+                    .overlay(Circle().stroke(.white ,lineWidth: 3))
                     .frame(width: 150, height: 150)
                 
                 Image(systemName: "folder")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 80, height: 80)
+                    .foregroundColor(.white)
             }
             
             collectionName
@@ -39,18 +40,21 @@ struct AddCollectionView: View {
                 .padding(.top)
             Spacer()
         }
+        .background(.black)
     }
     
     var collectionName: some View {
         TextField("Name of Collection", text: $addCollectionViewModel.collectionNameText)
-            .modifier(TextFieldCustomRoundedStyle(fieldColor: Color(.black)))
+            .modifier(PlaceholderStyle(showPlaceHolder: addCollectionViewModel.collectionNameText.isEmpty,
+                                   placeholder: "Name of Collection"))
+            .modifier(TextFieldCustomRoundedStyle(fieldColor: Color(.white)))
             .textInputAutocapitalization(.never)
             .disableAutocorrection(true)
     }
     
     var addButton: some View {
         Text("Add Collection")
-            .modifier(ButtonViewCustomRoundedStyle(buttonColor: Color(.blue)))
+            .modifier(ButtonViewCustomRoundedStyle(buttonColor: Color(red: 255/255, green: 187/255, blue: 59/255)))
             .onTapGesture {
                 isPresented = false
                 addCollectionViewModel.addToDatabase()

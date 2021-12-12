@@ -25,11 +25,12 @@ struct FavouritesView: View{
             }
         }
         .listStyle(PlainListStyle())
+        .background(.black)
     }
 }
 
 struct FavouritesView_Previews: PreviewProvider {
     static var previews: some View {
-        FavouritesView(searchResults: .constant([Movie(id: 1, title: "test", release_date: "test", image: "test", voteAverage: 3.2, voteCount: 1234, overview: "ads")]))
+        FavouritesView(searchResults: .constant([Movie(id: 1, title: "test", release_date: "test", image: "test", voteAverage: 3.2, voteCount: 1234, overview: "ads", backdropPath: "", genreIDs: [])]))
     }
 }
