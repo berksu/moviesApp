@@ -15,7 +15,7 @@ struct LoginPageView: View {
                 ZStack(alignment: .top){
                     GeometryReader{ geometry in
 
-                    NavigationLink(destination: MainBackgroundView(),isActive: $viewModel.isSignedIn) {
+                        NavigationLink(destination: MainBackgroundView().navigationBarHidden(true),isActive: $viewModel.isSignedIn) {
                         EmptyView()
                     }
                     

@@ -45,9 +45,9 @@ struct SideMenuView: View {
                 userInfo(sideMenuModel: sideMenuModel)
                 Spacer()
             }
-            .ignoresSafeArea()
-            .padding(EdgeInsets(top: 5, leading: 20, bottom: 0, trailing: 20))
-            Spacer()
+            //.ignoresSafeArea()
+            .padding(EdgeInsets(top: 40, leading: 20, bottom: 0, trailing: 20))
+            //Spacer()
         }.navigationBarHidden(true)
     }
 }

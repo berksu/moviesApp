@@ -24,6 +24,8 @@ struct CollectionDetailsListView: View {
                 }
             }
         }
+        .background(.black)
+        .navigationBarColor(.black)
         .navigationTitle(title)
         .onAppear {
             viewModel.fetchMovies(movieIDs: movieIDs)

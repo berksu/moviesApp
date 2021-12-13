@@ -19,7 +19,7 @@ struct CollectionsView: View {
                         Divider()
                         NavigationLink {
                             CollectionDetailsListView(title: collection.title ?? "",
-                                                  movieIDs: collection.movieIDs ?? [])
+                                                      movieIDs: collection.movieIDs ?? [])
                         } label: {
                             CollectionCellView(collectionName: collection.title ?? "Failed")
                                 .swipeCell(leadingSideGroup: rightGroup(id: collection.id), trailingSideGroup: rightGroup(id: collection.id), currentUserInteractionCellID: .constant(collection.id))

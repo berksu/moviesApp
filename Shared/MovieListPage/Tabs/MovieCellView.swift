@@ -35,6 +35,7 @@ struct MovieCellView: View{
             VStack(alignment: .leading, spacing: 2){
                 Text(title ?? "")
                     .fontWeight(.semibold)
+                    .foregroundColor(.white)
                     .lineLimit(2)
                     .minimumScaleFactor(0.5)
                     .multilineTextAlignment(.leading)

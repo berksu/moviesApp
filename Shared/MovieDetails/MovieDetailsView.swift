@@ -10,6 +10,7 @@ import Kingfisher
 
 struct MovieDetailsView: View {
     @ObservedObject var viewModel: MovieDetailsViewModel
+    
     @State var isSideMenuShow = false
     
     var body: some View{
@@ -22,7 +23,7 @@ struct MovieDetailsView: View {
                 headerView(geometry: geometry)
                 Spacer()
             }
-            .navigationBarHidden(true)
+            //.navigationBarHidden(true)
             .background(.black)
             .ignoresSafeArea()
         }
@@ -57,11 +58,11 @@ struct MovieDetailsView: View {
                     
                 }
                 
-                NavigationLink(destination: MainBackgroundView().navigationBarBackButtonHidden(true)){
-                    Text("< Back")
-                        .foregroundColor(.yellow)
-                        .padding(EdgeInsets(top: geometry.size.height * 0.05, leading: geometry.size.width * 0.3, bottom: 0, trailing: 0))
-                }
+//                NavigationLink(destination: MainBackgroundView().navigationBarHidden(true)){
+//                    Text("< Back")
+//                        .foregroundColor(.yellow)
+//                        .padding(EdgeInsets(top: geometry.size.height * 0.05, leading: geometry.size.width * 0.3, bottom: 0, trailing: 0))
+//                }
             }
         }.frame(width: geometry.size.width, height: geometry.size.height * 0.45)
     }
