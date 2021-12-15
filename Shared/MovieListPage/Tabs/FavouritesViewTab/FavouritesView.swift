@@ -17,7 +17,7 @@ struct FavouritesView: View{
                 ForEach(searchResults.isEmpty ?  favouritesViewModel.favouriteMovies: searchResults, id: \.id) { movie in
                     VStack{
                         Divider()
-                        NavigationLink(destination: MovieDetailsView(viewModel: MovieDetailsViewModel(movie: movie))) {
+                        NavigationLink(destination: MovieDetailsView(viewModel: MovieDetailsViewModel(movie: movie),genreList: .constant([]))) {
                             MovieCellView(image: movie.image, title: movie.title, releaseDate: movie.release_date)
                         }
                     }

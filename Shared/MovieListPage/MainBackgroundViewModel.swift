@@ -21,7 +21,8 @@ final class MainBackgroundViewModel: ObservableObject{
     @Published var searched_title:Int = 1
     
     @Published var latestMovies: [Movie] = []
-    
+    @Published var topRated: [Movie] = []
+
     var genres:[Genre] = []
     
     
@@ -35,6 +36,8 @@ final class MainBackgroundViewModel: ObservableObject{
         searchMovieOnTime()
         getTopMovies(pageNum: 2)
         getLatestMovies()
+        getTopRatedMoviesFromDatabase()
+        getGenres()
     }
     
     func searchMovieOnTime(){
@@ -101,20 +104,16 @@ final class MainBackgroundViewModel: ObservableObject{
     
     
     func getGenres(){
-        MovieSearchApi().fetchGenres { [weak self]
-             genres in
+        MovieSearchApi().fetchGenres {[weak self] genres in
             self?.genres = genres
         }
     }
     
-    func getGenreStrings(genreInt: [Int]){
-        var genreStr:[String] = []
-        for i in 0..<genreInt.count{
-            if let chosenGenre = genres.firstIndex (where: {$0.id == genreInt[i]}){
-                print(chosenGenre)
-            }
-        }
-        print(genreStr)
+    func getTopRatedMoviesFromDatabase(){
+        MovieSearchApi().getTopRatedMovies(completion: {[weak self] movies in
+                self?.topRated = movies
+        })
     }
+    
 }
 

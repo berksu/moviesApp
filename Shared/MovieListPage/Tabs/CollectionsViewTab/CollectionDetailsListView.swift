@@ -18,7 +18,7 @@ struct CollectionDetailsListView: View {
             LazyVStack{
                 ForEach(viewModel.collectedMovies, id:\.self){movie in
                     Divider()
-                    NavigationLink(destination: MovieDetailsView(viewModel: MovieDetailsViewModel(movie: movie))) {
+                    NavigationLink(destination: MovieDetailsView(viewModel: MovieDetailsViewModel(movie: movie),genreList: .constant([]))) {
                         MovieCellView(image: movie.image, title: movie.title, releaseDate: movie.release_date)
                     }
                 }

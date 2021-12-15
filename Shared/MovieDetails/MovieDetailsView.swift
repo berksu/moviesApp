@@ -12,6 +12,7 @@ struct MovieDetailsView: View {
     @ObservedObject var viewModel: MovieDetailsViewModel
     
     @State var isSideMenuShow = false
+    @Binding var genreList:[Genre]
     
     var body: some View{
         GeometryReader{geometry in
@@ -20,6 +21,7 @@ struct MovieDetailsView: View {
                 title
                 movieInfoView
                     .padding()
+                scrolledTextView(genreStruct: $viewModel.genreStruct)
                 headerView(geometry: geometry)
                 Spacer()
             }
@@ -27,6 +29,11 @@ struct MovieDetailsView: View {
             .background(.black)
             .ignoresSafeArea()
         }
+        .onAppear(perform: {
+            if let genreIDS = viewModel.movie.genreIDs{
+                viewModel.getGenreStrings(genreInt: genreIDS, genres: genreList)
+            }
+        })
         .sheet(isPresented: $viewModel.isAddMovieToCollectionButtonTapped, onDismiss: {
             viewModel.addMovieToCollectionButton(state: false)
         }, content: {
@@ -158,6 +165,28 @@ struct MovieDetailsView: View {
                 .padding(.leading,40)
         }
 
+    }
+    
+    struct scrolledTextView: View{
+        @Binding var genreStruct: [GenreWithId]
+        
+        var body: some View{
+            HStack(spacing: 10){
+                ForEach(genreStruct, id: \.id){ genre in
+                    Text(genre.name)
+                        .font(.subheadline)
+                        .padding(EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8))
+                        .foregroundColor(.white)
+                        .minimumScaleFactor(0.8)
+                        .background(
+                            RoundedRectangle(cornerRadius: 5, style: .continuous)
+                                .stroke(Color.white, lineWidth: 2)
+                                .frame(height: 20)
+                        )
+                }
+            }.padding(.leading)
+                .frame(height:25)
+        }
     }
 }
 
@@ -303,7 +332,7 @@ struct MovieDetailsView: View {
 
 struct MovieDetailsView_Previews: PreviewProvider {
     static var previews: some View {
-        MovieDetailsView(viewModel: MovieDetailsViewModel(movie: Movie(id: 99999999, title: "Dexter", release_date: "2003", image: "https://tr.web.img4.acsta.net/pictures/21/10/04/15/10/2211034.jpg", voteAverage: 9.1, voteCount: 3245, overview: "dexter is a tv series", backdropPath: "", genreIDs:[])))
+        MovieDetailsView(viewModel: MovieDetailsViewModel(movie: Movie(id: 99999999, title: "Dexter", release_date: "2003", image: "https://tr.web.img4.acsta.net/pictures/21/10/04/15/10/2211034.jpg", voteAverage: 9.1, voteCount: 3245, overview: "dexter is a tv series", backdropPath: "", genreIDs:[])),genreList: .constant([]))
             .previewDevice(PreviewDevice(rawValue: "iPhone 12 Pro Max"))
     }
 }

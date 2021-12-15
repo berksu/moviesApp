@@ -12,7 +12,8 @@ final class MovieDetailsViewModel: ObservableObject {
     var favouriteMovies: [Movie] = []
     @Published var isFavourite:Bool = false
     @Published var isAddMovieToCollectionButtonTapped: Bool = false
-
+    @Published var genreStruct:[GenreWithId] = []
+    
     init(movie: Movie) {
         self.movie = movie
     }
@@ -40,8 +41,23 @@ final class MovieDetailsViewModel: ObservableObject {
     func addMovieToCollectionButton(state: Bool){
         isAddMovieToCollectionButtonTapped = state
     }
-    
-    func findGenreNames(){
+        
+    func getGenreStrings(genreInt: [Int], genres:[Genre]){
+        genreStruct = []
+        for i in 0..<genreInt.count{
+            if let chosenGenre = genres.firstIndex (where: {$0.id == genreInt[i]}){
+                //print(genres[chosenGenre].name)
+                //genreStr.append(genres[chosenGenre].name)
+                genreStruct.append(GenreWithId(id: String(genres[chosenGenre].id) , name: genres[chosenGenre].name))
+                
+            }
+        }
     }
 
+}
+
+
+struct GenreWithId{
+    let id: String
+    let name:String
 }

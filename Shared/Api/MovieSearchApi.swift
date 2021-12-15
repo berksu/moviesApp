@@ -105,4 +105,23 @@ final class MovieSearchApi{
         }
     }
     
+    
+    func getTopRatedMovies(completion: @escaping ([Movie]) -> Void){
+        AF.request("https://api.themoviedb.org/3/movie/top_rated?api_key=5c011e8f93fae74da4b04f2a25562db2&language=en-US&page=1").response { response in
+            guard let data = response.data
+            else{
+                return
+            }
+            
+            do{
+                let searchResult = try JSONDecoder().decode(MovieSearchList.self, from: data)
+                completion(searchResult.results)
+                //print(searchResult.totalPage)
+            }catch{
+                //print(error.localizedDescription)
+                completion([])
+            }
+        }
+    }
+    
 }

@@ -90,23 +90,10 @@ struct MainBackgroundView: View {
     var allMoviesTab: some View{
         VStack(alignment: .leading){
             ScrollView{
-                HStack{
-                    Text("Latest Movies")
-                        .foregroundColor(.white)
-                    Spacer()
-                }
-                ScrollView(.horizontal,showsIndicators: false){
-                    HStack{
-                        ForEach(viewModel.latestMovies, id: \.id) { movie in
-                            NavigationLink(destination: MovieDetailsView(viewModel: MovieDetailsViewModel(movie: movie)).navigationBackButton(color: UIColor(Color(red: 255/255, green: 187/255, blue: 59/255)),
-                                                                                                                                              text: "Back")) {
-                                KFImage.init(URL(string: "\(MovieListModel().urlBase)\(movie.image ?? "")"))
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                            }
-                        }
-                    }.frame(height: 120)
-                }
+                
+                horizontalScrollView(title: "Latest", movieList: viewModel.latestMovies)
+
+                horizontalScrollView(title: "Top Rated", movieList: viewModel.topRated)
                 
                 HStack{
                     Text(viewModel.searchResults.count == 0 ? "Popular":"Searched").padding(.top)
@@ -127,7 +114,7 @@ struct MainBackgroundView: View {
                 
                 LazyVGrid(columns: [GridItem(), GridItem(),GridItem(),GridItem()]) {
                     ForEach(viewModel.searchResults.isEmpty ?  viewModel.allMovies: viewModel.searchResults, id: \.idForLoop) { movie in
-                        NavigationLink(destination: MovieDetailsView(viewModel: MovieDetailsViewModel(movie: movie)).navigationBackButton(color: UIColor(Color(red: 255/255, green: 187/255, blue: 59/255)),
+                        NavigationLink(destination: MovieDetailsView(viewModel: MovieDetailsViewModel(movie: movie),genreList: $viewModel.genres).navigationBackButton(color: UIColor(Color(red: 255/255, green: 187/255, blue: 59/255)),
                                                                                                                                           text: "Back")) {
                             if let imageStr = movie.image{
                                 KFImage.init(URL(string: "\(MovieListModel().urlBase)\(imageStr)"))
@@ -161,6 +148,28 @@ struct MainBackgroundView: View {
             }
             
         }.background(.black)
+    }
+    
+    func horizontalScrollView(title: String, movieList: [Movie]) -> some View{
+        return Group{
+        HStack{
+            Text(title)
+                .foregroundColor(.white)
+            Spacer()
+        }
+        ScrollView(.horizontal,showsIndicators: false){
+            HStack{
+                ForEach(movieList, id: \.id) { movie in
+                    NavigationLink(destination: MovieDetailsView(viewModel: MovieDetailsViewModel(movie: movie),genreList: $viewModel.genres).navigationBackButton(color: UIColor(Color(red: 255/255, green: 187/255, blue: 59/255)),
+                                                                                                                                text: "Back")) {
+                        KFImage.init(URL(string: "\(MovieListModel().urlBase)\(movie.image ?? "")"))
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                    }
+                }
+            }.frame(height: 120)
+        }
+        }
     }
     
 }

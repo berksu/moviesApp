@@ -115,7 +115,7 @@ struct LoginPageView: View {
     
     
     func loginButton(geometry: GeometryProxy) -> some View{
-        return NavigationLink(destination: MainBackgroundView(),isActive: $viewModel.isLoggedIn) {
+        return NavigationLink(destination: MainBackgroundView().navigationBarHidden(true),isActive: $viewModel.isLoggedIn) {
             Text("LOGIN")
                 .modifier(LoginPageButtonField())
                 .onTapGesture {
