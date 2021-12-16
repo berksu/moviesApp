@@ -12,10 +12,10 @@ struct MainBackgroundView: View {
     @State var isSideMenuShow: Bool = false
     
     ////AppStorage and userdefaults tried
-    @AppStorage("tabSelection") private var selection: Int = 0
+    //@AppStorage("tabSelection") private var selection: Int = 0
     ////@State private var tapCount = UserDefaults.standard.integer(forKey: "Tap")
     ////UserDefaults.standard.set(self.tapCount, forKey: "Tap")
-    @ObservedObject var viewModel = MainBackgroundViewModel()
+    @StateObject var viewModel = MainBackgroundViewModel()
     
     var body: some View{
         NavigationView {
@@ -27,7 +27,7 @@ struct MainBackgroundView: View {
                     .cornerRadius(isSideMenuShow ? 20 : 10)
                     .offset(x: isSideMenuShow ? 250:0, y: isSideMenuShow ? 50:0)
                     .scaleEffect(isSideMenuShow ? 0.8 : 1)
-                    .opacity(isSideMenuShow ? 0.4:1)
+                    //.opacity(isSideMenuShow ? 0.4:1)
                     .ignoresSafeArea(.container, edges: .bottom)
                     .disabled(isSideMenuShow)
             }
@@ -35,11 +35,10 @@ struct MainBackgroundView: View {
             .background(.black)
             .ignoresSafeArea()
         }
-
     }
     
     var tabBarView: some View{
-        TabView(selection: $selection){
+        TabView(selection: $viewModel.selection){
             allMoviesTab
                 .tabItem {
                     Image(systemName: "house.fill")
@@ -67,7 +66,7 @@ struct MainBackgroundView: View {
                 UITabBar.appearance().unselectedItemTintColor = UIColor(Color(red: 1.0, green: 1.0, blue: 1.0, opacity: 0.75))
         }
         .accentColor(Color(red: 255/255, green: 178/255, blue: 36/255))
-        .navigationTitle(viewModel.determineTheTitle(tabNo: selection)) // bu satır constraint hatası verdiriyor
+        .navigationTitle(viewModel.determineTheTitle(tabNo: viewModel.selection)) // bu satır constraint hatası verdiriyor
         .toolbar{
             ToolbarItem(placement: .navigationBarLeading) {
                 Button {

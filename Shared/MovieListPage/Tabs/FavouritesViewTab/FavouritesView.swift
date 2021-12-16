@@ -17,7 +17,10 @@ struct FavouritesView: View{
                 ForEach(searchResults.isEmpty ?  favouritesViewModel.favouriteMovies: searchResults, id: \.id) { movie in
                     VStack{
                         Divider()
-                        NavigationLink(destination: MovieDetailsView(viewModel: MovieDetailsViewModel(movie: movie),genreList: .constant([]))) {
+                        //NavigationLink(destination: MovieDetailsView(viewModel: MovieDetailsViewModel(movie: movie),genreList: .constant([]))) {
+                        NavigationLink(tag: movie.id, selection: $favouritesViewModel.deepLinkID){
+                            MovieDetailsView(viewModel: MovieDetailsViewModel(movie: movie),genreList: .constant([]))
+                        }label: {
                             MovieCellView(image: movie.image, title: movie.title, releaseDate: movie.release_date)
                         }
                     }
@@ -26,6 +29,10 @@ struct FavouritesView: View{
         }
         .listStyle(PlainListStyle())
         .background(.black)
+        .onOpenURL { url in
+            print(url)
+            favouritesViewModel.checkDeepLink(url: url)
+        }
     }
 }
 

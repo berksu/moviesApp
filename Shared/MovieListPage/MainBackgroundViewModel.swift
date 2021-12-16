@@ -30,6 +30,10 @@ final class MainBackgroundViewModel: ObservableObject{
     @Published var searchResults: [Movie] = []
     var searchedPage = 1
     
+    @AppStorage("tabSelection") var selection: Int = 0
+    
+    @Published var movieDeepLink: Movie = Movie(id: 0, title: "", release_date: "", image: "", voteAverage: 0.0, voteCount: 0, overview: "", backdropPath: "", genreIDs: [])
+    
     var cancellables = Set<AnyCancellable>()
         
     init(){
@@ -114,6 +118,5 @@ final class MainBackgroundViewModel: ObservableObject{
                 self?.topRated = movies
         })
     }
-    
 }
 

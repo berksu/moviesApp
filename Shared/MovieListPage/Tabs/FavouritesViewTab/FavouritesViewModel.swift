@@ -9,7 +9,8 @@ import Foundation
 
 final class FavouritesViewModel: ObservableObject{
     @Published var favouriteMovies : [Movie] = []
-
+    @Published var deepLinkID: Int! = 0
+    
     init(){
         getFavouriteMovies()
     }
@@ -17,6 +18,13 @@ final class FavouritesViewModel: ObservableObject{
     func getFavouriteMovies(){
         MovieListViewStorage().getFavouriteMovies {[weak self] movies in
             self?.favouriteMovies = movies
+        }
+    }
+    
+    func checkDeepLink(url: URL){
+        if let host = URLComponents(url: url, resolvingAgainstBaseURL: true)?.host{
+            deepLinkID = Int(host) ?? 0
+            
         }
     }
 }
