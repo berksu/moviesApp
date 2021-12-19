@@ -22,8 +22,11 @@ struct MovieDetailsView: View {
                 movieInfoView
                     .padding()
                 scrolledTextView(genreStruct: $viewModel.genreStruct)
-                headerView(geometry: geometry)
-                Spacer()
+                ScrollView{
+                    headerView(geometry: geometry).padding(.bottom)
+                    horizontalScrollViewForCast(title: "Cast", castList: viewModel.casts)
+                    horizontalScrollViewForMovies(title: "Recommendations", movieList: viewModel.recommendations)
+                }
             }
             //.navigationBarHidden(true)
             .background(.black)
@@ -150,11 +153,9 @@ struct MovieDetailsView: View {
                     .lineLimit(nil)
                     .fixedSize(horizontal: false, vertical: true)
                     .frame(width: geometry.size.width*0.9)
-            }.padding(.bottom)
+            }
         }
     }
-    
-    
     
     var addMovieToCollectionButton: some View{
         Button {
@@ -186,6 +187,48 @@ struct MovieDetailsView: View {
                 }
             }.padding(.leading)
                 .frame(height:25)
+        }
+    }
+    
+    
+    func horizontalScrollViewForMovies(title: String, movieList: [Movie]) -> some View{
+        return Group{
+        HStack{
+            Text(title)
+                .foregroundColor(.white)
+            Spacer()
+        }
+        ScrollView(.horizontal,showsIndicators: false){
+            HStack{
+                ForEach(movieList, id: \.id) { movie in
+                    NavigationLink(destination: MovieDetailsView(viewModel: MovieDetailsViewModel(movie: movie),genreList: $genreList).navigationBackButton(color: UIColor(Color(red: 255/255, green: 187/255, blue: 59/255)),
+                                                                                                                                text: "Back")) {
+                        KFImage.init(URL(string: "\(MovieListModel().urlBase)\(movie.image ?? "")"))
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                    }
+                }
+            }.frame(height: 120)
+        }
+        }
+    }
+    
+    func horizontalScrollViewForCast(title: String, castList: [Cast]) -> some View{
+        return Group{
+        HStack{
+            Text(title)
+                .foregroundColor(.white)
+            Spacer()
+        }
+        ScrollView(.horizontal,showsIndicators: false){
+            HStack{
+                ForEach(castList, id: \.id) { cast in
+                    KFImage.init(URL(string: "\(MovieListModel().urlBase)\(cast.profilePath ?? "")"))
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                }
+            }.frame(height: 120)
+        }
         }
     }
 }

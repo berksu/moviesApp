@@ -124,4 +124,44 @@ final class MovieSearchApi{
         }
     }
     
+    
+    func getSimilarMovies(movieID: Int ,completion: @escaping ([Movie]) -> Void){
+        AF.request("https://api.themoviedb.org/3/movie/\(String(movieID))/recommendations?api_key=5c011e8f93fae74da4b04f2a25562db2&language=en-US&page=1").response { response in
+            guard let data = response.data
+            else{
+                return
+            }
+            
+            do{
+                let searchResult = try JSONDecoder().decode(MovieSearchList.self, from: data)
+                completion(searchResult.results)
+                //print(searchResult.totalPage)
+            }catch{
+                //print(error.localizedDescription)
+                completion([])
+            }
+        }
+    }
+    
+    
+    func getCredientals(movieID: Int ,completion: @escaping ([Cast]) -> Void){
+        AF.request("https://api.themoviedb.org/3/movie/\(String(movieID))/credits?api_key=5c011e8f93fae74da4b04f2a25562db2&language=en-US").response { response in
+            guard let data = response.data
+            else{
+                return
+            }
+            
+            do{
+                let searchResult = try JSONDecoder().decode(CastList.self, from: data)
+                completion(searchResult.cast)
+                //print(searchResult.totalPage)
+            }catch{
+                //print(error.localizedDescription)
+                completion([])
+            }
+        }
+    }
+    
+    // TO-DO: search with genre https://api.themoviedb.org/3/discover/movie?api_key=5c011e8f93fae74da4b04f2a25562db2&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=9648&with_watch_monetization_types=flatrate
+    
 }

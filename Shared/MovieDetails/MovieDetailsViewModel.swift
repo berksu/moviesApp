@@ -13,9 +13,14 @@ final class MovieDetailsViewModel: ObservableObject {
     @Published var isFavourite:Bool = false
     @Published var isAddMovieToCollectionButtonTapped: Bool = false
     @Published var genreStruct:[GenreWithId] = []
+    @Published var recommendations:[Movie] = []
+    @Published var casts:[Cast] = []
+
     
     init(movie: Movie) {
         self.movie = movie
+        getRecommendations(movieID: movie.id)
+        getCredientals(movieID: movie.id)
     }
     
     func movieFavouriteStatusUpdate(){
@@ -51,6 +56,18 @@ final class MovieDetailsViewModel: ObservableObject {
                 genreStruct.append(GenreWithId(id: String(genres[chosenGenre].id) , name: genres[chosenGenre].name))
                 
             }
+        }
+    }
+    
+    func getRecommendations(movieID: Int){
+        MovieSearchApi().getSimilarMovies(movieID: movieID) {[weak self] movies in
+            self?.recommendations = movies
+        }
+    }
+    
+    func getCredientals(movieID: Int){
+        MovieSearchApi().getCredientals(movieID: movieID) {[weak self] castList in
+            self?.casts = castList
         }
     }
 
